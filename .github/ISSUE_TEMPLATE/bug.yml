@@ -1,0 +1,71 @@
+name: "💣 ISSUE"
+description: "문제가 발생했어요."
+title: "💣 ISSUE - <title>"
+labels: ["💣 Type: Issue"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Summary"
+      description: 이슈에 관해 간단 명료하게 설명해주세요.
+      placeholder: 특정 페이지에 액세스할 수 없어요.
+    validations:
+      required: true
+  - type: textarea
+    id: reproductionsteps
+    attributes:
+      label: "Reproduction Steps"
+      description: 이슈를 발견하게된 경로나 이슈를 만들어내는 방법에 대해 설명해주세요.
+      placeholder: |
+        1. NavBar에서 Login 클릭
+        2. SignUp 버튼 클릭
+        3. 403 Forbidden 에러 표출
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: screenshoot
+    attributes:
+      label: "Screenshots"
+      description: 이슈와 관련된 영상 또는 스크린샷을 제공해주세요. (선택)
+      render: bash
+    validations:
+      required: false
+  - type: textarea
+    id: additionalinfo
+    attributes:
+      label: "Additional Information"
+      description: 추가적으로 알아야 할 내용이 있다면 작성해주세요.
+      placeholder: 예외처리를 어떻게 했으면 좋겠어요.
+    validations:
+      required: false
+  - type: dropdown
+    id: osenvironment
+    attributes:
+      label: "Operating System"
+      description: "어떤 운영체제에서 이슈가 발생하는지 정보를 제공해 주시면 문제를 해결하는데 도움이 됩니다."
+      multiple: true
+      options:
+        - Windows
+        - Linux
+        - MacOS
+        - iOS
+        - Android
+    validations:
+      required: false
+  - type: dropdown
+    id: browserenvironment
+    attributes:
+      label: "Browser"
+      description: "어떤 브라우저를 사용중이신가요?"
+      multiple: true
+      options:
+        - Google Chrome
+        - Microsoft Edge
+        - Firefox
+        - Opera
+        - Brave
+        - Safari
+        - Internet Explorer
+    validations:
+      required: false
