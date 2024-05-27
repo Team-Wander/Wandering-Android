@@ -1,4 +1,4 @@
-package com.wanderring.presentation.component
+package com.wanderring.presentation.component.theme
 
 import androidx.compose.ui.graphics.Color
 
