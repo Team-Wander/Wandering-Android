@@ -1,13 +1,36 @@
 package com.wanderring.presentation.component
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.R
+
+@Composable
+fun FloatButton(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Box(contentAlignment = Alignment.Center) {
+        Icon(
+            painter = painterResource(id = R.drawable.green_circle),
+            contentDescription = null,
+            modifier = modifier.size(60.dp),
+            tint = tint
+        )
+        Icon(
+            painter = painterResource(id = R.drawable.plus),
+            contentDescription = null,
+            modifier = Modifier.size(24.dp),
+            tint = tint
+        )
+    }
+}
 
 @Composable
 fun BellIcon(
@@ -16,7 +39,7 @@ fun BellIcon(
 ) {
     Icon(
         painter = painterResource(id = R.drawable.bell),
-        contentDescription = "MindWay Main Icon",
+        contentDescription = null,
         modifier = modifier.size(24.dp),
         tint = tint
     )
@@ -29,7 +52,7 @@ fun FilterIcon(
 ) {
     Icon(
         painter = painterResource(id = R.drawable.filter),
-        contentDescription = "MindWay Main Icon",
+        contentDescription = null,
         modifier = modifier.size(24.dp),
         tint = tint
     )
@@ -42,7 +65,7 @@ fun PluginIcon(
 ) {
     Icon(
         painter = painterResource(id = R.drawable.plus),
-        contentDescription = "MindWay Main Icon",
+        contentDescription = null,
         modifier = modifier.size(24.dp),
         tint = tint
     )
@@ -55,7 +78,7 @@ fun ProfileIcon(
 ) {
     Icon(
         painter = painterResource(id = R.drawable.profile),
-        contentDescription = "MindWay Main Icon",
+        contentDescription = null,
         modifier = modifier.size(24.dp),
         tint = tint
     )
@@ -68,7 +91,7 @@ fun ReportIcon(
 ) {
     Icon(
         painter = painterResource(id = R.drawable.report),
-        contentDescription = "MindWay Main Icon",
+        contentDescription = null,
         modifier = modifier.size(24.dp),
         tint = tint
     )
@@ -82,7 +105,7 @@ fun SearchIcon(
 ) {
     Icon(
         painter = painterResource(id = R.drawable.search),
-        contentDescription = "MindWay Main Icon",
+        contentDescription = null,
         modifier = modifier.size(24.dp),
         tint = tint
     )
@@ -95,7 +118,7 @@ fun XIcon(
 ) {
     Icon(
         painter = painterResource(id = R.drawable.x),
-        contentDescription = "MindWay Main Icon",
+        contentDescription = null,
         modifier = modifier.size(24.dp),
         tint = tint
     )
