@@ -36,3 +36,15 @@ fun CategoryButton(
         )
     }
 }
+
+@Preview
+@Composable
+private fun Preview() {
+    DoCategoryButton(
+        color = DoColor.CAT_RED,
+        text = "텍스트입니다",
+        modifier = Modifier
+            .height(70.dp)
+            .width(400.dp)
+    )
+}

@@ -38,3 +38,14 @@ fun MiniButton(
         )
     }
 }
+
+@Preview
+@Composable
+private fun Preview() {
+    DoMiniButton(
+        text = "텍스트입니다",
+        modifier = Modifier
+            .height(70.dp)
+            .width(400.dp)
+    )
+}

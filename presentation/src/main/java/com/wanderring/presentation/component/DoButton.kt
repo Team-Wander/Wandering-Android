@@ -44,7 +44,7 @@ fun DoButton(
 
 @Preview
 @Composable
-fun DoButtonPreview() {
+private fun Preview() {
     DoButton(
         text = "텍스트입니다",
         modifier = Modifier
