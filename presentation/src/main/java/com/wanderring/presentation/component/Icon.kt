@@ -45,6 +45,18 @@ fun LogoImage(
     )
 }
 
+@Composable
+fun ChevronRightIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.chevron_right),
+        contentDescription = null,
+        modifier = modifier.size(24.dp),
+        tint = tint
+    )
+}
 
 @Composable
 fun BellIcon(
