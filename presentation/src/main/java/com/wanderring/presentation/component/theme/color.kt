@@ -9,11 +9,13 @@ object DoColor {
     val RED = Color(0xFFE53A3A)
 
     val GRAY900 = Color(0xFF4F4F51)
+    val GRAY800 = Color(0xFF666669)
     val GRAY700 = Color(0xFF828387)
     val GRAY500 = Color(0xFFA5A6A9)
     val GRAY400 = Color(0xFFB4B5B7)
     val GRAY200 = Color(0xFFEFF0F2)
 
+    val SHADOW = Color(0x14000000)
 
     val CAT_BLUE = Color(0xFF7CAAEF)
     val CAT_PURPLE = Color(0xFF9A7CEF)
