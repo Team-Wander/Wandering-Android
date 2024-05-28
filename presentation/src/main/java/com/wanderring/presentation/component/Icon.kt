@@ -33,6 +33,20 @@ fun FloatButton(
 }
 
 @Composable
+fun LogoImage(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.logo),
+        contentDescription = null,
+        modifier = modifier,
+        tint = tint
+    )
+}
+
+
+@Composable
 fun BellIcon(
     modifier: Modifier = Modifier,
     tint: Color = Color.Unspecified,
