@@ -73,6 +73,4 @@ dependencies {
     debugImplementation(Dependency.Test.COMPOSE_MANIFEST)
 
     implementation(Dependency.Coil.COIL)
-
-    implementation(Dependency.Gauth.GAUTH)
 }
