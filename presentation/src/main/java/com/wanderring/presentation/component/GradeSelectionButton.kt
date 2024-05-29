@@ -1,4 +1,4 @@
-package com.wanderring.presentation.view.enterInfo.component
+package com.wanderring.presentation.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,8 +24,6 @@ fun GradeSelectionItem(
     isSelected: Boolean,
     grade: Grade,
 ) {
-    val color = if (isSelected) DoColor.WHITE else DoColor.GRAY800
-
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
@@ -36,7 +34,7 @@ fun GradeSelectionItem(
             )
             .border(
                 width = 1.dp,
-                color = color,
+                color = if (isSelected) DoColor.MAIN else DoColor.GRAY800,
                 shape = RoundedCornerShape(size = 8.dp)
             )
             .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -46,7 +44,7 @@ fun GradeSelectionItem(
             style = DoTypography.labelLarge,
             fontWeight = FontWeight(700),
             textAlign = TextAlign.Center,
-            color = color
+            color = if (isSelected) DoColor.WHITE else DoColor.GRAY800
         )
     }
 }
