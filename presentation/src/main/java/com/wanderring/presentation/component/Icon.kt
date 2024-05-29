@@ -46,6 +46,18 @@ fun LogoImage(
 }
 
 @Composable
+fun MapPinIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.map_pin),
+        contentDescription = null,
+        modifier = modifier.size(24.dp),
+        tint = tint
+    )
+}
+@Composable
 fun ChevronRightIcon(
     modifier: Modifier = Modifier,
     tint: Color = Color.Unspecified,
