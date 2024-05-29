@@ -1,5 +1,4 @@
-package com.wanderring.domain.model
-
+package com.wanderring.domain.model.enum
 
 enum class Tag(
     val description: String,

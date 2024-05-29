@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.wanderring.domain.model.Tag
+import com.wanderring.domain.model.enum.Tag
 import com.wanderring.presentation.R
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
