@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -79,21 +78,19 @@ fun DoWalkListItem(
         ) {
             if (tag0 != Tag.NONE) {
                 DoCategoryButton(
-                    color = Color(tag0.colorCode),
-                    text = tag0.description,
+                   tag = tag0,
                     modifier = Modifier
                         .width(45.dp)
                         .height(26.dp),
                 )
-            }
-            if (tag1 != Tag.NONE) {
-                DoCategoryButton(
-                    color = Color(tag1.colorCode),
-                    text = tag1.description,
-                    modifier = Modifier
-                        .width(45.dp)
-                        .height(26.dp)
-                )
+                if (tag1 != Tag.NONE) {
+                    DoCategoryButton(
+                        tag = tag1,
+                        modifier = Modifier
+                            .width(45.dp)
+                            .height(26.dp)
+                    )
+                }
             }
         }
     }
