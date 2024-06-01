@@ -45,6 +45,30 @@ fun LogoImage(
     )
 }
 
+
+@Composable
+fun CheckIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+    isSelected: Boolean,
+) {
+    if (isSelected) {
+        Icon(
+            painter = painterResource(id = R.drawable.check),
+            contentDescription = null,
+            modifier = modifier.size(24.dp),
+            tint = tint
+        )
+    } else {
+        Icon(
+            painter = painterResource(id = R.drawable.check),
+            contentDescription = null,
+            modifier = modifier.size(24.dp),
+            tint = tint
+        )
+    }
+}
+
 @Composable
 fun MapPinIcon(
     modifier: Modifier = Modifier,
@@ -57,6 +81,7 @@ fun MapPinIcon(
         tint = tint
     )
 }
+
 @Composable
 fun ChevronRightIcon(
     modifier: Modifier = Modifier,

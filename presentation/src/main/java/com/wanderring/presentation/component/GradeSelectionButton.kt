@@ -21,7 +21,7 @@ import com.wanderring.presentation.component.theme.DoTypography
 @Composable
 fun GradeSelectionItem(
     modifier: Modifier = Modifier,
-    isSelected: Boolean,
+    isSelected: Boolean = false,
     grade: Grade,
 ) {
     Row(
@@ -29,12 +29,12 @@ fun GradeSelectionItem(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .background(
-                if (isSelected) DoColor.MAIN else DoColor.WHITE,
+                if (isSelected) DoColor.GRAY800 else DoColor.WHITE,
                 shape = RoundedCornerShape(size = 8.dp)
             )
             .border(
                 width = 1.dp,
-                color = if (isSelected) DoColor.MAIN else DoColor.GRAY800,
+                color = if (isSelected) DoColor.GRAY800 else DoColor.GRAY800,
                 shape = RoundedCornerShape(size = 8.dp)
             )
             .padding(horizontal = 16.dp, vertical = 8.dp)
