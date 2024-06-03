@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wanderring.domain.model.enum.Grade
+import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 
@@ -23,6 +24,7 @@ fun GradeSelectionItem(
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
     grade: Grade,
+    onClick: () -> Unit,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,
@@ -37,6 +39,7 @@ fun GradeSelectionItem(
                 color = if (isSelected) DoColor.GRAY800 else DoColor.GRAY800,
                 shape = RoundedCornerShape(size = 8.dp)
             )
+            .clickableSingle(onClick = onClick)
             .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Text(
@@ -55,6 +58,7 @@ private fun PreviewSelected() {
     GradeSelectionItem(
         grade = Grade.TWO,
         isSelected = true,
+        onClick = {}
     )
 }
 
@@ -64,5 +68,6 @@ private fun PreviewNotSelected() {
     GradeSelectionItem(
         grade = Grade.TWO,
         isSelected = false,
+        onClick = {}
     )
 }
