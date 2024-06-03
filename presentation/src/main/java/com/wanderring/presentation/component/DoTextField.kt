@@ -3,6 +3,7 @@ package com.wanderring.presentation.component
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -54,8 +55,11 @@ fun DoTextField(
             )
             .padding(12.dp),
         decorationBox = { innerTextField ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(modifier = Modifier) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Box(modifier = Modifier.fillMaxWidth()) {
                     innerTextField()
                     if (value.value.isEmpty()) {
                         Text(
