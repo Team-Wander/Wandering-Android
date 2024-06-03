@@ -80,7 +80,18 @@ fun EnterSchoolRoute(
                 )
             }
 
-
+            2 -> {
+                EnterLocationPage(
+                    modifier = modifier,
+                    locationState = locationState,
+                    navigateToBack = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(1)
+                        }
+                    },
+                    navigateToHome = navigateToHome
+                )
+            }
         }
     }
 }
@@ -220,6 +231,54 @@ fun EnterGradePage(
                 .fillMaxHeight(0.0789f),
             text = "완료",
             onClick = navigateToLocationPage
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun EnterLocationPagePreview() {
+    EnterLocationPage(
+        locationState = remember { mutableStateOf("") },
+        navigateToBack = {},
+        navigateToHome = {}
+    )
+}
+
+@Composable
+fun EnterLocationPage(
+    modifier: Modifier = Modifier,
+    locationState: MutableState<String>,
+    navigateToBack: () -> Unit,
+    navigateToHome: () -> Unit,
+) {
+    Column(
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .background(DoColor.WHITE)
+            .fillMaxSize()
+            .padding(horizontal = 16.dp)
+            .padding(top = 70.dp, bottom = 71.dp)
+    ) {
+        InfoBox(
+            modifier = modifier.fillMaxWidth(),
+            title = "위치를 알려주세요",
+            content = "내가 서비스를 이용할 위치를 입력해 주세요",
+            navigateToBack = navigateToBack,
+            contentComposable = {
+                DoTextField(
+                    value = locationState,
+                    placeholder = "위치를 알려주세요"
+                )
+            }
+        )
+        DoButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.0789f),
+            text = "완료",
+            onClick = navigateToHome
         )
     }
 }
