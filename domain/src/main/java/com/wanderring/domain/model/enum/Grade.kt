@@ -6,5 +6,6 @@ enum class Grade(val description: String) {
     THREE(description = "3학년"),
     FOUR(description = "4학년"),
     FIVE(description = "5학년"),
-    SIX(description = "6학년")
+    SIX(description = "6학년"),
+    NOTHING(description = "")
 }
