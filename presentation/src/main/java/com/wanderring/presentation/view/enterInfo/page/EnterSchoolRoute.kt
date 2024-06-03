@@ -62,6 +62,25 @@ fun EnterSchoolRoute(
                     }
                 )
             }
+
+            1 -> {
+                EnterGradePage(
+                    modifier = modifier,
+                    gradeState = gradeState,
+                    navigateToBack = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(0)
+                        }
+                    },
+                    navigateToLocationPage = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(2)
+                        }
+                    }
+                )
+            }
+
+
         }
     }
 }
@@ -114,3 +133,93 @@ fun EnterSchoolPage(
     }
 }
 
+@Preview
+@Composable
+private fun EnterGradePagePreview() {
+    EnterGradePage(
+        gradeState = remember { mutableStateOf(Grade.TWO) },
+        navigateToBack = {},
+        navigateToLocationPage = {}
+    )
+}
+@Composable
+fun EnterGradePage(
+    modifier: Modifier = Modifier,
+    gradeState: MutableState<Grade>,
+    navigateToBack: () -> Unit,
+    navigateToLocationPage: () -> Unit,
+) {
+    Column(
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .background(DoColor.WHITE)
+            .fillMaxSize()
+            .padding(horizontal = 16.dp)
+            .padding(top = 70.dp, bottom = 71.dp)
+    ) {
+        InfoBox(
+            modifier = modifier.fillMaxWidth(),
+            title = "학년을 알려주세요",
+            content = "현재 학년을 알려주세요",
+            navigateToBack = navigateToBack,
+            innerSpacerValue = 0.0334f,
+            contentComposable = {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Top,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        listOf(
+                            Grade.ONE,
+                            Grade.TWO,
+                            Grade.THREE,
+                            Grade.FOUR
+                        ).forEach { grade ->
+                            GradeSelectionItem(
+                                grade = grade,
+                                isSelected = grade == gradeState.value,
+                                onClick = { gradeState.value = grade }
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.fillMaxHeight(0.03034f))
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Top,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        listOf(
+                            Grade.FIVE,
+                            Grade.SIX
+                        ).forEach { grade ->
+                            GradeSelectionItem(
+                                grade = grade,
+                                isSelected = grade == gradeState.value,
+                                onClick = { gradeState.value = grade }
+                            )
+                        }
+                        Spacer(
+                            modifier = Modifier
+                                .width(67.dp)
+                                .height(40.dp)
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .width(67.dp)
+                                .height(40.dp)
+                        )
+                    }
+                }
+            }
+        )
+        DoButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.0789f),
+            text = "완료",
+            onClick = navigateToLocationPage
+        )
+    }
+}
