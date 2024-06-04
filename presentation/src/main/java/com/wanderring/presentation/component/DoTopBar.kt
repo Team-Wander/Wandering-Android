@@ -26,6 +26,7 @@ fun DoTopBar(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
+            .fillMaxWidth()
             .background(DoColor.WHITE)
             .padding(10.dp)
     ) {
@@ -35,7 +36,10 @@ fun DoTopBar(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.width(104.dp)
         ) {
-            SearchIcon(modifier = Modifier.clickableSingle { searchOnClick() })
+            SearchIcon(
+                modifier = Modifier.clickableSingle { searchOnClick() },
+                tint = DoColor.Black
+            )
             BellIcon(modifier = Modifier.clickableSingle { bellOnClick() })
             ProfileIcon(modifier = Modifier.clickableSingle { profileOnClick() })
         }
