@@ -139,13 +139,14 @@ fun PluginIcon(
 @Composable
 fun ProfileIcon(
     modifier: Modifier = Modifier,
+    isSelected: Boolean = false,
     tint: Color = Color.Unspecified,
 ) {
     Icon(
         painter = painterResource(id = R.drawable.profile),
         contentDescription = null,
         modifier = modifier.size(24.dp),
-        tint = tint
+        tint = if(isSelected) DoColor.MAIN else tint
     )
 }
 
@@ -166,13 +167,14 @@ fun ReportIcon(
 @Composable
 fun SearchIcon(
     modifier: Modifier = Modifier,
+    isSelected: Boolean = false,
     tint: Color = DoColor.GRAY400,
 ) {
     Icon(
         painter = painterResource(id = R.drawable.search),
         contentDescription = null,
         modifier = modifier.size(24.dp),
-        tint = tint
+        tint = if(isSelected) DoColor.MAIN else tint
     )
 }
 
@@ -192,25 +194,27 @@ fun XIcon(
 @Composable
 fun HomeIcon(
     modifier: Modifier = Modifier,
-    tint: Color = Color.Unspecified,
+    isSelected: Boolean = false,
+    tint: Color = DoColor.GRAY400,
 ) {
     Icon(
         painter = painterResource(id = R.drawable.home),
         contentDescription = null,
         modifier = modifier.size(24.dp),
-        tint = tint
+        tint = if(isSelected) DoColor.MAIN else tint
     )
 }
 
 @Composable
 fun TimeScheduleIcon(
     modifier: Modifier = Modifier,
+    isSelected: Boolean = false,
     tint: Color = Color.Unspecified,
 ) {
     Icon(
         painter = painterResource(id = R.drawable.timeschedule),
         contentDescription = null,
         modifier = modifier.size(24.dp),
-        tint = tint
+        tint = if(isSelected) DoColor.MAIN else tint
     )
 }
