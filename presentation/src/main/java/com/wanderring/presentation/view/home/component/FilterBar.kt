@@ -1,14 +1,15 @@
-package com.wanderring.presentation.view.main.component
+package com.wanderring.presentation.view.home.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.component.FilterIcon
 import com.wanderring.presentation.component.MapPinIcon
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
@@ -24,13 +25,11 @@ fun FilterBar(
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
+        modifier = modifier.fillMaxWidth()
     ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
+        Row(verticalAlignment = Alignment.CenterVertically,) {
             MapPinIcon()
+            Spacer(modifier = Modifier.fillMaxWidth(0.02439f))
             Text(
                 text = location,
                 style = DoTypography.bodyMedium,
