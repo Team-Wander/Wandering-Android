@@ -1,5 +1,6 @@
 package com.wanderring.presentation.component
 
+import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -10,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.R
+import com.wanderring.presentation.component.theme.DoColor
 
 @Composable
 fun FloatButton(
@@ -164,7 +166,7 @@ fun ReportIcon(
 @Composable
 fun SearchIcon(
     modifier: Modifier = Modifier,
-    tint: Color = Color.Unspecified,
+    tint: Color = DoColor.GRAY400,
 ) {
     Icon(
         painter = painterResource(id = R.drawable.search),
@@ -181,6 +183,32 @@ fun XIcon(
 ) {
     Icon(
         painter = painterResource(id = R.drawable.x),
+        contentDescription = null,
+        modifier = modifier.size(24.dp),
+        tint = tint
+    )
+}
+
+@Composable
+fun HomeIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.home),
+        contentDescription = null,
+        modifier = modifier.size(24.dp),
+        tint = tint
+    )
+}
+
+@Composable
+fun TimeScheduleIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.timeschedule),
         contentDescription = null,
         modifier = modifier.size(24.dp),
         tint = tint
