@@ -23,7 +23,7 @@ enum class DoNavBarEnum(val description: String) {
     HOME(description = "홈"),
     SEARCH(description = "검색"),
     SETTING(description = "설정"),
-    PROFILE(description = "프로필")
+    MY(description = "마이")
 }
 
 @Composable
@@ -46,7 +46,7 @@ fun DoNavBar(
             DoNavBarEnum.HOME,
             DoNavBarEnum.SEARCH,
             DoNavBarEnum.SETTING,
-            DoNavBarEnum.PROFILE
+            DoNavBarEnum.MY
         ).forEach { enum ->
             DoNavBarItem(
                 text = enum.description,
@@ -56,7 +56,7 @@ fun DoNavBar(
                         DoNavBarEnum.HOME -> { navigateToHome() }
                         DoNavBarEnum.SEARCH -> { navigateToSearch() }
                         DoNavBarEnum.SETTING -> { navigateToTimeSchedule() }
-                        DoNavBarEnum.PROFILE -> { navigateToMy() }
+                        DoNavBarEnum.MY -> { navigateToMy() }
                     }
                 },
                 icon = {
@@ -64,7 +64,7 @@ fun DoNavBar(
                         DoNavBarEnum.HOME -> { HomeIcon(isSelected = currentItem.value == enum) }
                         DoNavBarEnum.SEARCH -> { SearchIcon(isSelected = currentItem.value == enum) }
                         DoNavBarEnum.SETTING -> { TimeScheduleIcon(isSelected = currentItem.value == enum) }
-                        DoNavBarEnum.PROFILE -> { ProfileIcon(isSelected = currentItem.value == enum) }
+                        DoNavBarEnum.MY -> { MyIcon(isSelected = currentItem.value == enum) }
                     }
                 }
             )
@@ -83,7 +83,7 @@ private fun Preview() {
         navigateToHome = {currentIndex.value = DoNavBarEnum.HOME },
         navigateToSearch = {currentIndex.value = DoNavBarEnum.SEARCH },
         navigateToTimeSchedule = {currentIndex.value = DoNavBarEnum.SETTING },
-        navigateToMy = {currentIndex.value = DoNavBarEnum.PROFILE }
+        navigateToMy = {currentIndex.value = DoNavBarEnum.MY }
     )
 }
 
