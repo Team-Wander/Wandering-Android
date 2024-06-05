@@ -218,3 +218,17 @@ fun TimeScheduleIcon(
         tint = if(isSelected) DoColor.MAIN else tint
     )
 }
+
+@Composable
+fun MyIcon(
+    modifier: Modifier = Modifier,
+    isSelected: Boolean = false,
+    tint: Color = DoColor.GRAY400,
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.my),
+        contentDescription = null,
+        modifier = modifier.size(24.dp),
+        tint = if(isSelected) DoColor.MAIN else tint
+    )
+}
