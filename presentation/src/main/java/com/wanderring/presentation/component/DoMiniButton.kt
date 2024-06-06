@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 
@@ -23,14 +24,17 @@ fun DoMiniButton(
     modifier: Modifier = Modifier,
     color: Color = DoColor.MAIN,
     text: String,
+    onClick: () -> Unit,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.background(
-            color = color,
-            shape = RoundedCornerShape(size = 8.dp)
-        )
+        modifier = modifier
+            .background(
+                color = color,
+                shape = RoundedCornerShape(size = 8.dp)
+            )
+            .clickableSingle(onClick = onClick)
     ) {
         Text(
             text = text,
@@ -47,6 +51,7 @@ fun DoMiniButton(
 private fun Preview() {
     DoMiniButton(
         text = "텍스트입니다",
+        onClick = {},
         modifier = Modifier
             .height(70.dp)
             .width(400.dp)

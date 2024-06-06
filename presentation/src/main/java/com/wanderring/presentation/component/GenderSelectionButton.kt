@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wanderring.domain.model.enum.Gender
+import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 
@@ -24,6 +25,7 @@ fun GenderSelectionButton(
     modifier: Modifier = Modifier,
     gender: Gender,
     isSelected: Boolean = false,
+    onClick: () -> Unit,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,
@@ -41,6 +43,7 @@ fun GenderSelectionButton(
                 color = if (isSelected) DoColor.MAIN else DoColor.GRAY300,
                 shape = RoundedCornerShape(size = 8.dp)
             )
+            .clickableSingle(onClick = onClick)
     ) {
         Text(
             text = gender.description,
@@ -58,6 +61,7 @@ private fun PreviewSelected() {
     GenderSelectionButton(
         gender = Gender.WOMEN,
         isSelected = true,
+        onClick = {},
         modifier = Modifier
             .height(70.dp)
             .width(400.dp)
@@ -70,6 +74,7 @@ private fun PreviewNotSelected() {
     GenderSelectionButton(
         gender = Gender.WOMEN,
         isSelected = false,
+        onClick = {},
         modifier = Modifier
             .height(70.dp)
             .width(400.dp)

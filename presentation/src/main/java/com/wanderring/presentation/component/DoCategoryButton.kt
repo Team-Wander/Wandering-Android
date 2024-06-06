@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wanderring.domain.model.enum.Tag
+import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 
@@ -24,6 +25,7 @@ fun DoCategoryButton(
     modifier: Modifier = Modifier,
     tag: Tag,
     isSelected: Boolean = false,
+    onClick: () -> Unit,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,
@@ -41,6 +43,7 @@ fun DoCategoryButton(
                 color = if (isSelected) DoColor.MAIN else DoColor.GRAY300,
                 shape = RoundedCornerShape(size = 8.dp)
             )
+            .clickableSingle(onClick = onClick)
     ) {
         Text(
             text = tag.description,
@@ -57,6 +60,7 @@ private fun PreviewNotSelected() {
     DoCategoryButton(
         tag = Tag.WORRY,
         isSelected = false,
+        onClick = {},
         modifier = Modifier
             .height(70.dp)
             .width(400.dp)
@@ -69,6 +73,7 @@ private fun PreviewSelected() {
     DoCategoryButton(
         tag = Tag.WORRY,
         isSelected = true,
+        onClick = {},
         modifier = Modifier
             .height(70.dp)
             .width(400.dp)
