@@ -31,13 +31,14 @@ fun DoCategoryButton(
         modifier = modifier
             .then(
                 if (isSelected) Modifier.background(
-                    color = Color(tag.colorCode), shape = RoundedCornerShape(size = 8.dp)
+                    color = DoColor.MAIN,
+                    shape = RoundedCornerShape(size = 8.dp)
                 )
                 else Modifier
             )
             .border(
                 width = 1.dp,
-                color = Color(tag.colorCode),
+                color = if (isSelected) DoColor.MAIN else DoColor.GRAY300,
                 shape = RoundedCornerShape(size = 8.dp)
             )
     ) {
@@ -45,7 +46,7 @@ fun DoCategoryButton(
             text = tag.description,
             style = DoTypography.labelLarge,
             fontWeight = FontWeight(600),
-            color = if (isSelected) DoColor.WHITE else Color(tag.colorCode)
+            color = if (isSelected) DoColor.WHITE else DoColor.GRAY500
         )
     }
 }
@@ -61,6 +62,7 @@ private fun PreviewNotSelected() {
             .width(400.dp)
     )
 }
+
 @Preview
 @Composable
 private fun PreviewSelected() {
