@@ -4,7 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,30 +22,32 @@ import com.wanderring.presentation.component.theme.DoTypography
 @Composable
 fun GenderSelectionButton(
     modifier: Modifier = Modifier,
-    isSelected: Boolean = false,
     gender: Gender,
+    isSelected: Boolean = false,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .background(
-                if (isSelected) DoColor.GRAY800 else DoColor.WHITE,
-                shape = RoundedCornerShape(size = 8.dp)
+            .then(
+                if (isSelected) Modifier.background(
+                    color = DoColor.MAIN,
+                    shape = RoundedCornerShape(size = 8.dp)
+                )
+                else Modifier
             )
             .border(
                 width = 1.dp,
-                color = DoColor.GRAY800,
+                color = if (isSelected) DoColor.MAIN else DoColor.GRAY300,
                 shape = RoundedCornerShape(size = 8.dp)
             )
-            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Text(
             text = gender.description,
             style = DoTypography.labelLarge,
             fontWeight = FontWeight(700),
             textAlign = TextAlign.Center,
-            color = if (isSelected) DoColor.WHITE else DoColor.GRAY800
+            color = if (isSelected) DoColor.WHITE else DoColor.GRAY500
         )
     }
 }
@@ -55,6 +58,9 @@ private fun PreviewSelected() {
     GenderSelectionButton(
         gender = Gender.WOMEN,
         isSelected = true,
+        modifier = Modifier
+            .height(70.dp)
+            .width(400.dp)
     )
 }
 
@@ -64,5 +70,8 @@ private fun PreviewNotSelected() {
     GenderSelectionButton(
         gender = Gender.WOMEN,
         isSelected = false,
+        modifier = Modifier
+            .height(70.dp)
+            .width(400.dp)
     )
 }

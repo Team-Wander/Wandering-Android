@@ -4,7 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +21,7 @@ import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 
 @Composable
-fun GradeSelectionItem(
+fun GradeSelectionButton(
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
     grade: Grade,
@@ -30,24 +31,26 @@ fun GradeSelectionItem(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .background(
-                if (isSelected) DoColor.GRAY800 else DoColor.WHITE,
-                shape = RoundedCornerShape(size = 8.dp)
+            .then(
+                if (isSelected) Modifier.background(
+                    color = DoColor.MAIN,
+                    shape = RoundedCornerShape(size = 8.dp)
+                )
+                else Modifier
             )
             .border(
                 width = 1.dp,
-                color = if (isSelected) DoColor.GRAY800 else DoColor.GRAY800,
+                color = if (isSelected) DoColor.MAIN else DoColor.GRAY300,
                 shape = RoundedCornerShape(size = 8.dp)
             )
             .clickableSingle(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Text(
             text = grade.description,
             style = DoTypography.labelLarge,
             fontWeight = FontWeight(700),
             textAlign = TextAlign.Center,
-            color = if (isSelected) DoColor.WHITE else DoColor.GRAY800
+            color = if (isSelected) DoColor.WHITE else DoColor.GRAY500
         )
     }
 }
@@ -55,19 +58,25 @@ fun GradeSelectionItem(
 @Preview
 @Composable
 private fun PreviewSelected() {
-    GradeSelectionItem(
+    GradeSelectionButton(
         grade = Grade.TWO,
         isSelected = true,
-        onClick = {}
+        onClick = {},
+        modifier = Modifier
+            .height(70.dp)
+            .width(400.dp)
     )
 }
 
 @Preview
 @Composable
 private fun PreviewNotSelected() {
-    GradeSelectionItem(
+    GradeSelectionButton(
         grade = Grade.TWO,
         isSelected = false,
-        onClick = {}
+        onClick = {},
+        modifier = Modifier
+            .height(70.dp)
+            .width(400.dp)
     )
 }
