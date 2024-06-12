@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.wanderring.presentation.view.compostion
 
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -6,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -14,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.wanderring.presentation.component.DoNavBar
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
@@ -21,7 +25,6 @@ fun TopLevelViewRoute(modifier: Modifier = Modifier) {
     TopLevelView(modifier = modifier)
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TopLevelView(modifier: Modifier = Modifier) {
     val pagerState = rememberPagerState { 4 }
@@ -31,26 +34,10 @@ fun TopLevelView(modifier: Modifier = Modifier) {
         bottomBar = {
             DoNavBar(
                 currentItem = pagerState.currentPage,
-                navigateToHome = {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(0)
-                    }
-                },
-                navigateToSearch = {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(1)
-                    }
-                },
-                navigateToTimeSchedule = {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(2)
-                    }
-                },
-                navigateToMy = {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(3)
-                    }
-                },
+                navigateToHome = { coroutineScope.navigateToPage(page = 0, pagerState = pagerState) },
+                navigateToSearch = { coroutineScope.navigateToPage(page = 1, pagerState = pagerState) },
+                navigateToTimeSchedule = { coroutineScope.navigateToPage(page = 2, pagerState = pagerState) },
+                navigateToMy = { coroutineScope.navigateToPage(page = 3, pagerState = pagerState) },
             )
         }
     ) {
@@ -75,8 +62,14 @@ fun TopLevelView(modifier: Modifier = Modifier) {
     }
 }
 
+private fun CoroutineScope.navigateToPage(page: Int, pagerState: PagerState) {
+    this.launch {
+        pagerState.animateScrollToPage(page)
+    }
+}
+
 @Preview
 @Composable
-private fun Preview(){
+private fun Preview() {
     TopLevelViewRoute()
 }
