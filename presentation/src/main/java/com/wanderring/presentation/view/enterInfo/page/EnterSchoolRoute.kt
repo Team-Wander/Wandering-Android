@@ -23,13 +23,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.wanderring.domain.model.enum.Grade
+import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.presentation.component.DoButton
 import com.wanderring.presentation.component.DoTextField
-import com.wanderring.presentation.component.GradeSelectionItem
+import com.wanderring.presentation.component.GradeSelectionButton
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.view.enterInfo.component.InfoBox
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -153,6 +152,7 @@ private fun EnterGradePagePreview() {
         navigateToLocationPage = {}
     )
 }
+
 @Composable
 fun EnterGradePage(
     modifier: Modifier = Modifier,
@@ -188,7 +188,7 @@ fun EnterGradePage(
                             Grade.THREE,
                             Grade.FOUR
                         ).forEach { grade ->
-                            GradeSelectionItem(
+                            GradeSelectionButton(
                                 grade = grade,
                                 isSelected = grade == gradeState.value,
                                 onClick = { gradeState.value = grade }
@@ -205,7 +205,7 @@ fun EnterGradePage(
                             Grade.FIVE,
                             Grade.SIX
                         ).forEach { grade ->
-                            GradeSelectionItem(
+                            GradeSelectionButton(
                                 grade = grade,
                                 isSelected = grade == gradeState.value,
                                 onClick = { gradeState.value = grade }

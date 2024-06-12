@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.wanderring.domain.model.enum.Tag
+import com.wanderring.domain.model.enumType.Tag
 import com.wanderring.presentation.R
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
@@ -33,7 +33,9 @@ fun DoWalkListItem(
     title: String,
     info: String,
     tag0: Tag = Tag.NONE,
+    tag0OnClick: () -> Unit,
     tag1: Tag = Tag.NONE,
+    tag1OnClick: () -> Unit,
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -78,7 +80,8 @@ fun DoWalkListItem(
         ) {
             if (tag0 != Tag.NONE) {
                 DoCategoryButton(
-                   tag = tag0,
+                    tag = tag0,
+                    onClick = tag0OnClick,
                     modifier = Modifier
                         .width(45.dp)
                         .height(26.dp),
@@ -86,6 +89,7 @@ fun DoWalkListItem(
                 if (tag1 != Tag.NONE) {
                     DoCategoryButton(
                         tag = tag1,
+                        onClick = tag1OnClick,
                         modifier = Modifier
                             .width(45.dp)
                             .height(26.dp)
@@ -107,6 +111,8 @@ private fun Preview() {
         title = "제목",
         info = "2007.11.15",
         tag0 = Tag.CHAT,
-        tag1 = Tag.WORRY
+        tag0OnClick = {},
+        tag1 = Tag.WORRY,
+        tag1OnClick = {},
     )
 }
