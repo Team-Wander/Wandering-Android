@@ -1,4 +1,4 @@
-package com.wanderring.domain.model.enum
+package com.wanderring.domain.model.enumType
 
 enum class Grade(val description: String) {
     ONE(description = "1학년"),

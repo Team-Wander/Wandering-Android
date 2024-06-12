@@ -1,4 +1,4 @@
-package com.wanderring.domain.model.enum
+package com.wanderring.domain.model.enumType
 
 enum class Gender(val description: String) {
     MEN("남자"),

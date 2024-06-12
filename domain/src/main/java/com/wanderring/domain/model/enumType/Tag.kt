@@ -1,4 +1,4 @@
-package com.wanderring.domain.model.enum
+package com.wanderring.domain.model.enumType
 
 enum class Tag(val description: String, ) {
     WALK(description = "산책"),
