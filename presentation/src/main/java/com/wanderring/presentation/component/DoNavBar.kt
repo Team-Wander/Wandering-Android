@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +26,7 @@ enum class DoNavBarEnum(val description: String) {
 @Composable
 fun DoNavBar(
     modifier: Modifier = Modifier,
-    currentItem: MutableState<DoNavBarEnum>,
+    currentItem: Int,
     navigateToHome: () -> Unit,
     navigateToSearch: () -> Unit,
     navigateToTimeSchedule: () -> Unit,
@@ -47,10 +44,10 @@ fun DoNavBar(
             DoNavBarEnum.SEARCH,
             DoNavBarEnum.SETTING,
             DoNavBarEnum.MY
-        ).forEach { enum ->
+        ).forEachIndexed {  index ,enum ->
             DoNavBarItem(
                 text = enum.description,
-                isSelected = currentItem.value == enum,
+                isSelected = currentItem == index,
                 onClick = {
                     when (enum) {
                         DoNavBarEnum.HOME -> { navigateToHome() }
@@ -61,10 +58,10 @@ fun DoNavBar(
                 },
                 icon = {
                     when (enum) {
-                        DoNavBarEnum.HOME -> { HomeIcon(isSelected = currentItem.value == enum) }
-                        DoNavBarEnum.SEARCH -> { SearchIcon(isSelected = currentItem.value == enum) }
-                        DoNavBarEnum.SETTING -> { TimeScheduleIcon(isSelected = currentItem.value == enum) }
-                        DoNavBarEnum.MY -> { MyIcon(isSelected = currentItem.value == enum) }
+                        DoNavBarEnum.HOME -> { HomeIcon(isSelected = currentItem == index) }
+                        DoNavBarEnum.SEARCH -> { SearchIcon(isSelected = currentItem == index) }
+                        DoNavBarEnum.SETTING -> { TimeScheduleIcon(isSelected = currentItem == index) }
+                        DoNavBarEnum.MY -> { MyIcon(isSelected = currentItem == index) }
                     }
                 }
             )
@@ -75,15 +72,12 @@ fun DoNavBar(
 @Preview
 @Composable
 private fun Preview() {
-    val currentIndex = remember {
-        mutableStateOf(DoNavBarEnum.HOME)
-    }
     DoNavBar(
-        currentItem = currentIndex,
-        navigateToHome = {currentIndex.value = DoNavBarEnum.HOME },
-        navigateToSearch = {currentIndex.value = DoNavBarEnum.SEARCH },
-        navigateToTimeSchedule = {currentIndex.value = DoNavBarEnum.SETTING },
-        navigateToMy = {currentIndex.value = DoNavBarEnum.MY }
+        currentItem = 1,
+        navigateToHome = {  },
+        navigateToSearch = {  },
+        navigateToTimeSchedule = {  },
+        navigateToMy = {  }
     )
 }
 
