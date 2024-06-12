@@ -26,10 +26,11 @@ fun TopLevelViewRoute(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TopLevelView(modifier: Modifier = Modifier) {
-    val pagerState = rememberPagerState { 4 }
-    val coroutineScope = rememberCoroutineScope()
-
+fun TopLevelView(
+    modifier: Modifier = Modifier,
+    pagerState: PagerState = rememberPagerState { 4 },
+    coroutineScope: CoroutineScope = rememberCoroutineScope(),
+) {
     Scaffold(
         bottomBar = {
             DoNavBar(
