@@ -16,6 +16,7 @@ android {
 dependencies {
     // TODO: Add your project dependencies
 
-    androidTestImplementation(libs.androidx.test.ext)
     implementation(libs.app.update.ktx)
+    androidTestImplementation(libs.androidx.test.ext)
+
 }
