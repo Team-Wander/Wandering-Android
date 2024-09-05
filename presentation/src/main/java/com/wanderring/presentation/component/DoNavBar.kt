@@ -40,11 +40,11 @@ fun DoNavBar(
             .padding(horizontal = 32.dp, vertical = 7.dp)
     ) {
         listOf(
-            DoNavBarEnum.HOME,
-            DoNavBarEnum.SEARCH,
-            DoNavBarEnum.SETTING,
-            DoNavBarEnum.MY
         ).forEachIndexed {  index ,enum ->
+            HOME,
+            SEARCH,
+            SETTING,
+            MY
             DoNavBarItem(
                 text = enum.description,
                 isSelected = currentItem == index,
@@ -92,7 +92,6 @@ fun DoNavBarItem(
     val color = if (isSelected) DoColor.MAIN else DoColor.GRAY400
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(0.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.clickableSingle(enabled = !isSelected) { onClick() }
     ) {
