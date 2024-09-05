@@ -1,6 +1,5 @@
 package com.wanderring.presentation.component
 
-import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -56,14 +55,14 @@ fun CheckIcon(
 ) {
     if (isSelected) {
         Icon(
-            painter = painterResource(id = R.drawable.check),
+            painter = painterResource(id = R.drawable.checked),
             contentDescription = null,
             modifier = modifier.size(24.dp),
             tint = tint
         )
     } else {
         Icon(
-            painter = painterResource(id = R.drawable.check),
+            painter = painterResource(id = R.drawable.notchecked),
             contentDescription = null,
             modifier = modifier.size(24.dp),
             tint = tint
