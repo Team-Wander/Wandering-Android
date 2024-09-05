@@ -2,14 +2,10 @@ package com.wanderring.presentation.view.onboarding.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -24,32 +20,26 @@ import com.wanderring.presentation.component.theme.DoTypography
 @Composable
 fun InfoBox(
     modifier: Modifier = Modifier,
-    innerSpacerValue: Float = 0.04552f,
     title: String,
     content: String,
     contentComposable: @Composable () -> Unit,
     navigateToBack: () -> Unit,
 ) {
     Column(
-        verticalArrangement = Arrangement.SpaceBetween,
+        verticalArrangement = Arrangement.spacedBy(48.dp),
         horizontalAlignment = Alignment.Start,
         modifier = modifier,
     ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(0.dp, Alignment.Start),
-            verticalAlignment = Alignment.Top,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            ChevronRightIcon(modifier = Modifier.clickableSingle { navigateToBack() })
-        }
-        Spacer(modifier = Modifier.fillMaxHeight(0.0789f))
+        ChevronRightIcon(modifier = Modifier
+            .clickableSingle { navigateToBack() }
+            .padding(vertical = 12.dp))
         Column(
-            verticalArrangement = Arrangement.SpaceBetween,
+            verticalArrangement = Arrangement.spacedBy(30.dp),
             horizontalAlignment = Alignment.Start,
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(
-                verticalArrangement = Arrangement.SpaceBetween,
+                verticalArrangement = Arrangement.spacedBy(14.dp),
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -59,7 +49,6 @@ fun InfoBox(
                     fontWeight = FontWeight(600),
                     color = DoColor.Black
                 )
-                Spacer(modifier = Modifier.fillMaxHeight(0.0214f))
                 Text(
                     text = content,
                     style = DoTypography.lable,
@@ -67,19 +56,18 @@ fun InfoBox(
                     color = DoColor.GRAY600,
                 )
             }
-            Spacer(modifier = Modifier.fillMaxHeight(innerSpacerValue))
             contentComposable()
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun Preview() {
     InfoBox(
         title = "제목",
         content = "내용입니다",
-        contentComposable = { DoTextField(value = "qwe", onValueChange = { _ -> }) },
+        contentComposable = { DoTextField(value = "", onValueChange = { _ -> }, placeholder = "학교를 입력해주세여") },
         navigateToBack = {}
     )
 }
