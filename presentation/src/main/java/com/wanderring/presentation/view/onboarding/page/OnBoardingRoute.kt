@@ -30,6 +30,7 @@ import com.wanderring.presentation.component.GradeSelectionButton
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.view.onboarding.component.InfoBox
 import kotlinx.coroutines.launch
+import okhttp3.internal.immutableListOf
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -179,7 +180,6 @@ fun EnterGradePage(
             title = "학년을 알려주세요",
             content = "현재 학년을 알려주세요",
             navigateToBack = navigateToBack,
-            innerSpacerValue = 0.0334f,
             contentComposable = {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Row(
@@ -187,13 +187,17 @@ fun EnterGradePage(
                         verticalAlignment = Alignment.Top,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        listOf(
+                        immutableListOf(
                             Grade.ONE,
                             Grade.TWO,
                             Grade.THREE,
                             Grade.FOUR
                         ).forEach { grade ->
                             GradeSelectionButton(
+                                modifier = Modifier.padding(
+                                    vertical = 8.dp,
+                                    horizontal = 16.dp
+                                ),
                                 grade = grade,
                                 isSelected = grade == gradeState.value,
                                 onClick = { gradeState.value = grade }
@@ -206,11 +210,15 @@ fun EnterGradePage(
                         verticalAlignment = Alignment.Top,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        listOf(
+                        immutableListOf(
                             Grade.FIVE,
                             Grade.SIX
                         ).forEach { grade ->
                             GradeSelectionButton(
+                                modifier = Modifier.padding(
+                                    vertical = 8.dp,
+                                    horizontal = 16.dp
+                                ),
                                 grade = grade,
                                 isSelected = grade == gradeState.value,
                                 onClick = { gradeState.value = grade }
