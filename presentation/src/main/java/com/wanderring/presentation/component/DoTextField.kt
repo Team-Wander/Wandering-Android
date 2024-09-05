@@ -1,8 +1,10 @@
 package com.wanderring.presentation.component
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,7 +32,7 @@ fun DoTextField(
     modifier: Modifier = Modifier,
     value: String,
     placeholder: String = "",
-    isSearch: Boolean = false,
+    trailingIcon: @Composable () -> Unit = { Spacer(modifier = Modifier) },
     outlineColor: Color = DoColor.MAIN,
     focusRequester: FocusRequester = FocusRequester(),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -73,9 +75,12 @@ fun DoTextField(
                             color = DoColor.GRAY400
                         )
                     }
-                }
-                if (isSearch) {
-                    SearchIcon()
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        trailingIcon()
+                    }
                 }
             }
         }
@@ -83,8 +88,8 @@ fun DoTextField(
 }
 
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    DoTextField(value = "안녕하세요", onValueChange = { _ -> })
+    DoTextField(value = "안녕하세요", onValueChange = { _ -> }, trailingIcon = { SearchIcon() })
 }
