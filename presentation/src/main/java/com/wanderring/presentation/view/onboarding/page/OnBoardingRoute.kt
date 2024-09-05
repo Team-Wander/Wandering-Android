@@ -52,7 +52,8 @@ fun EnterSchoolRoute(
             0 -> {
                 EnterSchoolPage(
                     modifier = modifier,
-                    schoolState = schoolState,
+                    schoolState = schoolState.value,
+                    onSchoolValueChange = { schoolState.value = it },
                     navigateToBack = navigateToBack,
                     navigateToGradePage = {
                         coroutineScope.launch {
@@ -82,13 +83,14 @@ fun EnterSchoolRoute(
             2 -> {
                 EnterLocationPage(
                     modifier = modifier,
-                    locationState = locationState,
+                    locationState = locationState.value,
+                    onLocationValueChange = { locationState.value = it },
                     navigateToBack = {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(1)
                         }
                     },
-                    navigateToHome = navigateToHome
+                    navigateToHome = navigateToHome,
                 )
             }
         }
@@ -99,16 +101,18 @@ fun EnterSchoolRoute(
 @Composable
 private fun EnterSchoolPagePreview() {
     EnterSchoolPage(
-        schoolState = remember { mutableStateOf("") },
+        schoolState = "",
         navigateToBack = {},
-        navigateToGradePage = {}
+        navigateToGradePage = {},
+        onSchoolValueChange = { _ -> }
     )
 }
 
 @Composable
 fun EnterSchoolPage(
     modifier: Modifier = Modifier,
-    schoolState: MutableState<String>,
+    schoolState: String,
+    onSchoolValueChange: (String) -> Unit,
     navigateToBack: () -> Unit,
     navigateToGradePage: () -> Unit,
 ) {
@@ -129,7 +133,8 @@ fun EnterSchoolPage(
             contentComposable = {
                 DoTextField(
                     value = schoolState,
-                    placeholder = "학교를 알려주세요"
+                    placeholder = "학교를 알려주세요",
+                    onValueChange = onSchoolValueChange
                 )
             }
         )
@@ -239,16 +244,18 @@ fun EnterGradePage(
 @Composable
 private fun EnterLocationPagePreview() {
     EnterLocationPage(
-        locationState = remember { mutableStateOf("") },
+        locationState = "",
         navigateToBack = {},
-        navigateToHome = {}
+        navigateToHome = {},
+        onLocationValueChange = { _ -> },
     )
 }
 
 @Composable
 fun EnterLocationPage(
     modifier: Modifier = Modifier,
-    locationState: MutableState<String>,
+    locationState: String,
+    onLocationValueChange: (String) -> Unit,
     navigateToBack: () -> Unit,
     navigateToHome: () -> Unit,
 ) {
@@ -269,7 +276,8 @@ fun EnterLocationPage(
             contentComposable = {
                 DoTextField(
                     value = locationState,
-                    placeholder = "위치를 알려주세요"
+                    placeholder = "위치를 알려주세요",
+                    onValueChange = onLocationValueChange
                 )
             }
         )

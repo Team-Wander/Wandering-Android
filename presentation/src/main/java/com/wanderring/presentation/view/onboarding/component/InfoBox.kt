@@ -79,7 +79,7 @@ private fun Preview() {
     InfoBox(
         title = "제목",
         content = "내용입니다",
-        contentComposable = { DoTextField(value = remember { mutableStateOf("") }) },
+        contentComposable = { DoTextField(value = "qwe", onValueChange = { _ -> }) },
         navigateToBack = {}
     )
 }
