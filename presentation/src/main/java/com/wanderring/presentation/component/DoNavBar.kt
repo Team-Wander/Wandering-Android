@@ -100,7 +100,7 @@ fun DoNavBarItem(
         Text(
             modifier = Modifier.height(20.dp),
             text = text,
-            style = DoTypography.labelLarge,
+            style = DoTypography.lable,
             color = color
         )
     }

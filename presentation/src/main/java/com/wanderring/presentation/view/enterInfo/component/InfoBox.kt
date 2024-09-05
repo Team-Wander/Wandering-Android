@@ -55,14 +55,14 @@ fun InfoBox(
             ) {
                 Text(
                     text = title,
-                    style = DoTypography.headlineMedium,
+                    style = DoTypography.m1,
                     fontWeight = FontWeight(600),
                     color = DoColor.Black
                 )
                 Spacer(modifier = Modifier.fillMaxHeight(0.0214f))
                 Text(
                     text = content,
-                    style = DoTypography.labelLarge,
+                    style = DoTypography.lable,
                     fontWeight = FontWeight(400),
                     color = DoColor.GRAY600,
                 )

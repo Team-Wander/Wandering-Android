@@ -38,7 +38,7 @@ fun DoButton(
     ) {
         Text(
             text = text,
-            style = DoTypography.bodySmall,
+            style = DoTypography.m3,
             fontWeight = FontWeight(600),
             textAlign = TextAlign.Center,
             color = DoColor.WHITE

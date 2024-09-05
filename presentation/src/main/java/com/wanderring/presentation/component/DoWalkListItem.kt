@@ -69,7 +69,7 @@ fun DoWalkListItem(
             )
             Text(
                 text = title,
-                style = DoTypography.bodySmall,
+                style = DoTypography.m3,
                 fontWeight = FontWeight(600),
             )
             Text(text = info)

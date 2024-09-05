@@ -20,6 +20,7 @@ import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 
+
 @Composable
 fun GradeSelectionButton(
     modifier: Modifier = Modifier,
@@ -47,7 +48,7 @@ fun GradeSelectionButton(
     ) {
         Text(
             text = grade.description,
-            style = DoTypography.labelLarge,
+            style = DoTypography.lable,
             fontWeight = FontWeight(700),
             textAlign = TextAlign.Center,
             color = if (isSelected) DoColor.WHITE else DoColor.GRAY500

@@ -40,7 +40,7 @@ fun DoTextField(
         value = value.value,
         onValueChange = { newText -> value.value = newText },
         visualTransformation = visualTransformation,
-        textStyle = DoTypography.bodySmall.copy(
+        textStyle = DoTypography.m3.copy(
             fontWeight = FontWeight.Normal,
             color = DoColor.Black,
             textAlign = TextAlign.Start,
@@ -64,7 +64,7 @@ fun DoTextField(
                     if (value.value.isEmpty()) {
                         Text(
                             text = placeholder,
-                            style = DoTypography.bodySmall,
+                            style = DoTypography.m3,
                             fontWeight = FontWeight(400),
                             color = DoColor.GRAY400
                         )

@@ -46,7 +46,7 @@ fun DoCategoryButton(
     ) {
         Text(
             text = tag.description,
-            style = DoTypography.labelLarge,
+            style = DoTypography.lable,
             fontWeight = FontWeight(600),
             color = if (isSelected) DoColor.WHITE else DoColor.GRAY500
         )

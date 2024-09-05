@@ -32,7 +32,7 @@ fun FilterBar(
             Spacer(modifier = Modifier.fillMaxWidth(0.02439f))
             Text(
                 text = location,
-                style = DoTypography.bodyMedium,
+                style = DoTypography.m2,
                 fontWeight = FontWeight(600),
                 color = DoColor.Black
             )

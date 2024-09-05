@@ -38,7 +38,7 @@ fun DoMiniButton(
     ) {
         Text(
             text = text,
-            style = DoTypography.labelLarge,
+            style = DoTypography.lable,
             fontWeight = FontWeight(700),
             textAlign = TextAlign.Center,
             color = DoColor.WHITE

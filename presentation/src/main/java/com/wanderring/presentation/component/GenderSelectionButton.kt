@@ -47,7 +47,7 @@ fun GenderSelectionButton(
     ) {
         Text(
             text = gender.description,
-            style = DoTypography.labelLarge,
+            style = DoTypography.m1,
             fontWeight = FontWeight(700),
             textAlign = TextAlign.Center,
             color = if (isSelected) DoColor.WHITE else DoColor.GRAY500
