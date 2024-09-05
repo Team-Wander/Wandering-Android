@@ -48,8 +48,7 @@ fun OnBoardingRoute(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen(
-    // OnBoarding 화면들을 하나로 묶은 screen
+fun OnBoardingScreen( // OnBoarding 화면들을 하나로 묶은 screen
     modifier: Modifier = Modifier,
     navigateToBack: () -> Unit,
     navigateToHome: () -> Unit,
@@ -157,7 +156,7 @@ fun EnterSchoolPage(
         DoButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.0789f),
+                .padding(vertical = 14.dp),
             text = "완료",
             onClick = navigateToGradePage
         )
@@ -256,7 +255,7 @@ fun EnterGradePage(
         DoButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.0789f),
+                .padding(vertical = 14.dp),
             text = "완료",
             onClick = navigateToLocationPage
         )
@@ -308,7 +307,7 @@ fun EnterLocationPage(
         DoButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.0789f),
+                .padding(vertical = 14.dp),
             text = "완료",
             onClick = navigateToHome
         )
