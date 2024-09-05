@@ -28,15 +28,28 @@ import com.wanderring.presentation.component.DoButton
 import com.wanderring.presentation.component.DoTextField
 import com.wanderring.presentation.component.GradeSelectionButton
 import com.wanderring.presentation.component.SearchIcon
-import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.view.onboarding.component.InfoBox
 import kotlinx.coroutines.launch
 import okhttp3.internal.immutableListOf
 
+@Composable
+fun OnBoardingRoute(
+    modifier: Modifier = Modifier,
+    navigateToBack: () -> Unit,
+    navigateToHome: () -> Unit,
+) {
+    OnBoardingScreen(
+        modifier = modifier,
+        navigateToBack = navigateToBack,
+        navigateToHome = navigateToHome,
+    )
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun EnterSchoolRoute(
+fun OnBoardingScreen(
+    // OnBoarding 화면들을 하나로 묶은 screen
     modifier: Modifier = Modifier,
     navigateToBack: () -> Unit,
     navigateToHome: () -> Unit,

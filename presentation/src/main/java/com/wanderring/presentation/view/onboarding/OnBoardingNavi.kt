@@ -3,7 +3,7 @@ package com.wanderring.presentation.view.onboarding
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.wanderring.presentation.view.onboarding.page.EnterSchoolRoute
+import com.wanderring.presentation.view.onboarding.page.OnBoardingRoute
 
 const val OnBoarding = "OnBoarding"
 
@@ -16,7 +16,7 @@ fun NavGraphBuilder.enterInfo(
     navigateToBack: () -> Unit,
 ) {
     composable(OnBoarding) {
-        EnterSchoolRoute(
+        OnBoardingRoute(
             navigateToHome = navigateToHome,
             navigateToBack = navigateToBack
         )
