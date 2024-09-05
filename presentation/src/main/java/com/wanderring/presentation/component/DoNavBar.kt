@@ -8,13 +8,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.wanderring.presentation.component.DoNavBarEnum.*
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
+import okhttp3.internal.immutableListOf
 
 enum class DoNavBarEnum(val description: String) {
     HOME(description = "홈"),
@@ -39,29 +42,29 @@ fun DoNavBar(
             .fillMaxWidth()
             .padding(horizontal = 32.dp, vertical = 7.dp)
     ) {
-        listOf(
-        ).forEachIndexed {  index ,enum ->
+        immutableListOf(
             HOME,
             SEARCH,
             SETTING,
             MY
+        ).forEachIndexed { index, type ->
             DoNavBarItem(
-                text = enum.description,
+                text = type.description,
                 isSelected = currentItem == index,
                 onClick = {
-                    when (enum) {
-                        DoNavBarEnum.HOME -> { navigateToHome() }
-                        DoNavBarEnum.SEARCH -> { navigateToSearch() }
-                        DoNavBarEnum.SETTING -> { navigateToTimeSchedule() }
-                        DoNavBarEnum.MY -> { navigateToMy() }
+                    when (type) {
+                        HOME -> { navigateToHome() }
+                        SEARCH -> { navigateToSearch() }
+                        SETTING -> { navigateToTimeSchedule() }
+                        MY -> { navigateToMy() }
                     }
                 },
                 icon = {
-                    when (enum) {
-                        DoNavBarEnum.HOME -> { HomeIcon(isSelected = currentItem == index) }
-                        DoNavBarEnum.SEARCH -> { SearchIcon(isSelected = currentItem == index) }
-                        DoNavBarEnum.SETTING -> { TimeScheduleIcon(isSelected = currentItem == index) }
-                        DoNavBarEnum.MY -> { MyIcon(isSelected = currentItem == index) }
+                    when (type) {
+                        HOME -> { HomeIcon(isSelected = currentItem == index) }
+                        SEARCH -> { SearchIcon(isSelected = currentItem == index) }
+                        SETTING -> { TimeScheduleIcon(isSelected = currentItem == index) }
+                        MY -> { MyIcon(isSelected = currentItem == index) }
                     }
                 }
             )
@@ -74,10 +77,10 @@ fun DoNavBar(
 private fun Preview() {
     DoNavBar(
         currentItem = 1,
-        navigateToHome = {  },
-        navigateToSearch = {  },
-        navigateToTimeSchedule = {  },
-        navigateToMy = {  }
+        navigateToHome = { },
+        navigateToSearch = { },
+        navigateToTimeSchedule = { },
+        navigateToMy = { }
     )
 }
 
@@ -89,7 +92,7 @@ fun DoNavBarItem(
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
 ) {
-    val color = if (isSelected) DoColor.MAIN else DoColor.GRAY400
+    val color = remember { if (isSelected) DoColor.MAIN else DoColor.GRAY400 }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
