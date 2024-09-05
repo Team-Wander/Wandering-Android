@@ -11,7 +11,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("com.google.dagger.hilt.android")
                 apply("com.google.devtools.ksp")
             }
-
             dependencies {
                 add("implementation", project(":core:ui"))
                 add("implementation", project(":core:designsystem"))

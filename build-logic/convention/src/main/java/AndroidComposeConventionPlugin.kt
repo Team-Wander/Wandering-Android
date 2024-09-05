@@ -11,14 +11,14 @@ class AndroidComposeConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("com.android.library")
+            }
 
-                extensions.configure<LibraryExtension> {
-                    configureAndroidCompose(this)
-                }
+            extensions.configure<LibraryExtension> {
+                configureAndroidCompose(this)
+            }
 
-                dependencies {
-                    add("implementation", libs.findBundle("compose").get())
-                }
+            dependencies {
+                add("implementation", libs.findBundle("compose").get())
             }
         }
     }

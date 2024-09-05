@@ -1,5 +1,6 @@
 plugins {
     id("takeawalk.android.compose")
+    id("takeawalk.jvm.library")
 }
 
 dependencies {

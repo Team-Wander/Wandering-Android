@@ -20,14 +20,12 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     applicationId = "com.wandering.takeawalk"
                     minSdk = 26
                     targetSdk = 34
-                    versionCode = 19
-                    versionName = "1.2.8"
+                    versionCode = 1
+                    versionName = "1.0"
                     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
                     vectorDrawables.useSupportLibrary = true
                 }
-
-                buildFeatures.compose = true
 
                 buildTypes {
                     getByName("release") {

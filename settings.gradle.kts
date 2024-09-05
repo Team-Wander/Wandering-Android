@@ -26,7 +26,6 @@ dependencyResolutionManagement {
 rootProject.name = "takeawalk"
 include(":app")
 
-gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:testClasses"))
 include(":feature:main")
 include(":feature:onboarding")
 include(":feature:scadule")
@@ -38,3 +37,5 @@ include(":core:designsystem")
 include(":core:domain")
 include(":core:model")
 include(":core:ui")
+
+gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:testClasses"))
