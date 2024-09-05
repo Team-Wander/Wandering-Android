@@ -27,6 +27,8 @@ import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.presentation.component.DoButton
 import com.wanderring.presentation.component.DoTextField
 import com.wanderring.presentation.component.GradeSelectionButton
+import com.wanderring.presentation.component.SearchIcon
+import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.view.onboarding.component.InfoBox
 import kotlinx.coroutines.launch
@@ -285,7 +287,8 @@ fun EnterLocationPage(
                 DoTextField(
                     value = locationState,
                     placeholder = "위치를 알려주세요",
-                    onValueChange = onLocationValueChange
+                    onValueChange = onLocationValueChange,
+                    trailingIcon = { SearchIcon() }
                 )
             }
         )
