@@ -18,6 +18,7 @@ object DoColor {
     val GRAY400 = Color(0xFFB4B5B7)
     val GRAY300 = Color(0xFFDBDCDE)
     val GRAY200 = Color(0xFFEFF0F2)
+    val GRAY100 = Color(0xFFF5F6F8)
 
     val SHADOW = Color(0x14000000)
 
