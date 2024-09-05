@@ -7,12 +7,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -29,16 +27,20 @@ import com.wanderring.presentation.component.theme.DoTypography
 @Composable
 fun DoTextField(
     modifier: Modifier = Modifier,
+    value: String,
     placeholder: String = "",
     isSearch: Boolean = false,
-    value: MutableState<String>,
+    focusRequester: FocusRequester = FocusRequester(),
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
+    onValueChange: (String) -> Unit,
 ) {
-    val focusRequester by remember { mutableStateOf(FocusRequester()) }
-
     BasicTextField(
-        value = value.value,
-        onValueChange = { newText -> value.value = newText },
+        value = value,
+        onValueChange = { onValueChange(it) },
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
         visualTransformation = visualTransformation,
         textStyle = DoTypography.m3.copy(
             fontWeight = FontWeight.Normal,
@@ -61,7 +63,7 @@ fun DoTextField(
             ) {
                 Box(modifier = Modifier.fillMaxWidth()) {
                     innerTextField()
-                    if (value.value.isEmpty()) {
+                    if (value.isEmpty()) {
                         Text(
                             text = placeholder,
                             style = DoTypography.m3,
@@ -82,5 +84,5 @@ fun DoTextField(
 @Preview
 @Composable
 private fun Preview() {
-    DoTextField(value = remember { mutableStateOf("") })
+    DoTextField(value = "안녕하세요", onValueChange = { _ -> })
 }
