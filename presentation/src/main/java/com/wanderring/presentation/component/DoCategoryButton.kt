@@ -43,6 +43,7 @@ fun DoCategoryButton(
                 shape = RoundedCornerShape(size = 8.dp)
             )
             .clickableSingle(onClick = onClick)
+            .then(modifier) // modifer는 순차적으로 적용되기 때문에 padding을 나중에 적용시키기 위해 사용한 코드
     ) {
         Text(
             text = tag.description,
