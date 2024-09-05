@@ -2,6 +2,8 @@ package com.wanderring.presentation.component.theme
 
 import androidx.compose.ui.graphics.Color
 
+// 애플리케이션에서 사용되는 색상 모음
+
 object DoColor {
     val MAIN = Color(0xFF36C05C)
     val Black = Color(0xFF333333)
