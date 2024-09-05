@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
@@ -30,6 +31,7 @@ fun DoTextField(
     value: String,
     placeholder: String = "",
     isSearch: Boolean = false,
+    outlineColor: Color = DoColor.MAIN,
     focusRequester: FocusRequester = FocusRequester(),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -52,7 +54,7 @@ fun DoTextField(
             .focusRequester(focusRequester)
             .border(
                 width = 1.dp,
-                color = DoColor.MAIN,
+                color = outlineColor,
                 shape = RoundedCornerShape(size = 12.dp)
             )
             .padding(12.dp),
