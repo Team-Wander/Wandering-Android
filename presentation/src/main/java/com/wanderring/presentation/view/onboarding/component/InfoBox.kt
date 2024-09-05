@@ -1,4 +1,4 @@
-package com.wanderring.presentation.view.enterInfo.component
+package com.wanderring.presentation.view.onboarding.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

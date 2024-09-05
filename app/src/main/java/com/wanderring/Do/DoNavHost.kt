@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.wanderring.presentation.view.enterInfo.enterInfo
+import com.wanderring.presentation.view.onboarding.enterInfo
 
 @Composable
 fun DoNavHost(

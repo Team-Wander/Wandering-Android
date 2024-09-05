@@ -1,4 +1,4 @@
-package com.wanderring.presentation.view.enterInfo.page
+package com.wanderring.presentation.view.onboarding.page
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -28,7 +28,7 @@ import com.wanderring.presentation.component.DoButton
 import com.wanderring.presentation.component.DoTextField
 import com.wanderring.presentation.component.GradeSelectionButton
 import com.wanderring.presentation.component.theme.DoColor
-import com.wanderring.presentation.view.enterInfo.component.InfoBox
+import com.wanderring.presentation.view.onboarding.component.InfoBox
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)

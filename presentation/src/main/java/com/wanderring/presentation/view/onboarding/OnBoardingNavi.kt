@@ -1,9 +1,9 @@
-package com.wanderring.presentation.view.enterInfo
+package com.wanderring.presentation.view.onboarding
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.wanderring.presentation.view.enterInfo.page.EnterSchoolRoute
+import com.wanderring.presentation.view.onboarding.page.EnterSchoolRoute
 
 const val EnterInfo = "Enter_Info"
 
