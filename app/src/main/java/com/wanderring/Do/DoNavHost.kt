@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.wanderring.presentation.view.onboarding.enterInfo
+import com.wanderring.presentation.view.onboarding.onBoarding
 
 @Composable
 fun DoNavHost(
@@ -15,7 +15,7 @@ fun DoNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        enterInfo(
+        onBoarding(
             navigateToBack = navController::popBackStack,
             navigateToHome = { TODO() }
         )

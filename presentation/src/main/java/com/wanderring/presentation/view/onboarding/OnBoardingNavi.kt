@@ -7,11 +7,11 @@ import com.wanderring.presentation.view.onboarding.page.OnBoardingRoute
 
 const val OnBoarding = "OnBoarding"
 
-fun NavController.navigationToEnterInfo() {
+fun NavController.navigationToOnBoarding() {
     this.navigate(OnBoarding)
 }
 
-fun NavGraphBuilder.enterInfo(
+fun NavGraphBuilder.onBoarding(
     navigateToHome: () -> Unit,
     navigateToBack: () -> Unit,
 ) {
