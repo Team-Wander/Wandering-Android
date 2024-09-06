@@ -1,8 +1,8 @@
 object Versions {
 
     const val GRADLE = "8.2.0"
-    const val KOTLIN = "1.8.10"
-    const val KSP = "1.8.10-1.0.9"
+    const val KOTLIN = "1.9.10"   // 최신 Kotlin 버전
+    const val KSP = "1.9.10-1.0.13"  // Kotlin에 맞춘 KSP 최신 버전
 
     const val COMPOSE = "1.4.3"
     const val APPCOMPAT = "1.6.1"
@@ -15,7 +15,7 @@ object Versions {
 
     const val LIFECYCLE = "2.3.1"
     const val COMPOSE_LIFECYCLE = "2.6.2"
-    const val CORE_KTX = "1.5.0"
+    const val CORE_KTX = "1.12.0"
     const val MATERIAL = "1.9.0"
     const val SPLASH = "1.0.0-beta02"
     const val VIEWMODEL_LIFECYCLE = "2.5.1"
