@@ -1,4 +1,4 @@
-package com.wanderring.Do.ui
+package com.wanderring.Do.app
 
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -26,6 +26,10 @@ class AppState(val navController: NavHostController) {
     val currentDestination: NavDestination?
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
+
+    val isTopLevelDestination: Boolean
+        @Composable get() = TopLevelDestination.values()
+            .any { currentDestination?.route == it.destinationName }
 
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() = when (currentDestination?.route) {
