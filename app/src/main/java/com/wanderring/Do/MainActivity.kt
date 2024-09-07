@@ -3,8 +3,8 @@ package com.wanderring.Do
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.wanderring.Do.ui.App
-import com.wanderring.Do.ui.rememberAppState
+import com.wanderring.Do.app.App
+import com.wanderring.Do.app.rememberAppState
 
 
 class MainActivity : ComponentActivity() {
