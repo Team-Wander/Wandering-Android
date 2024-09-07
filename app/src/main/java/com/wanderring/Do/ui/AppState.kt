@@ -13,16 +13,16 @@ import androidx.navigation.navOptions
 import com.wanderring.Do.navigation.TopLevelDestination
 
 @Composable
-fun rememberDoAppState(
+fun rememberAppState(
     navController: NavHostController = rememberNavController(),
-): DoAppState {
+): AppState {
     return remember(navController) {
-        DoAppState(navController = navController)
+        AppState(navController = navController)
     }
 }
 
 @Stable
-class DoAppState(val navController: NavHostController) {
+class AppState(val navController: NavHostController) {
     val currentDestination: NavDestination?
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
