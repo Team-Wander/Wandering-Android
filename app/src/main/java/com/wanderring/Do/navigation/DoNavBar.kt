@@ -28,7 +28,7 @@ fun DoNavBar(
     currentItem: Int,
     navigateToHome: () -> Unit,
     navigateToSearch: () -> Unit,
-    navigateToTimeSchedule: () -> Unit,
+    navigateToSchedule: () -> Unit,
     navigateToMy: () -> Unit,
 ) {
     Row(
