@@ -1,4 +1,4 @@
-package com.wanderring.presentation.component
+package com.wanderring.Do.navigation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,18 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.wanderring.presentation.component.DoNavBarEnum.*
+import com.wanderring.Do.navigation.TopLevelDestination.Home
+import com.wanderring.Do.navigation.TopLevelDestination.MY
+import com.wanderring.Do.navigation.TopLevelDestination.Schedule
+import com.wanderring.Do.navigation.TopLevelDestination.Search
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 import okhttp3.internal.immutableListOf
-
-enum class DoNavBarEnum(val description: String) {
-    HOME(description = "홈"),
-    SEARCH(description = "검색"),
-    SETTING(description = "설정"),
-    MY(description = "마이")
-}
 
 @Composable
 fun DoNavBar(
@@ -43,30 +39,23 @@ fun DoNavBar(
             .padding(horizontal = 32.dp, vertical = 7.dp)
     ) {
         immutableListOf(
-            HOME,
-            SEARCH,
-            SETTING,
+            Home,
+            Search,
+            Schedule,
             MY
         ).forEachIndexed { index, type ->
             DoNavBarItem(
-                text = type.description,
+                text = type.destinationName,
                 isSelected = currentItem == index,
                 onClick = {
                     when (type) {
-                        HOME -> { navigateToHome() }
-                        SEARCH -> { navigateToSearch() }
-                        SETTING -> { navigateToTimeSchedule() }
-                        MY -> { navigateToMy() }
+                        Home -> navigateToHome
+                        Search -> navigateToSearch
+                        Schedule -> navigateToSchedule
+                        MY -> navigateToMy
                     }
                 },
-                icon = {
-                    when (type) {
-                        HOME -> { HomeIcon(isSelected = currentItem == index) }
-                        SEARCH -> { SearchIcon(isSelected = currentItem == index) }
-                        SETTING -> { TimeScheduleIcon(isSelected = currentItem == index) }
-                        MY -> { MyIcon(isSelected = currentItem == index) }
-                    }
-                }
+                icon = { type.icon() }
             )
         }
     }
@@ -79,7 +68,7 @@ private fun Preview() {
         currentItem = 1,
         navigateToHome = { },
         navigateToSearch = { },
-        navigateToTimeSchedule = { },
+        navigateToSchedule = { },
         navigateToMy = { }
     )
 }
