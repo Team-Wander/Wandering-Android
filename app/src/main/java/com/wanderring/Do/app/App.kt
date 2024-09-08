@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.wanderring.Do.navigation.DoNavBar
 import com.wanderring.Do.navigation.DoNavHost
 
 @Composable
@@ -17,11 +18,18 @@ fun App(appState: AppState) {
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
             if (appState.isTopLevelDestination) {
-                // todo nav 바 추가
+                DoNavBar(
+                    currentDestinations = appState.currentDestination!!,
+                    navigateToTopLevelDestination = appState::navigateToTopLevelDestination
+                )
             }
         }
     ) { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize()
+        ) {
             DoNavHost(
                 startDestination = "",
                 appState = appState,

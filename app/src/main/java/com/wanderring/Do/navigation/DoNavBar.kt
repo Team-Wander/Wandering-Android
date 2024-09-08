@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
 import com.wanderring.Do.navigation.TopLevelDestination.Home
 import com.wanderring.Do.navigation.TopLevelDestination.MY
 import com.wanderring.Do.navigation.TopLevelDestination.Schedule
@@ -25,11 +25,8 @@ import okhttp3.internal.immutableListOf
 @Composable
 fun DoNavBar(
     modifier: Modifier = Modifier,
-    currentItem: Int,
-    navigateToHome: () -> Unit,
-    navigateToSearch: () -> Unit,
-    navigateToSchedule: () -> Unit,
-    navigateToMy: () -> Unit,
+    currentDestinations: NavDestination,
+    navigateToTopLevelDestination: (TopLevelDestination) -> Unit
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -43,34 +40,15 @@ fun DoNavBar(
             Search,
             Schedule,
             MY
-        ).forEachIndexed { index, type ->
+        ).forEach { type ->
             DoNavBarItem(
                 text = type.destinationName,
-                isSelected = currentItem == index,
-                onClick = {
-                    when (type) {
-                        Home -> navigateToHome
-                        Search -> navigateToSearch
-                        Schedule -> navigateToSchedule
-                        MY -> navigateToMy
-                    }
-                },
+                isSelected = currentDestinations.route == type.name,
+                onClick = { navigateToTopLevelDestination(type) },
                 icon = { type.icon() }
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun Preview() {
-    DoNavBar(
-        currentItem = 1,
-        navigateToHome = { },
-        navigateToSearch = { },
-        navigateToSchedule = { },
-        navigateToMy = { }
-    )
 }
 
 @Composable
