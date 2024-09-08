@@ -54,6 +54,7 @@ abstract class DoViewModel<INTENT : Any, STATE : Any, EFFECT : Any> : ViewModel(
     private val _sideEffect: MutableSharedFlow<EFFECT> = MutableSharedFlow()
     val sideEffect = _sideEffect.asSharedFlow()
 
+    // state 를 반환 하는 함수를 구현 해야 합니다
     abstract fun initialState(): STATE
 
     // Intent 처리: 추상 메서드로 정의
