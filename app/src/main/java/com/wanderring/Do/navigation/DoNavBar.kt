@@ -12,9 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination
 import com.wanderring.Do.navigation.TopLevelDestination.Home
-import com.wanderring.Do.navigation.TopLevelDestination.MY
+import com.wanderring.Do.navigation.TopLevelDestination.My
 import com.wanderring.Do.navigation.TopLevelDestination.Schedule
 import com.wanderring.Do.navigation.TopLevelDestination.Search
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
@@ -25,7 +24,7 @@ import okhttp3.internal.immutableListOf
 @Composable
 fun DoNavBar(
     modifier: Modifier = Modifier,
-    currentDestinations: NavDestination,
+    currentDestination: String,
     navigateToTopLevelDestination: (TopLevelDestination) -> Unit
 ) {
     Row(
@@ -39,11 +38,11 @@ fun DoNavBar(
             Home,
             Search,
             Schedule,
-            MY
+            My
         ).forEach { type ->
             DoNavBarItem(
                 text = type.destinationName,
-                isSelected = currentDestinations.route == type.name,
+                isSelected = currentDestination == type.name,
                 onClick = { navigateToTopLevelDestination(type) },
                 icon = { type.icon() }
             )
