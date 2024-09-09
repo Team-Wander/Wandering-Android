@@ -11,10 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
+import com.wanderring.presentation.view.home.HomeRoute
 
 @Composable
 fun DoNavBar(
@@ -39,6 +41,16 @@ fun DoNavBar(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun DoNavBarPreview() {
+    DoNavBar(
+        currentDestination = HomeRoute,
+        topLevelDestinations = emptyList(),
+        navigateToTopLevelDestination = { _ -> }
+    )
 }
 
 @Composable
