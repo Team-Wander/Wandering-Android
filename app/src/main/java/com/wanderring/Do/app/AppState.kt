@@ -11,7 +11,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.wanderring.Do.navigation.TopLevelDestination
-import com.wanderring.Do.navigation.TopLevelDestination.*
+import com.wanderring.Do.navigation.TopLevelDestination.Home
+import com.wanderring.Do.navigation.TopLevelDestination.My
+import com.wanderring.Do.navigation.TopLevelDestination.Schedule
+import com.wanderring.Do.navigation.TopLevelDestination.Search
 import com.wanderring.presentation.view.home.navigateToHomeRoute
 import com.wanderring.presentation.view.my.navigateToMyRoute
 import com.wanderring.presentation.view.schedule.navigateToScheduleRoute
@@ -35,13 +38,6 @@ class AppState(val navController: NavHostController) {
     val isTopLevelDestination: Boolean
         @Composable get() = TopLevelDestination.values()
             .any { currentDestination?.route == it.destinationName }
-
-    val currentTopLevelDestination: TopLevelDestination?
-        @Composable get() = when (currentDestination?.route) {
-            // todo
-            else -> null
-        }
-
 
     val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.values().toList()
 
