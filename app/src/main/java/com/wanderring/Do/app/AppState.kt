@@ -57,7 +57,7 @@ class AppState(val navController: NavHostController) {
             TopLevelDestination.Home -> TODO()
             TopLevelDestination.Search -> TODO()
             TopLevelDestination.Schedule -> TODO()
-            TopLevelDestination.MY -> TODO()
+            TopLevelDestination.My -> TODO()
         }
     }
 }

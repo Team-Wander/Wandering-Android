@@ -18,7 +18,7 @@ enum class TopLevelDestination(
         icon = { com.wanderring.presentation.component.TimeScheduleIcon() },
         destinationName = "시간표"
     ),
-    MY(
+    My(
         icon = { com.wanderring.presentation.component.MyIcon() },
         destinationName = "마이"
     ),
