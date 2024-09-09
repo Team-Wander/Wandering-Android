@@ -20,7 +20,8 @@ fun App(appState: AppState) {
             if (appState.isTopLevelDestination) {
                 DoNavBar(
                     currentDestination = appState.currentDestination!!.route!!,
-                    navigateToTopLevelDestination = appState::navigateToTopLevelDestination
+                    topLevelDestinations = appState.topLevelDestinations,
+                    navigateToTopLevelDestination = appState::navigateToTopLevelDestination,
                 )
             }
         }

@@ -12,19 +12,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.wanderring.Do.navigation.TopLevelDestination.Home
-import com.wanderring.Do.navigation.TopLevelDestination.My
-import com.wanderring.Do.navigation.TopLevelDestination.Schedule
-import com.wanderring.Do.navigation.TopLevelDestination.Search
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
-import okhttp3.internal.immutableListOf
 
 @Composable
 fun DoNavBar(
     modifier: Modifier = Modifier,
     currentDestination: String,
+    topLevelDestinations: List<TopLevelDestination>,
     navigateToTopLevelDestination: (TopLevelDestination) -> Unit
 ) {
     Row(
@@ -34,12 +30,7 @@ fun DoNavBar(
             .fillMaxWidth()
             .padding(horizontal = 32.dp, vertical = 7.dp)
     ) {
-        immutableListOf(
-            Home,
-            Search,
-            Schedule,
-            My
-        ).forEach { type ->
+        topLevelDestinations.forEach { type ->
             DoNavBarItem(
                 text = type.destinationName,
                 isSelected = currentDestination == type.name,
