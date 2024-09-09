@@ -11,6 +11,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.wanderring.Do.navigation.TopLevelDestination
+import com.wanderring.Do.navigation.TopLevelDestination.*
+import com.wanderring.presentation.view.home.navigateToHomeRoute
+import com.wanderring.presentation.view.my.navigateToMyRoute
+import com.wanderring.presentation.view.schedule.navigateToScheduleRoute
+import com.wanderring.presentation.view.search.navigateToSearchRoute
 
 @Composable
 fun rememberAppState(
@@ -54,10 +59,10 @@ class AppState(val navController: NavHostController) {
         }
 
         when (topLevelDestination) {
-            TopLevelDestination.Home -> TODO()
-            TopLevelDestination.Search -> TODO()
-            TopLevelDestination.Schedule -> TODO()
-            TopLevelDestination.My -> TODO()
+            Home -> navController.navigateToHomeRoute(topLevelNavOptions)
+            Search -> navController.navigateToSearchRoute(topLevelNavOptions)
+            Schedule -> navController.navigateToScheduleRoute(topLevelNavOptions)
+            My -> navController.navigateToMyRoute(topLevelNavOptions)
         }
     }
 }
