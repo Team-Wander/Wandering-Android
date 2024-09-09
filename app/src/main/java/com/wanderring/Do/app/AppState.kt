@@ -39,7 +39,7 @@ class AppState(val navController: NavHostController) {
         @Composable get() = TopLevelDestination.values()
             .any { currentDestination?.route == it.destinationName }
 
-    val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.values().toList()
+    val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.entries
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
         Log.d("Navigation", "Navigation: ${topLevelDestination.name}")

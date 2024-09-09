@@ -4,7 +4,7 @@ object Versions {
     const val KOTLIN = "1.9.10"   // 최신 Kotlin 버전
     const val KSP = "1.9.10-1.0.13"  // Kotlin에 맞춘 KSP 최신 버전
 
-    const val COMPOSE = "1.4.3"
+    const val COMPOSE = "1.5.3"
     const val APPCOMPAT = "1.6.1"
     const val ACTIVITY_COMPOSE = "1.7.2"
     const val COMPOSE_MATERIAL = "1.4.3"
