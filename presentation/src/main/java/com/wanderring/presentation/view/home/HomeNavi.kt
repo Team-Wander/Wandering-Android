@@ -7,11 +7,11 @@ import androidx.navigation.compose.composable
 
 const val HomeRoute = "HomeRoute"
 
-fun NavController.navigationToOnBoarding(navOptions: NavOptions? = null) {
+fun NavController.navigateToHomeRoute(navOptions: NavOptions? = null) {
     this.navigate(HomeRoute, navOptions)
 }
 
-fun NavGraphBuilder.onBoarding() {
+fun NavGraphBuilder.homeRoute() {
     composable(HomeRoute) {
 
     }

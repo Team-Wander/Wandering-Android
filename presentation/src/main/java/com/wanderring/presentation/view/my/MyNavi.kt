@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 
 const val MyRoute = "MyRoute"
 
-fun NavController.navigateToMy(navOptions: NavOptions? = null) {
+fun NavController.navigateToMyRoute(navOptions: NavOptions? = null) {
     this.navigate(MyRoute, navOptions)
 }
 
