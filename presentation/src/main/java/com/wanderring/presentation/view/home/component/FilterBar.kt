@@ -15,13 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.component.FilterIcon
 import com.wanderring.presentation.component.MapPinIcon
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
+import com.wanderring.presentation.utill.DoPreview
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -81,7 +81,7 @@ fun FilterBar(
     }
 }
 
-@Preview(showBackground = true)
+@DoPreview
 @Composable
 private fun Preview() {
     FilterBar(

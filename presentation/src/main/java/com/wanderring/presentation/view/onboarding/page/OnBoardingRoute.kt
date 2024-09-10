@@ -21,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.presentation.component.DoButton
@@ -29,6 +28,7 @@ import com.wanderring.presentation.component.DoTextField
 import com.wanderring.presentation.component.GradeSelectionButton
 import com.wanderring.presentation.component.SearchIcon
 import com.wanderring.presentation.component.theme.DoColor
+import com.wanderring.presentation.utill.DoPreview
 import com.wanderring.presentation.view.onboarding.component.InfoBox
 import kotlinx.coroutines.launch
 import okhttp3.internal.immutableListOf
@@ -112,7 +112,7 @@ fun OnBoardingScreen( // OnBoarding 화면들을 하나로 묶은 screen
     }
 }
 
-@Preview
+@DoPreview
 @Composable
 private fun EnterSchoolPagePreview() {
     EnterSchoolPage(
@@ -163,7 +163,7 @@ fun EnterSchoolPage(
     }
 }
 
-@Preview
+@DoPreview
 @Composable
 private fun EnterGradePagePreview() {
     EnterGradePage(
@@ -262,7 +262,7 @@ fun EnterGradePage(
     }
 }
 
-@Preview
+@DoPreview
 @Composable
 private fun EnterLocationPagePreview() {
     EnterLocationPage(

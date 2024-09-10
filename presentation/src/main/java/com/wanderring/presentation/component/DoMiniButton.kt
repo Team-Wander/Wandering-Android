@@ -13,11 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
+import com.wanderring.presentation.utill.DoPreview
 
 @Composable
 fun DoMiniButton(
@@ -47,7 +47,7 @@ fun DoMiniButton(
     }
 }
 
-@Preview
+@DoPreview
 @Composable
 private fun Preview() { // 취소, 확인 버튼
     DoMiniButton(

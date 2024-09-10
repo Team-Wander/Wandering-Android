@@ -13,12 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
+import com.wanderring.presentation.utill.DoPreview
 
 
 @Composable
@@ -57,7 +57,7 @@ fun GradeSelectionButton(
     }
 }
 
-@Preview
+@DoPreview
 @Composable
 private fun PreviewSelected() {
     GradeSelectionButton(
@@ -70,7 +70,7 @@ private fun PreviewSelected() {
     )
 }
 
-@Preview
+@DoPreview
 @Composable
 private fun PreviewNotSelected() {
     GradeSelectionButton(
