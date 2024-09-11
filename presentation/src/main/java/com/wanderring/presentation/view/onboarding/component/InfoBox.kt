@@ -22,8 +22,8 @@ fun InfoBox(
     modifier: Modifier = Modifier,
     title: String,
     content: String,
-    contentComposable: @Composable () -> Unit,
     navigateToBack: () -> Unit,
+    contentComposable: @Composable () -> Unit,
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(48.dp),
@@ -67,7 +67,13 @@ private fun Preview() {
     InfoBox(
         title = "제목",
         content = "내용입니다",
-        contentComposable = { DoTextField(value = "", onValueChange = { _ -> }, placeholder = "학교를 입력해주세여") },
+        contentComposable = {
+            DoTextField(
+                value = "",
+                onValueChange = { _ -> },
+                placeholder = "학교를 입력해주세여"
+            )
+        },
         navigateToBack = {}
     )
 }
