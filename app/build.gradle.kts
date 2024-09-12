@@ -77,6 +77,10 @@ dependencies {
     ksp(Dependency.Hilt.HILT_COMPILER)
 
     implementation(Dependency.DataStore.PREFERENCES)
+    implementation (Dependency.DataStore.SECURITY_CRYPTO)
+
+    implementation (Dependency.Moshi.MOSHI_CONVERTER)
+    implementation (Dependency.Moshi.MOSHI_KOTLIN)
 
     implementation(Dependency.Retrofit.RETROFIT)
     implementation(Dependency.Retrofit.RETROFIT_CONVERTER_GSON)

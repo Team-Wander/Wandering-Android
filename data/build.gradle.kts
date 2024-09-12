@@ -50,6 +50,9 @@ dependencies {
     ksp(Dependency.Hilt.HILT_COMPILER)
 
     implementation(Dependency.OkHttp.OKHTTP)
+
+    implementation (Dependency.Moshi.MOSHI_KOTLIN)
+
     implementation(Dependency.OkHttp.OKHTTP_LOGGING_INTERCEPTOR)
     implementation(Dependency.Retrofit.RETROFIT)
     implementation(Dependency.Retrofit.RETROFIT_CONVERTER_GSON)
