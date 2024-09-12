@@ -5,14 +5,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.wanderring.Do.app.App
 import com.wanderring.Do.app.rememberAppState
-
+import com.wanderring.domain.model.repository.UserDataRepository
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var userDataRepository: UserDataRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val appState = rememberAppState()
+            val appState = rememberAppState(userDataRepository = userDataRepository)
 
             App(appState = appState)
         }

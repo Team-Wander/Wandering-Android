@@ -15,6 +15,7 @@ import com.wanderring.Do.navigation.TopLevelDestination.Home
 import com.wanderring.Do.navigation.TopLevelDestination.My
 import com.wanderring.Do.navigation.TopLevelDestination.Schedule
 import com.wanderring.Do.navigation.TopLevelDestination.Search
+import com.wanderring.domain.model.repository.UserDataRepository
 import com.wanderring.presentation.view.home.navigateToHomeRoute
 import com.wanderring.presentation.view.my.navigateToMyRoute
 import com.wanderring.presentation.view.schedule.navigateToScheduleRoute
@@ -24,15 +25,27 @@ import com.wanderring.presentation.view.search.navigateToSearchRoute
 @Composable
 fun rememberAppState(
     navController: NavHostController = rememberNavController(),
+    userDataRepository: UserDataRepository,
 ): AppState {
-    return remember(navController) {
-        AppState(navController = navController)
+    return remember(
+        navController,
+        userDataRepository
+    ) {
+        AppState(
+            navController = navController,
+            userDataRepository = userDataRepository
+        )
     }
 }
 
 // 앱의 네비게이션 상태를 관리하고, 최상위 목적지로의 이동을 구현한 클래스
 @Stable
-class AppState(val navController: NavHostController) {
+class AppState(
+    val navController: NavHostController,
+    val userDataRepository: UserDataRepository,
+) {
+    // 앱의 온보딩 과정이 끝났는지 여부
+    val isOnBoardingFinished = userDataRepository.getIsOnBoardingFinished()
 
     // 현재 네비게이션 백스택의 최상위 항목의 목적지
     val currentDestination: NavDestination?
