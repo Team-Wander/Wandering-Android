@@ -6,6 +6,11 @@ object Dependency {
         const val KSP = "com.google.devtools.ksp"
     }
 
+    object Moshi {
+        const val MOSHI_CONVERTER = "com.squareup.retrofit2:converter-moshi:${Versions.MOSHI_CONVERTER}"
+        const val MOSHI_KOTLIN = "com.squareup.moshi:moshi-kotlin:${Versions.MOSHI_KOTLIN}"
+    }
+
     object AndroidX {
         const val CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
         const val LIFECYCLE = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LIFECYCLE}"
@@ -69,6 +74,7 @@ object Dependency {
     }
 
     object DataStore {
+        const val SECURITY_CRYPTO = "androidx.security:security-crypto:${Versions.SECURITY_CRYPTO}"
         const val PREFERENCES = "androidx.datastore:datastore-preferences:${Versions.PREFERENCES}"
     }
 }

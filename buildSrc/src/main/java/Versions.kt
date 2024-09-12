@@ -20,6 +20,10 @@ object Versions {
     const val SPLASH = "1.0.0-beta02"
     const val VIEWMODEL_LIFECYCLE = "2.5.1"
 
+    const val SECURITY_CRYPTO = "1.1.0-alpha04"
+    const val MOSHI_CONVERTER = "2.9.0"
+    const val MOSHI_KOTLIN = "1.12.0"
+
     const val JUNIT = "4.13.2"
     const val ANDROID_JUNIT = "1.1.2"
     const val ESPRESSO = "3.5.1"
