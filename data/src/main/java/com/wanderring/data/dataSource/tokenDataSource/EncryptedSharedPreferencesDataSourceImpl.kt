@@ -20,11 +20,7 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
 
     override fun getAccessToken(): String? {
         val json = sharedPreferences.getString(ACCESS_TOKEN, null)
-        return if (json != null) {
-            tokenAdapter.fromJson(json)
-        } else {
-            null
-        }
+        return tokenAdapter?.fromJson(json)
     }
 
     override fun setAccessToken(accessToken: String) {
@@ -39,11 +35,7 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
 
     override fun getAccessTime(): String? {
         val json = sharedPreferences.getString(ACCESS_TIME, null)
-        return if (json != null) {
-            tokenAdapter.fromJson(json)
-        } else {
-            null
-        }
+        return tokenAdapter?.fromJson(json)
     }
 
     override fun setAccessTime(accessTime: String) {
@@ -58,11 +50,7 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
 
     override fun getRefreshToken(): String? {
         val json = sharedPreferences.getString(REFRESH_TOKEN, null)
-        return if (json != null) {
-            tokenAdapter.fromJson(json)
-        } else {
-            null
-        }
+        return tokenAdapter?.fromJson(json)
     }
 
     override fun setRefreshToken(refreshToken: String) {
@@ -77,17 +65,14 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
 
     override fun getRefreshTime(): String? {
         val json = sharedPreferences.getString(REFRESH_TIME, null)
-        return if (json != null) {
-            tokenAdapter.fromJson(json)
-        } else {
-            null
-        }
+        return tokenAdapter?.fromJson(json)
     }
 
     override fun setRefreshTime(refreshTime: String) {
         val json = tokenAdapter.toJson(refreshTime)
         editor.putString(REFRESH_TIME, json)
-        editor.apply()    }
+        editor.apply()
+    }
 
     override fun deleteRefreshTime() {
         sharedPreferences.edit().remove(REFRESH_TIME).apply()
