@@ -1,9 +1,9 @@
 package com.wanderring.data.dataSource.tokenDataSource
 
 import android.content.SharedPreferences
+import com.squareup.moshi.JsonAdapter
 import com.wanderring.data.dataSource.EncryptedSharedPreferencesDataSource
 import javax.inject.Inject
-import com.squareup.moshi.JsonAdapter
 
 class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
     private val sharedPreferences: SharedPreferences,
@@ -14,6 +14,7 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
         private const val ACCESS_TIME = "access_time"
         private const val REFRESH_TOKEN = "refresh_token"
         private const val REFRESH_TIME = "access_time"
+        private const val ONBOARDING_FINISH = "onboarding_finished"
     }
 
     private val editor = sharedPreferences.edit()
@@ -73,5 +74,19 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
 
     override fun deleteRefreshTime() {
         sharedPreferences.edit().remove(REFRESH_TIME).apply()
+    }
+
+    override fun getIsOnBoardingFinished(): Boolean? {
+        val json = sharedPreferences.getString(ONBOARDING_FINISH, null)
+        return tokenAdapter?.fromJson(json).toBoolean()
+    }
+
+    override fun setIsOnBoardingFinished() {
+        val json = tokenAdapter.toJson(false.toString())
+        editor.putString(ONBOARDING_FINISH, json).apply()
+    }
+
+    override fun deleteIsOnBoardingFinished() {
+        sharedPreferences.edit().remove(ONBOARDING_FINISH).apply()
     }
 }

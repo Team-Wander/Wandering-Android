@@ -16,4 +16,8 @@ interface EncryptedSharedPreferencesDataSource {
     fun getRefreshTime(): String?
     fun setRefreshTime(refreshTime: String)
     fun deleteRefreshTime()
+
+    fun getIsOnBoardingFinished(): Boolean?
+    fun setIsOnBoardingFinished()
+    fun deleteIsOnBoardingFinished()
 }
