@@ -34,6 +34,7 @@ fun App(appState: AppState) {
             DoNavHost(
                 startDestination = appState.startDestination,
                 navController = appState.navController,
+                navigateToTopLevelDestination = appState::navigateToTopLevelDestination
             )
         }
     }

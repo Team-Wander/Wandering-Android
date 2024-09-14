@@ -9,6 +9,7 @@ import com.wanderring.presentation.view.onboarding.onBoarding
 fun DoNavHost(
     startDestination: String,
     navController: NavHostController,
+    navigateToTopLevelDestination: (TopLevelDestination) -> Unit,
 ) {
     NavHost(
         navController = navController,
