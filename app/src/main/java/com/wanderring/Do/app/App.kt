@@ -32,8 +32,8 @@ fun App(appState: AppState) {
                 .fillMaxSize()
         ) {
             DoNavHost(
-                startDestination = "",
-                appState = appState,
+                startDestination = appState.startDestination,
+                navController = appState.navController,
             )
         }
     }
