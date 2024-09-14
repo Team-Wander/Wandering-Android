@@ -15,9 +15,13 @@ import com.wanderring.Do.navigation.TopLevelDestination.Home
 import com.wanderring.Do.navigation.TopLevelDestination.My
 import com.wanderring.Do.navigation.TopLevelDestination.Schedule
 import com.wanderring.Do.navigation.TopLevelDestination.Search
+import com.wanderring.data.utill.isExpire
 import com.wanderring.domain.model.repository.UserDataRepository
+import com.wanderring.presentation.view.home.HomeRoute
 import com.wanderring.presentation.view.home.navigateToHomeRoute
 import com.wanderring.presentation.view.my.navigateToMyRoute
+import com.wanderring.presentation.view.onboarding.LoginRoute
+import com.wanderring.presentation.view.onboarding.OnBoardingRoute
 import com.wanderring.presentation.view.schedule.navigateToScheduleRoute
 import com.wanderring.presentation.view.search.navigateToSearchRoute
 
@@ -45,7 +49,15 @@ class AppState(
     val userDataRepository: UserDataRepository,
 ) {
     // 앱의 온보딩 과정이 끝났는지 여부
-    val isOnBoardingFinished = userDataRepository.getIsOnBoardingFinished()
+    private val isOnBoardingFinished = userDataRepository.getIsOnBoardingFinished()
+
+    val startDestination = if (isOnBoardingFinished) {
+        HomeRoute
+    } else if (userDataRepository.getRefreshTime().isExpire()) {
+        LoginRoute
+    } else {
+        OnBoardingRoute
+    }
 
     // 현재 네비게이션 백스택의 최상위 항목의 목적지
     val currentDestination: NavDestination?
