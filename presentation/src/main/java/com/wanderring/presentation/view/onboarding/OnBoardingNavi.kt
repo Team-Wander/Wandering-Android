@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.wanderring.presentation.view.onboarding.page.OnBoardingRoute
 
 const val OnBoardingRoute = "OnBoardingRoute"
+const val LoginRoute = "LoginRoute"
 
 fun NavController.navigateToOnBoardingRoute(navOptions: NavOptions? = null) {
     this.navigate(OnBoardingRoute, navOptions)
