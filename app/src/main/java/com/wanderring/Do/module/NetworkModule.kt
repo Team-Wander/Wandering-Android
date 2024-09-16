@@ -4,6 +4,7 @@ import android.util.Log
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.wanderring.Do.BuildConfig
 import com.wanderring.data.utill.TokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -64,7 +65,7 @@ private object NetworkModule {
         okHttpClient: OkHttpClient,
         moshiConverterFactory: MoshiConverterFactory,
     ): Retrofit = Retrofit.Builder()
-        .baseUrl("BuildConfig.BASE_URL")
+        .baseUrl(BuildConfig.BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(moshiConverterFactory)
         .build()
