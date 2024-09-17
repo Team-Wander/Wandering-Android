@@ -1,4 +1,4 @@
-package com.wanderring.presentation.view.home
+package com.wanderring.presentation.section.home
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

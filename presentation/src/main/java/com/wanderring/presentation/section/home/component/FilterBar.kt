@@ -1,4 +1,4 @@
-package com.wanderring.presentation.view.home.component
+package com.wanderring.presentation.section.home.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

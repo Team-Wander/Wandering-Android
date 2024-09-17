@@ -17,13 +17,13 @@ import com.wanderring.Do.navigation.TopLevelDestination.Schedule
 import com.wanderring.Do.navigation.TopLevelDestination.Search
 import com.wanderring.data.utill.isExpire
 import com.wanderring.domain.model.repository.UserDataRepository
-import com.wanderring.presentation.view.home.HomeRoute
-import com.wanderring.presentation.view.home.navigateToHomeRoute
-import com.wanderring.presentation.view.my.navigateToMyRoute
-import com.wanderring.presentation.view.onboarding.LoginRoute
-import com.wanderring.presentation.view.onboarding.OnBoardingRoute
-import com.wanderring.presentation.view.schedule.navigateToScheduleRoute
-import com.wanderring.presentation.view.search.navigateToSearchRoute
+import com.wanderring.presentation.section.home.HomeRoute
+import com.wanderring.presentation.section.home.navigateToHomeRoute
+import com.wanderring.presentation.section.my.navigateToMyRoute
+import com.wanderring.presentation.section.onboarding.LoginRoute
+import com.wanderring.presentation.section.onboarding.OnBoardingRoute
+import com.wanderring.presentation.section.schedule.navigateToScheduleRoute
+import com.wanderring.presentation.section.search.navigateToSearchRoute
 
 // Compose에서 상태를 유지하기 위한 AppState 객체를 생성하는 함수
 @Composable

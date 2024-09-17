@@ -1,4 +1,4 @@
-package com.wanderring.presentation.view.onboarding.page
+package com.wanderring.presentation.section.onboarding.page
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -29,7 +29,7 @@ import com.wanderring.presentation.component.GradeSelectionButton
 import com.wanderring.presentation.component.SearchIcon
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.utill.DoPreview
-import com.wanderring.presentation.view.onboarding.component.InfoBox
+import com.wanderring.presentation.section.onboarding.component.InfoBox
 import kotlinx.coroutines.launch
 import okhttp3.internal.immutableListOf
 

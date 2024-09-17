@@ -1,4 +1,4 @@
-package com.wanderring.presentation.view.search
+package com.wanderring.presentation.section.search
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

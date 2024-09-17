@@ -16,7 +16,7 @@ import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 import com.wanderring.presentation.utill.DoPreview
-import com.wanderring.presentation.view.home.HomeRoute
+import com.wanderring.presentation.section.home.HomeRoute
 
 @Composable
 fun DoNavBar(

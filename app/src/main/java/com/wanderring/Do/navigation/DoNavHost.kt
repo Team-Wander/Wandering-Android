@@ -3,7 +3,7 @@ package com.wanderring.Do.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.wanderring.presentation.view.onboarding.onBoarding
+import com.wanderring.presentation.section.onboarding.onBoarding
 
 @Composable
 fun DoNavHost(

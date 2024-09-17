@@ -1,4 +1,4 @@
-package com.wanderring.presentation.view.schedule
+package com.wanderring.presentation.section.schedule
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
