@@ -31,6 +31,7 @@ object Dependency {
         const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:${Versions.COMPOSE_NAVIGATION}"
         const val NAVIGATION_ANIMATION = "com.google.accompanist:accompanist-navigation-animation:${Versions.NAVIGATION_ANIMATION}"
         const val COMPOSE_FOUNDATION = "androidx.compose.foundation:foundation:{${Versions.COMPOSE_FOUNDATION}"
+        const val KOTLINX_COLLECTIONS_IMMUTABLE = "org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.KOTLINX_COLLECTIONS_IMMUTABLE}"
     }
 
     object Google {
