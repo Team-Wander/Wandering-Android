@@ -60,6 +60,7 @@ dependencies {
     implementation(Dependency.Compose.COMPOSE_NAVIGATION)
     debugImplementation(Dependency.Compose.COMPOSE_TOOLING)
     implementation(Dependency.Compose.NAVIGATION_ANIMATION)
+    implementation(Dependency.Compose.KOTLINX_COLLECTIONS_IMMUTABLE)
 
     implementation(Dependency.Hilt.HILT)
     ksp(Dependency.Hilt.HILT_COMPILER)
