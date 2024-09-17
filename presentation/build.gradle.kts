@@ -59,6 +59,7 @@ dependencies {
     implementation(Dependency.Compose.COMPOSE_MATERIAL)
     implementation(Dependency.Compose.COMPOSE_NAVIGATION)
     debugImplementation(Dependency.Compose.COMPOSE_TOOLING)
+    implementation(Dependency.Compose.NAVIGATION_ANIMATION)
 
     implementation(Dependency.Hilt.HILT)
     ksp(Dependency.Hilt.HILT_COMPILER)
