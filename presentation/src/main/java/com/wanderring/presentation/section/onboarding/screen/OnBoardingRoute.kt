@@ -1,4 +1,4 @@
-package com.wanderring.presentation.section.onboarding.page
+package com.wanderring.presentation.section.onboarding.screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
