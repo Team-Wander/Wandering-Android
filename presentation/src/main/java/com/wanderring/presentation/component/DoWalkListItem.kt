@@ -1,100 +1,118 @@
 package com.wanderring.presentation.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.wanderring.domain.model.enumType.Gender
+import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.domain.model.enumType.Tag
-import com.wanderring.presentation.R
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
+import com.wanderring.presentation.section.home.component.SeekInfoTag
+import com.wanderring.presentation.section.home.component.SeekTag
 import com.wanderring.presentation.utill.DoPreview
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun DoWalkListItem(
     modifier: Modifier = Modifier,
-    name: String,
-    title: String,
-    info: String,
-    tag0: Tag = Tag.NONE,
-    tag0OnClick: () -> Unit,
-    tag1: Tag = Tag.NONE,
-    tag1OnClick: () -> Unit,
+    gradeTag: Grade,
+    genderTag: Gender,
+    recruiterName: String,
+    recruiterGrade: String,
+    recruiterGender: String,
+    intro: String,
+    typeTag: ImmutableList<Tag>
 ) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.Top,
+    Column(
+        verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.Top),
+        horizontalAlignment = Alignment.Start,
         modifier = modifier
-            .shadow(
-                elevation = 20.dp,
-                spotColor = DoColor.SHADOW,
-                ambientColor = DoColor.SHADOW
+            .border(
+                width = 1.dp,
+                color = DoColor.GRAY200,
+                shape = RoundedCornerShape(size = 8.dp)
             )
-            .background(color = DoColor.WHITE, shape = RoundedCornerShape(size = 12.dp))
             .padding(
                 horizontal = 18.dp,
-                vertical = 19.dp
-            )
+                vertical = 16.dp
+            ),
     ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.Start,
-            modifier = Modifier.fillMaxHeight()
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.Start),
+            verticalAlignment = Alignment.Top,
         ) {
-            Text(
-                text = name,
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    lineHeight = 18.sp,
-                    fontFamily = FontFamily(Font(R.font.pretendard)),
-                    fontWeight = FontWeight(400),
-                    color = DoColor.GRAY800,
-                )
-            )
-            Text(
-                text = title,
-                style = DoTypography.m3,
-                fontWeight = FontWeight(600),
-            )
-            Text(text = info)
+            SeekInfoTag(text = gradeTag.description)
+            SeekInfoTag(text = genderTag.description)
         }
         Row(
-            horizontalArrangement = Arrangement.spacedBy(18.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            if (tag0 != Tag.NONE) {
-                DoCategoryButton(
-                    tag = tag0,
-                    onClick = tag0OnClick,
-                    modifier = Modifier
-                        .width(45.dp)
-                        .height(26.dp),
+            Text(
+                text = recruiterName,
+                style = DoTypography.lable,
+                fontWeight = FontWeight(400),
+                color = DoColor.GRAY700,
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(16.dp)
+                    .width(1.dp)
+                    .background(DoColor.GRAY300)
+            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.Start),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = recruiterGrade,
+                    style = DoTypography.lable,
+                    fontWeight = FontWeight(400),
+                    color = DoColor.GRAY500,
                 )
-                if (tag1 != Tag.NONE) {
-                    DoCategoryButton(
-                        tag = tag1,
-                        onClick = tag1OnClick,
-                        modifier = Modifier
-                            .width(45.dp)
-                            .height(26.dp)
-                    )
-                }
+                Spacer(
+                    modifier = Modifier
+                        .size(2.dp)
+                        .background(
+                            color = DoColor.GRAY500,
+                            shape = RoundedCornerShape(8.dp),
+                        )
+                )
+                Text(
+                    text = recruiterGender,
+                    style = DoTypography.lable,
+                    fontWeight = FontWeight(400),
+                    color = DoColor.GRAY500,
+                )
+            }
+        }
+        Text(
+            text = intro,
+            style = DoTypography.m1,
+            fontWeight = FontWeight(600),
+            color = DoColor.Black,
+        )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.Start),
+            verticalAlignment = Alignment.Top,
+        ) {
+            typeTag.forEach {
+                SeekTag(text = it.name)
             }
         }
     }
@@ -104,15 +122,12 @@ fun DoWalkListItem(
 @Composable
 private fun Preview() {
     DoWalkListItem(
-        modifier = Modifier
-            .width(328.dp)
-            .height(121.dp),
-        name = "이름",
-        title = "제목",
-        info = "2007.11.15",
-        tag0 = Tag.CHAT,
-        tag0OnClick = {},
-        tag1 = Tag.WORRY,
-        tag1OnClick = {},
+        recruiterName = "이름",
+        gradeTag = Grade.ONE,
+        recruiterGrade = "2007.11.15",
+        typeTag = kotlinx.collections.immutable.immutableListOf(Tag.CHAT),
+        intro = "산택할 인간 구합니다",
+        genderTag = Gender.WOMEN,
+        recruiterGender = "광주소프트웨어마이스터고등학교 1학년"
     )
 }
