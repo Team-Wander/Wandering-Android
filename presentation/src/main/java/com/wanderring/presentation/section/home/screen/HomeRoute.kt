@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.wanderring.presentation.component.FloatButton
+import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.section.home.component.DoTopBar
 import com.wanderring.presentation.section.home.component.DoWalkListItem
 import com.wanderring.presentation.section.home.component.DoWalkListItemState
@@ -30,6 +33,7 @@ fun HomeRoute(modifier: Modifier = Modifier) {
         bellOnClick = { /* TODO() */ },
         profileOnClick = { /* TODO() */ },
         filterOnClick = { /* TODO() */ },
+        navigateToWriteRoute = { /* TODO() */ },
     )
 }
 
@@ -42,31 +46,40 @@ fun HomeScreen(
     bellOnClick: () -> Unit,
     profileOnClick: () -> Unit,
     filterOnClick: () -> Unit,
+    navigateToWriteRoute: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 18.dp),
+
+    Scaffold(
+        floatingActionButton = {
+            FloatButton(modifier = Modifier.clickableSingle(onClick = navigateToWriteRoute))
+        }
     ) {
-        DoTopBar(
-            logoOnClick = logoOnClick,
-            searchOnClick = searchOnClick,
-            bellOnClick = bellOnClick,
-            profileOnClick = profileOnClick,
-        )
         Column(
-            modifier = Modifier.verticalScroll(scrollState),
-            verticalArrangement = Arrangement.spacedBy(28.dp, Alignment.Top),
+            modifier = modifier
+                .fillMaxSize()
+                .padding(it)
+                .padding(horizontal = 18.dp),
         ) {
-            IntroCard(modifier = Modifier.fillMaxWidth())
-            FilterBar(
-                modifier = Modifier.fillMaxWidth(),
-                location = "", // TODO: location 연결
-                filterOnClick = filterOnClick,
+            DoTopBar(
+                logoOnClick = logoOnClick,
+                searchOnClick = searchOnClick,
+                bellOnClick = bellOnClick,
+                profileOnClick = profileOnClick,
             )
-            seekList.forEach {
-                DoWalkListItem(state = it)
+            Column(
+                modifier = Modifier.verticalScroll(scrollState),
+                verticalArrangement = Arrangement.spacedBy(28.dp, Alignment.Top),
+            ) {
+                IntroCard(modifier = Modifier.fillMaxWidth())
+                FilterBar(
+                    modifier = Modifier.fillMaxWidth(),
+                    location = "", // TODO: location 연결
+                    filterOnClick = filterOnClick,
+                )
+                seekList.forEach {
+                    DoWalkListItem(state = it)
+                }
             }
         }
     }
@@ -82,5 +95,6 @@ fun HomeScreenPreview() {
         bellOnClick = { },
         profileOnClick = { },
         filterOnClick = { },
+        navigateToWriteRoute = { },
     )
 }
