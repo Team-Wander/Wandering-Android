@@ -25,7 +25,7 @@ fun FloatButton(
             tint = tint
         )
         Icon(
-            painter = painterResource(id = R.drawable.plus),
+            painter = painterResource(id = R.drawable.write),
             contentDescription = null,
             modifier = Modifier.size(24.dp),
             tint = tint
