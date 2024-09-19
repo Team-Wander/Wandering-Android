@@ -1,4 +1,4 @@
-package com.wanderring.presentation.component
+package com.wanderring.presentation.section.home.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,21 +22,24 @@ import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.domain.model.enumType.Tag
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
-import com.wanderring.presentation.section.home.component.SeekInfoTag
-import com.wanderring.presentation.section.home.component.SeekTag
 import com.wanderring.presentation.utill.DoPreview
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.immutableListOf
+
+data class DoWalkListItemState(
+    val gradeTag: Grade,
+    val genderTag: Gender,
+    val recruiterName: String,
+    val recruiterGrade: String,
+    val recruiterGender: String,
+    val intro: String,
+    val typeTag: ImmutableList<Tag>
+)
 
 @Composable
 fun DoWalkListItem(
     modifier: Modifier = Modifier,
-    gradeTag: Grade,
-    genderTag: Gender,
-    recruiterName: String,
-    recruiterGrade: String,
-    recruiterGender: String,
-    intro: String,
-    typeTag: ImmutableList<Tag>
+    state: DoWalkListItemState
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.Top),
@@ -56,15 +59,15 @@ fun DoWalkListItem(
             horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.Start),
             verticalAlignment = Alignment.Top,
         ) {
-            SeekInfoTag(text = gradeTag.description)
-            SeekInfoTag(text = genderTag.description)
+            SeekInfoTag(text = state.gradeTag.description)
+            SeekInfoTag(text = state.genderTag.description)
         }
         Row(
             horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = recruiterName,
+                text = state.recruiterName,
                 style = DoTypography.lable,
                 fontWeight = FontWeight(400),
                 color = DoColor.GRAY700,
@@ -80,7 +83,7 @@ fun DoWalkListItem(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = recruiterGrade,
+                    text = state.recruiterGrade,
                     style = DoTypography.lable,
                     fontWeight = FontWeight(400),
                     color = DoColor.GRAY500,
@@ -94,7 +97,7 @@ fun DoWalkListItem(
                         )
                 )
                 Text(
-                    text = recruiterGender,
+                    text = state.recruiterGender,
                     style = DoTypography.lable,
                     fontWeight = FontWeight(400),
                     color = DoColor.GRAY500,
@@ -102,7 +105,7 @@ fun DoWalkListItem(
             }
         }
         Text(
-            text = intro,
+            text = state.intro,
             style = DoTypography.m1,
             fontWeight = FontWeight(600),
             color = DoColor.Black,
@@ -111,7 +114,7 @@ fun DoWalkListItem(
             horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.Start),
             verticalAlignment = Alignment.Top,
         ) {
-            typeTag.forEach {
+            state.typeTag.forEach {
                 SeekTag(text = it.name)
             }
         }
@@ -122,12 +125,15 @@ fun DoWalkListItem(
 @Composable
 private fun Preview() {
     DoWalkListItem(
-        recruiterName = "이름",
-        gradeTag = Grade.ONE,
-        recruiterGrade = "2007.11.15",
-        typeTag = kotlinx.collections.immutable.immutableListOf(Tag.CHAT),
-        intro = "산택할 인간 구합니다",
-        genderTag = Gender.WOMEN,
-        recruiterGender = "광주소프트웨어마이스터고등학교 1학년"
+        state =
+        DoWalkListItemState(
+            recruiterName = "이름",
+            gradeTag = Grade.ONE,
+            recruiterGrade = "2007.11.15",
+            typeTag = immutableListOf(Tag.CHAT),
+            intro = "산택할 인간 구합니다",
+            genderTag = Gender.WOMEN,
+            recruiterGender = "광주소프트웨어마이스터고등학교 1학년"
+        )
     )
 }
