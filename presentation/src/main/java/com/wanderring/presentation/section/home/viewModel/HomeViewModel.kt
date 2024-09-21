@@ -60,7 +60,7 @@ data class HomeScreenState(
     val seekList: ImmutableList<DoWalkListItemState>,
     val currentAlarmCount: Int,
 )
-
+// State의 초기값을 넣어주기위해 필수로 구현해야하는 함수
 private fun getInitialState() = HomeScreenState(
     location = "",
     seekList = immutableListOf(),
