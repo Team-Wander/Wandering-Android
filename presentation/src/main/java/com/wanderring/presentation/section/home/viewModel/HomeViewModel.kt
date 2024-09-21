@@ -2,8 +2,13 @@ package com.wanderring.presentation.section.home.viewModel
 
 import DoViewModel
 import com.wanderring.presentation.section.home.component.DoWalkListItemState
-import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.*
-import com.wanderring.presentation.section.home.viewModel.HomeScreenState.Companion.getInitialState
+import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.LoadCurrentAlarmCount
+import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.LoadLocation
+import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.LoadSeekList
+import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.NavigateToAlarm
+import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.NavigateToMy
+import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.NavigateToSearch
+import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.NavigateToWrite
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.immutableListOf
@@ -54,15 +59,13 @@ data class HomeScreenState(
     val location: String,
     val seekList: ImmutableList<DoWalkListItemState>,
     val currentAlarmCount: Int,
-) {
-    companion object {
-        fun getInitialState() = HomeScreenState(
-            location = "",
-            seekList = immutableListOf(),
-            currentAlarmCount = 0,
-        )
-    }
-}
+)
+
+private fun getInitialState() = HomeScreenState(
+    location = "",
+    seekList = immutableListOf(),
+    currentAlarmCount = 0,
+)
 
 sealed class HomeSideEffect {
     data object NavigateToWrite : HomeSideEffect()
