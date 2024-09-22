@@ -18,7 +18,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor() :
     DoViewModel<HomeScreenIntent, HomeScreenState, HomeSideEffect>() {
 
-    override fun initialState(): HomeScreenState = getInitialState()
+    override fun initialState(): HomeScreenState = HomeScreenState.getInitialState()
 
     override fun handleIntent(intent: HomeScreenIntent) {
         when (intent) {
@@ -59,13 +59,16 @@ data class HomeScreenState(
     val location: String,
     val seekList: ImmutableList<DoWalkListItemState>,
     val currentAlarmCount: Int,
-)
-// State의 초기값을 넣어주기위해 필수로 구현해야하는 함수
-private fun getInitialState() = HomeScreenState(
-    location = "",
-    seekList = immutableListOf(),
-    currentAlarmCount = 0,
-)
+) {
+    companion object {
+        // State의 초기값을 넣어주기위해 필수로 구현해야하는 함수
+        fun getInitialState() = HomeScreenState(
+            location = "",
+            seekList = immutableListOf(),
+            currentAlarmCount = 0,
+        )
+    }
+}
 
 sealed class HomeSideEffect {
     data object NavigateToWrite : HomeSideEffect()
