@@ -9,17 +9,37 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.wanderring.Do.navigation.DoNavBar
 import com.wanderring.Do.navigation.DoNavHost
+import com.wanderring.presentation.section.home.HomeRoute
+import com.wanderring.presentation.section.home.component.DoTopBar
+import com.wanderring.presentation.section.my.MyRoute
+import com.wanderring.presentation.section.my.navigateToMyRoute
+import com.wanderring.presentation.section.search.navigateToSearchRoute
 
 @Composable
 fun App(appState: AppState) {
-
+    val navController = appState.navController
+    val currentDestination = appState.currentDestination!!.route!!
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        topBar = {
+            if (
+                currentDestination == MyRoute
+                || currentDestination == HomeRoute
+            /* || currentDestination == AlarmRoute */
+            ) {
+                DoTopBar(
+                    logoOnClick = { /* todo */ },
+                    searchOnClick = { navController.navigateToSearchRoute() },
+                    bellOnClick = { /* todo navController.navigateToAlarm() */ },
+                    profileOnClick = { navController.navigateToMyRoute() },
+                )
+            }
+        },
         bottomBar = {
             if (appState.isTopLevelDestination) {
                 DoNavBar(
-                    currentDestination = appState.currentDestination!!.route!!,
+                    currentDestination = currentDestination,
                     topLevelDestinations = appState.topLevelDestinations,
                     navigateToTopLevelDestination = appState::navigateToTopLevelDestination,
                 )
