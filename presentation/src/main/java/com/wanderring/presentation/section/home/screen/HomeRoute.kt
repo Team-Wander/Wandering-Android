@@ -75,30 +75,21 @@ fun HomeScreen(
         }
     ) {
         Column(
+            verticalArrangement = Arrangement.spacedBy(28.dp, Alignment.Top),
             modifier = modifier
                 .fillMaxSize()
                 .padding(it)
-                .padding(horizontal = 18.dp),
+                .padding(horizontal = 18.dp)
+                .verticalScroll(scrollState),
         ) {
-            DoTopBar(
-                logoOnClick = { /* todo */ },
-                searchOnClick = { handleIntent(HomeScreenIntent.NavigateToSearch) },
-                bellOnClick = { handleIntent(HomeScreenIntent.NavigateToAlarm) },
-                profileOnClick = { handleIntent(HomeScreenIntent.NavigateToMy) },
+            IntroCard(modifier = Modifier.fillMaxWidth())
+            FilterBar(
+                modifier = Modifier.fillMaxWidth(),
+                location = state.location,
+                filterOnClick = { handleIntent(HomeScreenIntent.NavigateToSearch) },
             )
-            Column(
-                modifier = Modifier.verticalScroll(scrollState),
-                verticalArrangement = Arrangement.spacedBy(28.dp, Alignment.Top),
-            ) {
-                IntroCard(modifier = Modifier.fillMaxWidth())
-                FilterBar(
-                    modifier = Modifier.fillMaxWidth(),
-                    location = state.location,
-                    filterOnClick = { handleIntent(HomeScreenIntent.NavigateToSearch) },
-                )
-                state.seekList.forEach {
-                    DoWalkListItem(state = it)
-                }
+            state.seekList.forEach {
+                DoWalkListItem(state = it)
             }
         }
     }
