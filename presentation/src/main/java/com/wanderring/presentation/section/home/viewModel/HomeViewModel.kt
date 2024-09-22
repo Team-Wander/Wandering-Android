@@ -5,8 +5,6 @@ import com.wanderring.presentation.section.home.component.DoWalkListItemState
 import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.LoadCurrentAlarmCount
 import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.LoadLocation
 import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.LoadSeekList
-import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.NavigateToAlarm
-import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.NavigateToMy
 import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.NavigateToSearch
 import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.NavigateToWrite
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,8 +23,6 @@ class HomeViewModel @Inject constructor() :
             LoadCurrentAlarmCount -> loadCurrentAlarmCount()
             LoadLocation -> loadLocation()
             LoadSeekList -> loadSeekList()
-            NavigateToAlarm -> postSideEffect(HomeSideEffect.NavigateToAlarm)
-            NavigateToMy -> postSideEffect(HomeSideEffect.NavigateToMy)
             NavigateToSearch -> postSideEffect(HomeSideEffect.NavigateToSearch)
             NavigateToWrite -> postSideEffect(HomeSideEffect.NavigateToWrite)
         }
@@ -51,8 +47,6 @@ sealed class HomeScreenIntent {
     data object LoadCurrentAlarmCount : HomeScreenIntent()
     data object NavigateToWrite : HomeScreenIntent()
     data object NavigateToSearch : HomeScreenIntent()
-    data object NavigateToAlarm : HomeScreenIntent()
-    data object NavigateToMy : HomeScreenIntent()
 }
 
 data class HomeScreenState(
@@ -73,6 +67,4 @@ data class HomeScreenState(
 sealed class HomeSideEffect {
     data object NavigateToWrite : HomeSideEffect()
     data object NavigateToSearch : HomeSideEffect()
-    data object NavigateToAlarm : HomeSideEffect()
-    data object NavigateToMy : HomeSideEffect()
 }
