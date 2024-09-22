@@ -18,7 +18,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wanderring.presentation.component.FloatButton
 import com.wanderring.presentation.component.clickableSingle.clickableSingle
-import com.wanderring.presentation.section.home.component.DoTopBar
 import com.wanderring.presentation.section.home.component.DoWalkListItem
 import com.wanderring.presentation.section.home.component.FilterBar
 import com.wanderring.presentation.section.home.component.IntroCard
@@ -27,8 +26,6 @@ import com.wanderring.presentation.section.home.viewModel.HomeScreenState
 import com.wanderring.presentation.section.home.viewModel.HomeSideEffect
 import com.wanderring.presentation.section.home.viewModel.HomeViewModel
 import com.wanderring.presentation.utill.DoPreview
-import kotlinx.collections.immutable.immutableListOf
-import kotlin.reflect.KFunction1
 
 @Composable
 fun HomeRoute(
@@ -40,8 +37,6 @@ fun HomeRoute(
     LaunchedEffect(Unit) {
         homeViewModel.sideEffect.collect { effect ->
             when (effect) {
-                is HomeSideEffect.NavigateToAlarm -> TODO()
-                is HomeSideEffect.NavigateToMy -> TODO()
                 is HomeSideEffect.NavigateToSearch -> TODO()
                 is HomeSideEffect.NavigateToWrite -> TODO()
             }
@@ -60,6 +55,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     state: HomeScreenState,
     handleIntent: (HomeScreenIntent) -> Unit,
+    // showBottomSheet
 ) {
     val scrollState = rememberScrollState()
 
@@ -86,7 +82,7 @@ fun HomeScreen(
             FilterBar(
                 modifier = Modifier.fillMaxWidth(),
                 location = state.location,
-                filterOnClick = { handleIntent(HomeScreenIntent.NavigateToSearch) },
+                filterOnClick = { /* todo showBottomSheet */ },
             )
             state.seekList.forEach {
                 DoWalkListItem(state = it)
