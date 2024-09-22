@@ -4,7 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.wanderring.presentation.section.home.homeRoute
+import com.wanderring.presentation.section.my.myRoute
 import com.wanderring.presentation.section.onboarding.onBoarding
+import com.wanderring.presentation.section.schedule.scheduleRoute
+import com.wanderring.presentation.section.search.searchRoute
 
 @Composable
 fun DoNavHost(
@@ -20,7 +24,11 @@ fun DoNavHost(
     ) {
         onBoarding(
             navigateToBack = navController::popBackStack,
-            navigateToHome = { TODO() }
+            navigateToHome = { navigateToTopLevelDestination(TopLevelDestination.Home) }
         )
+        homeRoute()
+        searchRoute()
+        myRoute()
+        scheduleRoute()
     }
 }
