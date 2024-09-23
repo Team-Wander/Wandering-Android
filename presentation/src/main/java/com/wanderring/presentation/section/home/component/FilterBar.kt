@@ -28,8 +28,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun FilterBar(
     modifier: Modifier = Modifier,
-    coroutineScope: CoroutineScope = rememberCoroutineScope(),
     location: String,
+    resetLocation: () -> Unit,
     filterOnClick: () -> Unit,
 ) {
     Row(
@@ -48,11 +48,7 @@ fun FilterBar(
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                modifier = Modifier.clickableSingle {
-                    coroutineScope.launch {
-
-                    }
-                },
+                modifier = Modifier.clickableSingle { resetLocation() },
                 text = "위치 재설정",
                 style = DoTypography.lable,
                 fontWeight = FontWeight(400),
@@ -87,6 +83,7 @@ private fun Preview() {
     FilterBar(
         modifier = Modifier.fillMaxWidth(),
         location = "여기는 부산입니다",
-        filterOnClick = {}
+        resetLocation = { },
+        filterOnClick = { }
     )
 }
