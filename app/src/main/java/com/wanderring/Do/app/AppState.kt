@@ -51,10 +51,10 @@ class AppState(
     // 앱의 온보딩 과정이 끝났는지 여부
     private val isOnBoardingFinished = userDataRepository.getIsOnBoardingFinished()
 
-    val startDestination = if (isOnBoardingFinished) {
-        HomeRoute
-    } else if (userDataRepository.getRefreshTime().isExpire()) {
+    val startDestination = if (userDataRepository.getRefreshTime().isExpire()) {
         LoginRoute
+    } else if (isOnBoardingFinished) {
+        HomeRoute
     } else {
         OnBoardingRoute
     }
