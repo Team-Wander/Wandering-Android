@@ -45,17 +45,14 @@ import kotlinx.coroutines.launch
  * 실행된 함수가 사이드 이펙트를 만든다
  */
 
-abstract class DoViewModel<INTENT : Any, STATE : Any, EFFECT : Any> : ViewModel() {
+abstract class DoViewModel<INTENT : Any, STATE : Any, EFFECT : Any>(initialState: STATE) : ViewModel() {
     // 상태를 관리하는 MutableStateFlow
-    private val _state: MutableStateFlow<STATE> = MutableStateFlow(initialState())
+    private val _state: MutableStateFlow<STATE> = MutableStateFlow(initialState)
     val state: StateFlow<STATE> = _state.asStateFlow()
 
     // SideEffect를 관리하는 MutableSharedFlow
     private val _sideEffect: MutableSharedFlow<EFFECT> = MutableSharedFlow()
     val sideEffect = _sideEffect.asSharedFlow()
-
-    // state 를 반환 하는 함수를 구현 해야 합니다
-    abstract fun initialState(): STATE
 
     // Intent 처리: 추상 메서드로 정의
     abstract fun handleIntent(intent: INTENT)
