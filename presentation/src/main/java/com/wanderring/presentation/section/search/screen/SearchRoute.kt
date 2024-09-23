@@ -1,5 +1,6 @@
 package com.wanderring.presentation.section.search.screen
 
+ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -17,6 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wanderring.presentation.component.ChevronRightIcon
 import com.wanderring.presentation.component.DoTextField
+import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.section.home.component.DoWalkListItem
 import com.wanderring.presentation.section.search.viewModel.SearchScreenIntent
 import com.wanderring.presentation.section.search.viewModel.SearchScreenState
@@ -65,7 +68,13 @@ fun SearchScreen(
             ChevronRightIcon()
             DoTextField(
                 value = state.searchTextState,
-                onValueChange = { handleIntent(SearchScreenIntent.SetSearchTextState) }
+                onValueChange = { handleIntent(SearchScreenIntent.SetSearchTextState(it)) },
+                modifier = Modifier.background(
+                    color = DoColor.GRAY100,
+                    shape = RoundedCornerShape(8.dp)
+                ),
+                placeholder = "산책을 찾아보세요",
+                outlineColor = DoColor.GRAY100
             )
         }
         LazyColumn(
