@@ -15,7 +15,7 @@ class SearchViewModel @Inject constructor(
     override fun handleIntent(intent: SearchScreenIntent) {
         when (intent) {
             SearchScreenIntent.LoadSearchResult -> loadSearchResult()
-            SearchScreenIntent.SetSearchTextState -> setSearchTextState(state.value.searchTextState)
+            is SearchScreenIntent.SetSearchTextState -> setSearchTextState(intent.state)
             SearchScreenIntent.NavigateToBackStack -> SearchSideEffect.NavigateToBackStack
             SearchScreenIntent.NavigateToSeekWritingDetail -> SearchSideEffect.NavigateToSeekWritingDetail
         }
@@ -33,7 +33,7 @@ class SearchViewModel @Inject constructor(
 sealed class SearchScreenIntent {
     data object NavigateToSeekWritingDetail : SearchScreenIntent()
     data object LoadSearchResult : SearchScreenIntent()
-    data object SetSearchTextState : SearchScreenIntent()
+    data class SetSearchTextState(val state: String) : SearchScreenIntent()
     data object NavigateToBackStack : SearchScreenIntent()
 }
 
