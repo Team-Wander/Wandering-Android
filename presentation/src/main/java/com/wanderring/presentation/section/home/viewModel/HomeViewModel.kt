@@ -13,11 +13,9 @@ import kotlinx.collections.immutable.immutableListOf
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() :
-    DoViewModel<HomeScreenIntent, HomeScreenState, HomeSideEffect>() {
+class HomeViewModel @Inject constructor(
 
-    override fun initialState(): HomeScreenState = HomeScreenState.getInitialState()
-
+) : DoViewModel<HomeScreenIntent, HomeScreenState, HomeSideEffect>(HomeScreenState.getInitialState()) {
     override fun handleIntent(intent: HomeScreenIntent) {
         when (intent) {
             LoadCurrentAlarmCount -> loadCurrentAlarmCount()
