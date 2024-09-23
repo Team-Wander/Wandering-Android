@@ -59,17 +59,6 @@ fun HomeScreen(
 ) {
     val scrollState = rememberScrollState()
 
-    Scaffold(
-        floatingActionButton = {
-            FloatButton(
-                modifier = Modifier.clickableSingle(
-                    onClick = {
-                        handleIntent(HomeScreenIntent.NavigateToWrite)
-                    }
-                )
-            )
-        }
-    ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(28.dp, Alignment.Top),
             modifier = modifier

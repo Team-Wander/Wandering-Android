@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.wanderring.Do.navigation.DoNavBar
 import com.wanderring.Do.navigation.DoNavHost
+import com.wanderring.presentation.component.FloatButton
+import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.section.home.HomeRoute
 import com.wanderring.presentation.section.home.component.DoTopBar
 import com.wanderring.presentation.section.my.MyRoute
@@ -45,6 +47,18 @@ fun App(appState: AppState) {
                 )
             }
         },
+        floatingActionButton = {
+            if (currentDestination == HomeRoute) {
+                FloatButton(
+                    modifier = Modifier.clickableSingle(
+                        onClick = { /*
+                     todo  navController.navigateToWrite
+                    */
+                        }
+                    )
+                )
+            }
+        }
     ) { paddingValues ->
         DoNavHost(
             modifier = Modifier.padding(paddingValues),
