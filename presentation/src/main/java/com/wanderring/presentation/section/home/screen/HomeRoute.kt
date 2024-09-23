@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -16,8 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.wanderring.presentation.component.FloatButton
-import com.wanderring.presentation.component.clickableSingle.clickableSingle
 import com.wanderring.presentation.section.home.component.DoWalkListItem
 import com.wanderring.presentation.section.home.component.FilterBar
 import com.wanderring.presentation.section.home.component.IntroCard
@@ -33,6 +30,14 @@ fun HomeRoute(
     homeViewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by homeViewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        with(homeViewModel) {
+            handleIntent(HomeScreenIntent.LoadLocation)
+            handleIntent(HomeScreenIntent.LoadSeekList)
+            handleIntent(HomeScreenIntent.LoadCurrentAlarmCount)
+        }
+    }
 
     LaunchedEffect(Unit) {
         homeViewModel.sideEffect.collect { effect ->
@@ -55,27 +60,25 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     state: HomeScreenState,
     handleIntent: (HomeScreenIntent) -> Unit,
-    // showBottomSheet
 ) {
     val scrollState = rememberScrollState()
 
-        Column(
-            verticalArrangement = Arrangement.spacedBy(28.dp, Alignment.Top),
-            modifier = modifier
-                .fillMaxSize()
-                .padding(it)
-                .padding(horizontal = 18.dp)
-                .verticalScroll(scrollState),
-        ) {
-            IntroCard(modifier = Modifier.fillMaxWidth())
-            FilterBar(
-                modifier = Modifier.fillMaxWidth(),
-                location = state.location,
-                filterOnClick = { /* todo showBottomSheet */ },
-            )
-            state.seekList.forEach {
-                DoWalkListItem(state = it)
-            }
+    Column(
+        verticalArrangement = Arrangement.spacedBy(28.dp, Alignment.Top),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 18.dp)
+            .verticalScroll(scrollState),
+    ) {
+        IntroCard(modifier = Modifier.fillMaxWidth())
+        FilterBar(
+            modifier = Modifier.fillMaxWidth(),
+            location = state.location,
+            resetLocation = { /* todo showBottomSheet */ },
+            filterOnClick = { /* todo showBottomSheet */ },
+        )
+        state.seekList.forEach {
+            DoWalkListItem(state = it)
         }
     }
 }
