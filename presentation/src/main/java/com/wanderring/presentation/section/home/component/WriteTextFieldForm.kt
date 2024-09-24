@@ -51,7 +51,7 @@ fun WriteTextFieldForm(
                     color = DoColor.MAIN,
                 )
             }
-            if (currentTextLength != 0) {
+            if (textLengthLimit != 0) {
                 Row {
                     Text(
                         text = currentTextLength.toString(),
