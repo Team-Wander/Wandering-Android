@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -22,7 +23,7 @@ import com.wanderring.presentation.utill.DoPreview
 @Composable
 fun DoCategoryButton(
     modifier: Modifier = Modifier,
-    tag: Tag,
+    tag: String,
     isSelected: Boolean = false,
     onClick: () -> Unit,
 ) {
@@ -43,10 +44,11 @@ fun DoCategoryButton(
                 shape = RoundedCornerShape(size = 8.dp)
             )
             .clickableSingle(onClick = onClick)
+            .padding(vertical = 4.dp, horizontal = 12.dp)
             .then(modifier) // modifer는 순차적으로 적용되기 때문에 padding을 나중에 적용시키기 위해 사용한 코드
     ) {
         Text(
-            text = tag.description,
+            text = tag,
             style = DoTypography.lable,
             fontWeight = FontWeight(600),
             color = if (isSelected) DoColor.WHITE else DoColor.GRAY500
@@ -58,7 +60,7 @@ fun DoCategoryButton(
 @Composable
 private fun PreviewNotSelected() {
     DoCategoryButton(
-        tag = Tag.WORRY,
+        tag = Tag.WORRY.descriptionWithHash,
         isSelected = false,
         onClick = {},
         modifier = Modifier
@@ -71,7 +73,7 @@ private fun PreviewNotSelected() {
 @Composable
 private fun PreviewSelected() {
     DoCategoryButton(
-        tag = Tag.WORRY,
+        tag = Tag.WORRY.descriptionWithHash,
         isSelected = true,
         onClick = {},
         modifier = Modifier
