@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
@@ -45,7 +46,8 @@ import kotlinx.coroutines.launch
  * 실행된 함수가 사이드 이펙트를 만든다
  */
 
-abstract class DoViewModel<INTENT : Any, STATE : Any, EFFECT : Any>(initialState: STATE) : ViewModel() {
+abstract class DoViewModel<INTENT : Any, STATE : Any, EFFECT : Any>
+    (initialState: STATE) : ViewModel() {
     // 상태를 관리하는 MutableStateFlow
     private val _state: MutableStateFlow<STATE> = MutableStateFlow(initialState)
     val state: StateFlow<STATE> = _state.asStateFlow()
@@ -59,7 +61,7 @@ abstract class DoViewModel<INTENT : Any, STATE : Any, EFFECT : Any>(initialState
 
     // 상태를 업데이트하는 함수
     fun setState(reducer: STATE.() -> STATE) {
-        _state.value = _state.value.reducer()
+        _state.update { newState -> newState.reducer() }
     }
 
     /**
