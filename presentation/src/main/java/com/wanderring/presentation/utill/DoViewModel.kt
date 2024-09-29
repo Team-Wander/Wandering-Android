@@ -1,3 +1,5 @@
+package com.wanderring.presentation.utill
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -9,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
- * 본 DoViewModel 클래스 는 mvi 를 구현 하기 위해
+ * 본 com.wanderring.presentation.utill.DoViewModel 클래스 는 mvi 를 구현 하기 위해
  * @param INTENT,
  * @param STATE,
  * @param EFFECT
@@ -24,7 +26,7 @@ import kotlinx.coroutines.launch
  *     object ClearData : ExampleIntent() // 데이터를 지우는 Intent
  * }
  * ```
- * 인탠트가 특정 함수를 실행 시킨다
+ * 인탠트가 특정 함수(state를 변경하는 함수)를 실행 시킨다
  *
  * 예시 State
  * ```
@@ -34,7 +36,7 @@ import kotlinx.coroutines.launch
  *     val isLoading: Boolean = false  // 데이터 로드 중인지 여부
  * )
  * ```
- * 실행된 함수가 State 를 변경 시킨다
+ * 필수로 state의 기본값을 반환하는 함수를 구현해야한다
  *
  * 예시 사이드 이펙트
  * ```
