@@ -1,6 +1,6 @@
 package com.wanderring.presentation.section.home.viewModel
 
-import DoViewModel
+import com.wanderring.presentation.utill.DoViewModel
 import com.wanderring.presentation.section.home.component.DoWalkListItemState
 import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.LoadCurrentAlarmCount
 import com.wanderring.presentation.section.home.viewModel.HomeScreenIntent.LoadLocation

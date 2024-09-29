@@ -1,6 +1,6 @@
 package com.wanderring.presentation.section.home.viewModel
 
-import DoViewModel
+import com.wanderring.presentation.utill.DoViewModel
 import androidx.lifecycle.viewModelScope
 import com.wanderring.domain.model.enumType.Gender
 import com.wanderring.domain.model.enumType.Grade

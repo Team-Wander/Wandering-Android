@@ -1,6 +1,6 @@
 package com.wanderring.presentation.section.search.viewModel
 
-import DoViewModel
+import com.wanderring.presentation.utill.DoViewModel
 import com.wanderring.presentation.section.home.component.DoWalkListItemState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
