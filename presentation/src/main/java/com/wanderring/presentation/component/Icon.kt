@@ -34,6 +34,30 @@ fun FloatButton(
 }
 
 @Composable
+fun Success_FailIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+    isSuccess: Boolean,
+) {
+    if (isSuccess) {
+        Icon(
+            painter = painterResource(id = R.drawable.success),
+            contentDescription = null,
+            modifier = modifier.size(30.dp),
+            tint = tint
+        )
+    } else {
+        Icon(
+            painter = painterResource(id = R.drawable.fail),
+            contentDescription = null,
+            modifier = Modifier.size(30.dp),
+            tint = tint
+        )
+    }
+}
+
+
+@Composable
 fun LogoImage(
     modifier: Modifier = Modifier,
     tint: Color = Color.Unspecified,
@@ -145,7 +169,7 @@ fun ProfileIcon(
         painter = painterResource(id = R.drawable.profile),
         contentDescription = null,
         modifier = modifier.size(24.dp),
-        tint = if(isSelected) DoColor.MAIN else tint
+        tint = if (isSelected) DoColor.MAIN else tint
     )
 }
 
@@ -173,7 +197,7 @@ fun SearchIcon(
         painter = painterResource(id = R.drawable.search),
         contentDescription = null,
         modifier = modifier.size(24.dp),
-        tint = if(isSelected) DoColor.MAIN else tint
+        tint = if (isSelected) DoColor.MAIN else tint
     )
 }
 
@@ -200,7 +224,7 @@ fun HomeIcon(
         painter = painterResource(id = R.drawable.home),
         contentDescription = null,
         modifier = modifier.size(24.dp),
-        tint = if(isSelected) DoColor.MAIN else tint
+        tint = if (isSelected) DoColor.MAIN else tint
     )
 }
 
@@ -214,7 +238,7 @@ fun TimeScheduleIcon(
         painter = painterResource(id = R.drawable.timeschedule),
         contentDescription = null,
         modifier = modifier.size(24.dp),
-        tint = if(isSelected) DoColor.MAIN else tint
+        tint = if (isSelected) DoColor.MAIN else tint
     )
 }
 
@@ -228,6 +252,7 @@ fun MyIcon(
         painter = painterResource(id = R.drawable.my),
         contentDescription = null,
         modifier = modifier.size(24.dp),
-        tint = if(isSelected) DoColor.MAIN else tint
+        tint = if (isSelected) DoColor.MAIN else tint
     )
 }
+
