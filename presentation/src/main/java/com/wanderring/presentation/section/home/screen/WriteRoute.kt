@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -23,7 +22,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -31,6 +29,7 @@ import com.wanderring.domain.model.enumType.Gender
 import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.domain.model.enumType.Tag
 import com.wanderring.presentation.component.ChevronRightIcon
+import com.wanderring.presentation.component.DoBasicTopAppBar
 import com.wanderring.presentation.component.DoCategoryButton
 import com.wanderring.presentation.component.DoTextField
 import com.wanderring.presentation.component.SearchIcon
@@ -85,23 +84,10 @@ fun WriteScreen(
             .padding(horizontal = 16.dp)
             .fillMaxSize(),
     ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Top,
-            modifier = Modifier
-                .padding(vertical = 12.dp)
-                .fillMaxWidth(),
-        ) {
-            ChevronRightIcon()
-            Text(
-                text = "글쓰기",
-                style = DoTypography.h3,
-                fontWeight = FontWeight(600),
-                color = DoColor.Black,
-                textAlign = TextAlign.Center,
-            )
-            Spacer(modifier = Modifier.size(24.dp))
-        }
+        DoBasicTopAppBar(
+            startIcon = { ChevronRightIcon() },
+            middleText = "글쓰기",
+        )
         Column(
             verticalArrangement = Arrangement.spacedBy(40.dp, Alignment.Top),
             horizontalAlignment = Alignment.Start,
