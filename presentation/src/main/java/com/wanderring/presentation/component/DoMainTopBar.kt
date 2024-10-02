@@ -15,7 +15,7 @@ import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.utill.DoPreview
 
 @Composable
-fun DoTopBar(
+fun DoMainTopBar(
     modifier: Modifier = Modifier,
     logoOnClick: () -> Unit,
     searchOnClick: () -> Unit,
@@ -49,7 +49,7 @@ fun DoTopBar(
 @DoPreview
 @Composable
 private fun Preview() {
-    DoTopBar(
+    DoMainTopBar(
         modifier = Modifier.fillMaxWidth(),
         logoOnClick = {},
         searchOnClick = {},
