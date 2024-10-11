@@ -24,17 +24,21 @@ import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 import com.wanderring.presentation.utill.DoPreview
 
+data class AlamListItemState(
+    val isSuccess: Boolean,
+    val titleText: String,
+    val detailText: String,
+)
+
 @Composable
 fun AlamListItem(
     modifier: Modifier = Modifier,
-    isSuccess: Boolean,
-    titleText: String,
-    detailText: String
+    state: AlamListItemState,
 ) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.Start),
         verticalAlignment = Alignment.CenterVertically,
-    modifier = modifier
+        modifier = modifier
             .border(
                 width = 1.dp,
                 color = DoColor.GRAY100,
@@ -44,19 +48,19 @@ fun AlamListItem(
             .background(color = DoColor.WHITE, shape = RoundedCornerShape(size = 8.dp))
             .padding(horizontal = 18.dp, vertical = 13.dp)
     ) {
-        Success_FailIcon(isSuccess = isSuccess)
+        Success_FailIcon(isSuccess = state.isSuccess)
         Column(
             verticalArrangement = Arrangement.spacedBy(3.dp, Alignment.Top),
             horizontalAlignment = Alignment.Start,
         ) {
             Text(
-                text = titleText,
+                text = state.titleText,
                 style = DoTypography.lable,
                 fontWeight = FontWeight(600),
                 color = DoColor.GRAY900,
             )
             Text(
-                text = detailText,
+                text = state.detailText,
                 style = TextStyle(
                     fontSize = 12.sp,
                     lineHeight = 18.sp,
@@ -73,9 +77,11 @@ fun AlamListItem(
 @Composable
 fun AlamListItemSuccessPreview() {
     AlamListItem(
-        isSuccess = true,
-        titleText = "1명이 신청했어요",
-        detailText = "마이페이지에서 확인해 주세요.",
+        state = AlamListItemState(
+            isSuccess = true,
+            titleText = "1명이 신청했어요",
+            detailText = "마이페이지에서 확인해 주세요.",
+        )
     )
 }
 
@@ -83,8 +89,10 @@ fun AlamListItemSuccessPreview() {
 @Composable
 fun AlamListItemFailPreview() {
     AlamListItem(
-        isSuccess = false,
-        titleText = "1명이 신청을 취소했어요",
-        detailText = "마이페이지에서 확인해 주세요.",
+        state = AlamListItemState(
+            isSuccess = false,
+            titleText = "1명이 신청을 취소했어요",
+            detailText = "마이페이지에서 확인해 주세요.",
+        )
     )
 }
