@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.component.ChevronRightIcon
 import com.wanderring.presentation.component.DoTextField
-import com.wanderring.presentation.component.clickableSingle.clickableSingle
+import com.wanderring.presentation.component.modifier.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 import com.wanderring.presentation.utill.DoPreview

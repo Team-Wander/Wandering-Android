@@ -1,4 +1,4 @@
-package com.wanderring.presentation.component.clickableSingle
+package com.wanderring.presentation.component.modifier.clickableSingle
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable

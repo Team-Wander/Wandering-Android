@@ -1,4 +1,4 @@
-package com.wanderring.presentation.component.clickableSingle
+package com.wanderring.presentation.component.modifier.clickableSingle
 
 // 클릭 이벤트가 짧은 시간 안에 여러 번 발생하는 것을 방지하기 위한 인터페이스
 internal interface MultipleEventsCutter {

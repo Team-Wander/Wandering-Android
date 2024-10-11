@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.component.FilterIcon
 import com.wanderring.presentation.component.MapPinIcon
-import com.wanderring.presentation.component.clickableSingle.clickableSingle
+import com.wanderring.presentation.component.modifier.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 import com.wanderring.presentation.utill.DoPreview
