@@ -186,6 +186,19 @@ fun ReportIcon(
     )
 }
 
+@Composable
+fun OptionIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.option),
+        contentDescription = null,
+        modifier = modifier.size(24.dp),
+        tint = tint
+    )
+}
+
 
 @Composable
 fun SearchIcon(
