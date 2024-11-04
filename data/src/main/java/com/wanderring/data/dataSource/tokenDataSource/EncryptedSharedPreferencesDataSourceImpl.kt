@@ -76,10 +76,13 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
         sharedPreferences.edit().remove(REFRESH_TIME).apply()
     }
 
-    override fun getIsOnBoardingFinished(): Boolean? {
+    override fun getIsOnBoardingFinished(): Boolean {
         val json = sharedPreferences.getString(ONBOARDING_FINISH, null)
-        return tokenAdapter?.fromJson(json).toBoolean()
+        return json?.let {
+            tokenAdapter.fromJson(it)?.toBoolean() ?: false
+        } ?: false
     }
+
 
     override fun setIsOnBoardingFinished() {
         val json = tokenAdapter.toJson(false.toString())
