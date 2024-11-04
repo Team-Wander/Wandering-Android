@@ -1,5 +1,7 @@
 package com.wanderring.presentation.component
 
+import android.graphics.Picture
+import android.provider.ContactsContract.Contacts.Photo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -106,6 +108,33 @@ fun MapPinIcon(
         tint = tint
     )
 }
+
+@Composable
+fun PhotoIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.photo),
+        contentDescription = null,
+        modifier = modifier.size(24.dp),
+        tint = tint
+    )
+}
+
+@Composable
+fun LogoutIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.logout),
+        contentDescription = null,
+        modifier = modifier.size(24.dp),
+        tint = tint
+    )
+}
+
 
 @Composable
 fun ChevronRightIcon(
