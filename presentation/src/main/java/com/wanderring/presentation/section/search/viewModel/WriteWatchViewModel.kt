@@ -63,7 +63,7 @@ data class WriteWatchScreenState(
             id = 0L,
             author = "",
             authorSchool = "",
-            authorGrade = Grade.ONE,
+            authorGrade = Grade.NONE,
             authorGender = Gender.NONE,
             authorProfile = "",
             title = "",
@@ -74,7 +74,7 @@ data class WriteWatchScreenState(
             spot = "",
             gender = listOf(Gender.NONE),
             tag = listOf(),
-            grade = listOf(Grade.NOTHING)
+            grade = listOf(Grade.NONE)
         )
     }
 }

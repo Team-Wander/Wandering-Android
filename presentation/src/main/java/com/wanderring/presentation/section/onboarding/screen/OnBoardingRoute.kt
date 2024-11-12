@@ -54,7 +54,7 @@ fun OnBoardingScreen( // OnBoarding 화면들을 하나로 묶은 screen
     navigateToHome: () -> Unit,
 ) {
     val schoolState = remember { mutableStateOf("") }
-    val gradeState = remember { mutableStateOf(Grade.NOTHING) }
+    val gradeState = remember { mutableStateOf(Grade.NONE) }
     val locationState = remember { mutableStateOf("") }
     val pagerState = rememberPagerState(pageCount = { 3 })
     val coroutineScope = rememberCoroutineScope()
