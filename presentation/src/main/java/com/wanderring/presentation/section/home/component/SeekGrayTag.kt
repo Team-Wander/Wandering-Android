@@ -18,7 +18,7 @@ import com.wanderring.presentation.component.theme.pretendard
 import com.wanderring.presentation.utill.DoPreview
 
 @Composable
-fun SeekTag(
+fun SeekGrayTag(
     modifier: Modifier = Modifier,
     text: String,
 ) {
@@ -52,5 +52,5 @@ fun SeekTag(
 @DoPreview
 @Composable
 fun SeekTagPreview() {
-    SeekTag(text = "#고민")
+    SeekGrayTag(text = "#고민")
 }

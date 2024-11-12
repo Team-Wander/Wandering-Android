@@ -115,7 +115,7 @@ fun DoWalkListItem(
             verticalAlignment = Alignment.Top,
         ) {
             state.typeTag.forEach {
-                SeekTag(text = it.name)
+                SeekGrayTag(text = it.descriptionWithHash)
             }
         }
     }
