@@ -17,7 +17,7 @@ import com.wanderring.presentation.utill.DoPreview
 
 
 @Composable
-fun SeekInfoTag(
+fun SeekGreenTag(
     modifier: Modifier = Modifier,
     text: String,
 ) {
@@ -47,5 +47,5 @@ fun SeekInfoTag(
 @DoPreview
 @Composable
 fun SeekInfoTagPreview() {
-    SeekInfoTag(text = "1학년")
+    SeekGreenTag(text = "1학년")
 }

@@ -43,8 +43,7 @@ import com.wanderring.presentation.component.ReportIcon
 import com.wanderring.presentation.component.modifier.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
-import com.wanderring.presentation.section.home.component.SeekInfoTag
-import com.wanderring.presentation.section.my.component.AlamBottomSheetContent
+import com.wanderring.presentation.section.home.component.SeekGreenTag
 import com.wanderring.presentation.section.search.viewModel.WriteWatchScreenState
 import com.wanderring.presentation.section.search.viewModel.WriteWatchSideEffect
 import com.wanderring.presentation.section.search.viewModel.WriteWatchViewModel
@@ -206,7 +205,7 @@ fun WriteWatchScreen(
                         verticalAlignment = Alignment.Top,
                     ) {
                         state.grade.forEach {
-                            SeekInfoTag(text = it.description)
+                            SeekGreenTag(text = it.description)
                         }
                     }
                 }
@@ -229,7 +228,7 @@ fun WriteWatchScreen(
                             verticalAlignment = Alignment.Top,
                         ) {
                             state.tag.forEach {
-                                SeekInfoTag(text = it.description)
+                                SeekGreenTag(text = it.descriptionWithHash)
                             }
                         }
                         ReportIcon(

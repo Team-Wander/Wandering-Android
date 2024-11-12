@@ -59,8 +59,8 @@ fun DoWalkListItem(
             horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.Start),
             verticalAlignment = Alignment.Top,
         ) {
-            SeekInfoTag(text = state.gradeTag.description)
-            SeekInfoTag(text = state.genderTag.description)
+            SeekGreenTag(text = state.gradeTag.description)
+            SeekGreenTag(text = state.genderTag.description)
         }
         Row(
             horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
