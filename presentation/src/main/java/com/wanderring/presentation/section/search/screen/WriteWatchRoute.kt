@@ -254,16 +254,18 @@ private fun ProfileCard(
     modifier: Modifier = Modifier,
     author: String,
     authorSchool: String,
-    authorGrade: String,
-    authorGender: String,
+    authorGrade: Grade,
+    authorGender: Gender,
     authorProfile: String,
 ) {
     Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.background(DoColor.WHITE)
     ) {
-        ProfileIcon()
+        ProfileIcon(
+            modifier = Modifier.size(50.dp)
+        )
         Column(
             verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
             horizontalAlignment = Alignment.Start,
@@ -279,7 +281,7 @@ private fun ProfileCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "$authorSchool $authorGrade",
+                    text = "$authorSchool ${authorGrade.description}",
                     style = TextStyle(
                         fontSize = 12.sp,
                         lineHeight = 18.sp,
@@ -294,7 +296,7 @@ private fun ProfileCard(
                     contentScale = ContentScale.None
                 )
                 Text(
-                    text = authorGender,
+                    text = authorGender.description,
                     style = TextStyle(
                         fontSize = 12.sp,
                         lineHeight = 18.sp,
@@ -305,6 +307,5 @@ private fun ProfileCard(
                 )
             }
         }
-        Spacer(modifier = Modifier)
     }
 }
