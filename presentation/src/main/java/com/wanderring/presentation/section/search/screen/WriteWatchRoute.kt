@@ -309,3 +309,48 @@ private fun ProfileCard(
         }
     }
 }
+
+@DoPreview
+@Composable
+fun ProfileCardPreview() {
+    ProfileCard(
+        author = "한재형",
+        authorSchool = "광주소프트웨어마이스터고등학교",
+        authorGrade = Grade.ONE,
+        authorGender = Gender.WOMEN,
+        authorProfile = "",
+    )
+}
+
+@Composable
+fun CheckBoxComponent(
+    modifier: Modifier = Modifier,
+    text: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.Start),
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.clickableSingle(onClick = onClick),
+    ) {
+        CheckIcon(isSelected = isSelected)
+        Text(
+            text = text,
+            style = DoTypography.m3,
+            fontWeight = FontWeight(400),
+            color = DoColor.Black,
+            textAlign = TextAlign.Right,
+        )
+    }
+}
+
+@DoPreview
+@Composable
+fun CheckBoxComponentPreveiw() {
+    CheckBoxComponent(
+        text = "기타",
+        isSelected = false,
+        onClick = {},
+    )
+}
