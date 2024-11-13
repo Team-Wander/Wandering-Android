@@ -4,7 +4,7 @@ enum class Grade(
     val description: String,
     val descriptionWithHash: String,
 ) {
-    ONE(description = "#1학년", descriptionWithHash = "#1학년"),
+    ONE(description = "1학년", descriptionWithHash = "#1학년"),
     TWO(description = "2학년", descriptionWithHash = "#2학년"),
     THREE(description = "3학년", descriptionWithHash = "#3학년"),
     FOUR(description = "4학년", descriptionWithHash = "#4학년"),
