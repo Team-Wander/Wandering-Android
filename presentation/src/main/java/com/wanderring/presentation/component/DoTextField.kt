@@ -34,6 +34,7 @@ fun DoTextField(
     placeholder: String = "",
     trailingIcon: @Composable () -> Unit = { Spacer(modifier = Modifier) },
     outlineColor: Color = DoColor.MAIN,
+    useOutLine: Boolean = true,
     focusRequester: FocusRequester = FocusRequester(),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -52,14 +53,17 @@ fun DoTextField(
             textAlign = TextAlign.Start,
         ),
         cursorBrush = SolidColor(DoColor.MAIN),
-        modifier = modifier
+        modifier = Modifier
             .focusRequester(focusRequester)
-            .border(
-                width = 1.dp,
-                color = outlineColor,
-                shape = RoundedCornerShape(size = 12.dp)
-            )
-            .padding(12.dp),
+            .then(
+                if (useOutLine)
+                    modifier.border(
+                        width = 1.dp,
+                        color = outlineColor,
+                        shape = RoundedCornerShape(size = 12.dp)
+                    )
+                else modifier
+            ),
         decorationBox = { innerTextField ->
             Row(
                 verticalAlignment = Alignment.CenterVertically,
