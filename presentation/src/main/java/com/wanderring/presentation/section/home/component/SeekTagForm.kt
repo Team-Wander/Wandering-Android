@@ -31,7 +31,7 @@ fun SeekTagForm(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "구해요 -  $title",
+                text = "구해요 - $title",
                 style = DoTypography.m2,
                 fontWeight = FontWeight(400),
                 color = DoColor.Black,
