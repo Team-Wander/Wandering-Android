@@ -1,6 +1,6 @@
 package com.wanderring.presentation.section.search.screen
 
- import androidx.compose.foundation.background
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -69,10 +69,12 @@ fun SearchScreen(
             DoTextField(
                 value = state.searchTextState,
                 onValueChange = { handleIntent(SearchScreenIntent.SetSearchTextState(it)) },
-                modifier = Modifier.background(
-                    color = DoColor.GRAY100,
-                    shape = RoundedCornerShape(8.dp)
-                ),
+                modifier = Modifier
+                    .background(
+                        color = DoColor.GRAY100,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .padding(12.dp),
                 placeholder = "산책을 찾아보세요",
                 outlineColor = DoColor.GRAY100
             )

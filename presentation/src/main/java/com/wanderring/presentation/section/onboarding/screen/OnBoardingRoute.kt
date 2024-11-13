@@ -147,6 +147,7 @@ fun EnterSchoolPage(
             navigateToBack = navigateToBack,
             contentComposable = {
                 DoTextField(
+                    modifier = Modifier.padding(12.dp),
                     value = schoolState,
                     placeholder = "학교를 알려주세요",
                     onValueChange = onSchoolValueChange
@@ -297,6 +298,7 @@ fun EnterLocationPage(
             navigateToBack = navigateToBack,
             contentComposable = {
                 DoTextField(
+                    modifier = Modifier.padding(12.dp),
                     value = locationState,
                     placeholder = "위치를 알려주세요",
                     onValueChange = onLocationValueChange,
