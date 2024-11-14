@@ -1,5 +1,6 @@
 package com.wanderring.data.common.address
 
+import com.wanderring.domain.model.model.address.AddressResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,24 +15,3 @@ interface AddressApi {
         @Query("resultType") resultType: String,
     ): AddressResponse
 }
-
-data class AddressResponse(
-    val results: Results
-)
-
-data class Results(
-    val common: Common,
-    val juso: List<Juso>
-)
-
-data class Common(
-    val totalCount: String,
-    val errorMessage: String,
-    val errorCode: String
-)
-
-data class Juso(
-    val roadAddr: String,
-    val jibunAddr: String,
-    val zipNo: String
-)
