@@ -1,8 +1,7 @@
-package com.wanderring.data.dataSource.tokenDataSource
+package com.wanderring.data.common.tokenData
 
 import android.content.SharedPreferences
 import com.squareup.moshi.JsonAdapter
-import com.wanderring.data.dataSource.EncryptedSharedPreferencesDataSource
 import javax.inject.Inject
 
 class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(

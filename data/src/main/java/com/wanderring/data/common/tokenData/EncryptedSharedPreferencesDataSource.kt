@@ -1,4 +1,4 @@
-package com.wanderring.data.dataSource
+package com.wanderring.data.common.tokenData
 
 interface EncryptedSharedPreferencesDataSource {
     fun getAccessToken(): String?

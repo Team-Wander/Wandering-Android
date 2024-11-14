@@ -5,8 +5,8 @@ import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.squareup.moshi.JsonAdapter
-import com.wanderring.data.dataSource.EncryptedSharedPreferencesDataSource
-import com.wanderring.data.dataSource.tokenDataSource.EncryptedSharedPreferencesDataSourceImpl
+import com.wanderring.data.common.tokenData.EncryptedSharedPreferencesDataSource
+import com.wanderring.data.common.tokenData.EncryptedSharedPreferencesDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

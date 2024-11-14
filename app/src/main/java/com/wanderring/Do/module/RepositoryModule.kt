@@ -1,6 +1,6 @@
 package com.wanderring.Do.module
 
-import com.wanderring.data.dataSource.repositoryImpl.UserDataRepositoryImpl
+import com.wanderring.data.common.tokenData.UserDataRepositoryImpl
 import com.wanderring.domain.model.repository.UserDataRepository
 import dagger.Binds
 import dagger.Module

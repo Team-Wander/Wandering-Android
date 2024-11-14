@@ -1,6 +1,5 @@
-package com.wanderring.data.dataSource.repositoryImpl
+package com.wanderring.data.common.tokenData
 
-import com.wanderring.data.dataSource.EncryptedSharedPreferencesDataSource
 import com.wanderring.domain.model.repository.UserDataRepository
 import javax.inject.Inject
 
