@@ -1,3 +1,13 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+fun getApiKey(propertyKey: String): String {
+    val propFile = rootProject.file("./local.properties")
+    val properties = Properties()
+    properties.load(FileInputStream(propFile))
+    return properties.getProperty(propertyKey)
+}
+
 plugins {
     id(Dependency.Gradle.LIBRARY)
     id(Dependency.Gradle.KOTLIN)
@@ -13,7 +23,13 @@ android {
 
         testInstrumentationRunner = ProjectProperties.Test.TEST_RUNNER
         consumerProguardFiles(ProjectProperties.Files.CONSUMER_PROGUARD_FILES)
+        buildConfigField(
+            type = "String",
+            name = "ADDRESS_API_KEY",
+            getApiKey("ADDRESS_API_KEY")
+        )
     }
+
 
     buildTypes {
         release {
