@@ -20,19 +20,6 @@ class WriteWatchViewModel @Inject constructor(
         }
     }
 }
-data class ReportBody(
-    val reason: Reason,
-    val content: String // 신고 사유
-)
-
-enum class Reason {
-    Personal_Info_Disclosure, // 개인 정보 노출
-    Same_Content,             // 같은 내용 반복 작성
-    Abusive_Attacks,          // 욕설, 인신 공격
-    Obscene_Sensationalism,    // 음란, 선정성
-    Promotional_Commercial,    // 홍보, 상업적
-    ETC                        // 기타
-}
 
 sealed class WriteWatchIntent {
     data object LoadAllData : WriteWatchIntent()
@@ -78,6 +65,42 @@ data class WriteWatchScreenState(
         )
     }
 }
+
+data class ReportBody(
+    val reason: Reason,
+    val content: String // 신고 사유
+)
+
+enum class Reason(
+    val description: String,
+    val enumName: String,
+) {
+    PERSONAL_INFO_DISCLOSURE(
+        description = "개인정보노출",
+        enumName = "Personal_Info_Disclosure",
+    ), // 개인 정보 노출
+    SAME_CONTENT(
+        description = "같은내용 반복작성",
+        enumName = "Same_Content",
+    ), // 같은 내용 반복 작성
+    ABUSIVE_ATTACKS(
+        description = "욕설/인신공격",
+        enumName = "Abusive_Attacks",
+    ), // 욕설, 인신 공격
+    PROMOTIONAL_COMMERCIAL(
+        description = "홍보성/상업적",
+        enumName = "Promotional_Commercial",
+    ), // 홍보, 상업적
+    OBSCENE_SENSATIONALISM(
+        description = "음란/선정성",
+        enumName = "Obscene_Sensationalism",
+    ), // 음란, 선정성
+    ETC(
+        description = "기타",
+        enumName = "ETC",
+    ) // 기타
+}
+
 
 sealed class WriteWatchSideEffect {
     data object NavigateToBackStack : WriteWatchSideEffect()
