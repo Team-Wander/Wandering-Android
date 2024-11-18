@@ -55,6 +55,7 @@ import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 import com.wanderring.presentation.section.home.component.SeekGrayTag
 import com.wanderring.presentation.section.home.component.SeekGreenTag
+import com.wanderring.presentation.section.search.viewModel.Reason
 import com.wanderring.presentation.section.search.viewModel.WriteWatchIntent
 import com.wanderring.presentation.section.search.viewModel.WriteWatchScreenState
 import com.wanderring.presentation.section.search.viewModel.WriteWatchSideEffect
@@ -152,7 +153,7 @@ fun WriteWatchScreen(
                             horizontalAlignment = Alignment.Start,
                         ) {
                             CheckBoxComponent(
-                                text = "개인정보노출",
+                                text = Reason.entries[1].description,
                                 isSelected = checkBoxStateList.value == 1,
                                 onClick = {
                                     checkBoxStateList.value =
@@ -160,7 +161,7 @@ fun WriteWatchScreen(
                                 },
                             )
                             CheckBoxComponent(
-                                text = "욕설/인신공격",
+                                text = Reason.entries[3].description,
                                 isSelected = checkBoxStateList.value == 3,
                                 onClick = {
                                     checkBoxStateList.value =
@@ -168,7 +169,7 @@ fun WriteWatchScreen(
                                 },
                             )
                             CheckBoxComponent(
-                                text = "음란/선정성",
+                                text = Reason.entries[5].description,
                                 isSelected = checkBoxStateList.value == 5,
                                 onClick = {
                                     checkBoxStateList.value =
@@ -176,7 +177,7 @@ fun WriteWatchScreen(
                                 },
                             )
                             CheckBoxComponent(
-                                text = "기타",
+                                text = Reason.entries[6].description,
                                 isSelected = checkBoxStateList.value == 6,
                                 onClick = {
                                     checkBoxStateList.value =
@@ -189,7 +190,7 @@ fun WriteWatchScreen(
                             horizontalAlignment = Alignment.Start,
                         ) {
                             CheckBoxComponent(
-                                text = "홍보성/상업적",
+                                text = Reason.entries[2].description,
                                 isSelected = checkBoxStateList.value == 2,
                                 onClick = {
                                     checkBoxStateList.value =
@@ -197,7 +198,7 @@ fun WriteWatchScreen(
                                 },
                             )
                             CheckBoxComponent(
-                                text = "같은내용 반복작성",
+                                text = Reason.entries[4].description,
                                 isSelected = checkBoxStateList.value == 4,
                                 onClick = {
                                     checkBoxStateList.value =
