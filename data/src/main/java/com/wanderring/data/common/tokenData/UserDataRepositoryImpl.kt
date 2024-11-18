@@ -1,6 +1,6 @@
 package com.wanderring.data.common.tokenData
 
-import com.wanderring.domain.model.repository.UserDataRepository
+import com.wanderring.domain.model.repository.userData.UserDataRepository
 import javax.inject.Inject
 
 class UserDataRepositoryImpl @Inject constructor(

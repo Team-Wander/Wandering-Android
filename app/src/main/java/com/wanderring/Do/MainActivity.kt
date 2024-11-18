@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.wanderring.Do.app.App
 import com.wanderring.Do.app.rememberAppState
-import com.wanderring.domain.model.repository.UserDataRepository
+import com.wanderring.domain.model.repository.userData.UserDataRepository
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
