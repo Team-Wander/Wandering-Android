@@ -1,6 +1,6 @@
 package com.wanderring.domain.model.repository.address
 
-import com.wanderring.domain.model.model.address.AddressResponse
+import com.wanderring.domain.model.model.address.AddressModel
 import kotlinx.coroutines.flow.Flow
 
 interface AddressRepository {
@@ -8,5 +8,5 @@ interface AddressRepository {
         currentPage: Int,
         countPerPage: Int,
         keyword: String,
-    ): Flow<AddressResponse>
+    ): Flow<AddressModel>
 }

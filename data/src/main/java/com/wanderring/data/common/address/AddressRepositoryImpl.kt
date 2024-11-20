@@ -1,8 +1,9 @@
 package com.wanderring.data.common.address
 
-import com.wanderring.domain.model.model.address.AddressResponse
+import com.wanderring.domain.model.model.address.AddressModel
 import com.wanderring.domain.model.repository.address.AddressRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class AddressRepositoryImpl @Inject constructor(
@@ -12,10 +13,14 @@ class AddressRepositoryImpl @Inject constructor(
         currentPage: Int,
         countPerPage: Int,
         keyword: String
-    ): Flow<AddressResponse> =
+    ): Flow<AddressModel> =
         addressDataSource.getAddress(
             countPerPage = countPerPage,
             currentPage = currentPage,
             keyword = keyword
-        )
+        ).map {
+            AddressModel(
+                juso = it.results.juso.map { juso -> juso.toJuso() }
+            )
+        }
 }
