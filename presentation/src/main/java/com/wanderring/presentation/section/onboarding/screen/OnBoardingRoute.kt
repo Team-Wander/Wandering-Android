@@ -15,47 +15,68 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.presentation.component.DoButton
 import com.wanderring.presentation.component.DoTextField
 import com.wanderring.presentation.component.GradeSelectionButton
 import com.wanderring.presentation.component.SearchIcon
 import com.wanderring.presentation.component.theme.DoColor
-import com.wanderring.presentation.utill.DoPreview
 import com.wanderring.presentation.section.onboarding.component.InfoBox
+import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingScreenIntent
+import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingScreenState
+import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingSideEffect
+import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingViewModel
+import com.wanderring.presentation.utill.DoPreview
 import kotlinx.coroutines.launch
 import okhttp3.internal.immutableListOf
 
 @Composable
 fun OnBoardingRoute(
     modifier: Modifier = Modifier,
+    viewModel: OnBoardingViewModel = hiltViewModel(),
     navigateToBack: () -> Unit,
     navigateToHome: () -> Unit,
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.sideEffect.collect {
+            when (it) {
+                OnBoardingSideEffect.NavigateToHome -> navigateToHome()
+            }
+        }
+    }
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     OnBoardingScreen(
         modifier = modifier,
+        state = state,
+        onSchoolChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSchool(it)) },
+        onGradeChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateGrade(it)) },
+        onSpotChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSpot(it)) },
+        onSubmit = { viewModel.handleIntent(OnBoardingScreenIntent.PostInfo) },
         navigateToBack = navigateToBack,
-        navigateToHome = navigateToHome,
     )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen( // OnBoarding 화면들을 하나로 묶은 screen
+fun OnBoardingScreen(
+    // OnBoarding 화면들을 하나로 묶은 screen
     modifier: Modifier = Modifier,
+    state: OnBoardingScreenState,
+    onSchoolChange: (String) -> Unit,
+    onGradeChange: (Grade) -> Unit,
+    onSpotChange: (String) -> Unit,
+    onSubmit: () -> Unit,
     navigateToBack: () -> Unit,
-    navigateToHome: () -> Unit,
 ) {
-    val schoolState = remember { mutableStateOf("") }
-    val gradeState = remember { mutableStateOf(Grade.NONE) }
-    val locationState = remember { mutableStateOf("") }
     val pagerState = rememberPagerState(pageCount = { 3 })
     val coroutineScope = rememberCoroutineScope()
 
@@ -67,8 +88,8 @@ fun OnBoardingScreen( // OnBoarding 화면들을 하나로 묶은 screen
             0 -> {
                 EnterSchoolPage(
                     modifier = modifier,
-                    schoolState = schoolState.value,
-                    onSchoolValueChange = { schoolState.value = it },
+                    schoolState = state.school,
+                    onSchoolValueChange = onSchoolChange,
                     navigateToBack = navigateToBack,
                     navigateToGradePage = {
                         coroutineScope.launch {
@@ -81,7 +102,8 @@ fun OnBoardingScreen( // OnBoarding 화면들을 하나로 묶은 screen
             1 -> {
                 EnterGradePage(
                     modifier = modifier,
-                    gradeState = gradeState,
+                    gradeState = state.grade,
+                    onGradeValueChange = onGradeChange,
                     navigateToBack = {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(0)
@@ -98,14 +120,14 @@ fun OnBoardingScreen( // OnBoarding 화면들을 하나로 묶은 screen
             2 -> {
                 EnterLocationPage(
                     modifier = modifier,
-                    locationState = locationState.value,
-                    onLocationValueChange = { locationState.value = it },
+                    locationState = state.spot,
+                    onLocationValueChange = onSpotChange,
                     navigateToBack = {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(1)
                         }
                     },
-                    navigateToHome = navigateToHome,
+                    onSubmit = onSubmit,
                 )
             }
         }
@@ -168,16 +190,18 @@ fun EnterSchoolPage(
 @Composable
 private fun EnterGradePagePreview() {
     EnterGradePage(
-        gradeState = remember { mutableStateOf(Grade.TWO) },
+        gradeState = Grade.TWO,
         navigateToBack = {},
-        navigateToLocationPage = {}
+        navigateToLocationPage = {},
+        onGradeValueChange = {}
     )
 }
 
 @Composable
 fun EnterGradePage(
     modifier: Modifier = Modifier,
-    gradeState: MutableState<Grade>,
+    gradeState: Grade,
+    onGradeValueChange: (Grade) -> Unit,
     navigateToBack: () -> Unit,
     navigateToLocationPage: () -> Unit,
 ) {
@@ -214,8 +238,8 @@ fun EnterGradePage(
                                     horizontal = 16.dp
                                 ),
                                 grade = grade,
-                                isSelected = grade == gradeState.value,
-                                onClick = { gradeState.value = grade }
+                                isSelected = grade == gradeState,
+                                onClick = { onGradeValueChange(grade) }
                             )
                         }
                     }
@@ -235,8 +259,8 @@ fun EnterGradePage(
                                     horizontal = 16.dp
                                 ),
                                 grade = grade,
-                                isSelected = grade == gradeState.value,
-                                onClick = { gradeState.value = grade }
+                                isSelected = grade == gradeState,
+                                onClick = { onGradeValueChange(grade) }
                             )
                         }
                         Spacer(
@@ -269,8 +293,8 @@ private fun EnterLocationPagePreview() {
     EnterLocationPage(
         locationState = "",
         navigateToBack = {},
-        navigateToHome = {},
         onLocationValueChange = { _ -> },
+        onSubmit = {}
     )
 }
 
@@ -279,8 +303,8 @@ fun EnterLocationPage(
     modifier: Modifier = Modifier,
     locationState: String,
     onLocationValueChange: (String) -> Unit,
+    onSubmit: () -> Unit,
     navigateToBack: () -> Unit,
-    navigateToHome: () -> Unit,
 ) {
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
@@ -311,7 +335,7 @@ fun EnterLocationPage(
                 .fillMaxWidth()
                 .padding(vertical = 14.dp),
             text = "완료",
-            onClick = navigateToHome
+            onClick = onSubmit
         )
     }
 }
