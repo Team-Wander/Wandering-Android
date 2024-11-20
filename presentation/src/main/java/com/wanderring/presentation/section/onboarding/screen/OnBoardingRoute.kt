@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -35,6 +36,9 @@ import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingScreen
 import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingSideEffect
 import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingViewModel
 import com.wanderring.presentation.utill.DoPreview
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import okhttp3.internal.immutableListOf
 
@@ -45,6 +49,8 @@ fun OnBoardingRoute(
     navigateToBack: () -> Unit,
     navigateToHome: () -> Unit,
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     LaunchedEffect(Unit) {
         viewModel.sideEffect.collect {
             when (it) {
@@ -52,14 +58,15 @@ fun OnBoardingRoute(
             }
         }
     }
-    val state by viewModel.state.collectAsStateWithLifecycle()
 
     OnBoardingScreen(
         modifier = modifier,
         state = state,
         onSchoolChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSchool(it)) },
         onGradeChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateGrade(it)) },
-        onSpotChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSpot(it)) },
+        onSpotChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSearchText(it)) },
+        onSearchTextChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSearchText(it)) },
+        searchLocation = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSearchText(it)) },
         onSubmit = { viewModel.handleIntent(OnBoardingScreenIntent.PostInfo) },
         navigateToBack = navigateToBack,
     )
@@ -74,6 +81,8 @@ fun OnBoardingScreen(
     onSchoolChange: (String) -> Unit,
     onGradeChange: (Grade) -> Unit,
     onSpotChange: (String) -> Unit,
+    onSearchTextChange: (String) -> Unit,
+    searchLocation: (String) -> Unit,
     onSubmit: () -> Unit,
     navigateToBack: () -> Unit,
 ) {
@@ -121,7 +130,9 @@ fun OnBoardingScreen(
                 EnterLocationPage(
                     modifier = modifier,
                     locationState = state.spot,
-                    onLocationValueChange = onSpotChange,
+                    onSearchTextChange = onSearchTextChange,
+                    searchLocation = searchLocation,
+                    onSpotChange = onSpotChange,
                     navigateToBack = {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(1)
@@ -292,9 +303,11 @@ fun EnterGradePage(
 private fun EnterLocationPagePreview() {
     EnterLocationPage(
         locationState = "",
+        onSearchTextChange = { _ -> },
+        searchLocation = { _ -> },
+        onSubmit = {},
         navigateToBack = {},
-        onLocationValueChange = { _ -> },
-        onSubmit = {}
+        onSpotChange = { }
     )
 }
 
@@ -302,10 +315,21 @@ private fun EnterLocationPagePreview() {
 fun EnterLocationPage(
     modifier: Modifier = Modifier,
     locationState: String,
-    onLocationValueChange: (String) -> Unit,
+    onSearchTextChange: (String) -> Unit,
+    searchLocation: (String) -> Unit,
     onSubmit: () -> Unit,
     navigateToBack: () -> Unit,
+    onSpotChange: (String) -> Unit,
 ) {
+    LaunchedEffect(locationState) {
+        snapshotFlow { locationState }
+            .filter { it.isNotEmpty() }
+            .debounce(300L) // 300ms 동안 입력 없으면 처리
+            .collectLatest { debouncedText ->
+                searchLocation(debouncedText)
+            }
+    }
+
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -325,7 +349,7 @@ fun EnterLocationPage(
                     modifier = Modifier.padding(12.dp),
                     value = locationState,
                     placeholder = "위치를 알려주세요",
-                    onValueChange = onLocationValueChange,
+                    onValueChange = onSearchTextChange,
                     trailingIcon = { SearchIcon() }
                 )
             }
