@@ -8,6 +8,7 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
     private val sharedPreferences: SharedPreferences,
     private val tokenAdapter: JsonAdapter<String>
 ) : EncryptedSharedPreferencesDataSource {
+
     companion object {
         private const val ACCESS_TOKEN = "access_token"
         private const val ACCESS_TIME = "access_time"
@@ -18,77 +19,37 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
 
     private val editor = sharedPreferences.edit()
 
-    override fun getAccessToken(): String? {
-        val json = sharedPreferences.getString(ACCESS_TOKEN, null)
-        return tokenAdapter?.fromJson(json)
+    private inline fun <reified T> getValue(key: String, adapter: JsonAdapter<T>, defaultValue: T): T {
+        val json = sharedPreferences.getString(key, null)
+        return json?.let { adapter.fromJson(it) } ?: defaultValue
     }
 
-    override fun setAccessToken(accessToken: String) {
-        val json = tokenAdapter.toJson(accessToken)
-        editor.putString(ACCESS_TOKEN, json).apply()
+    private fun <T> setValue(key: String, value: T, adapter: JsonAdapter<T>) {
+        val json = adapter.toJson(value)
+        editor.putString(key, json).apply()
     }
 
-    override fun deleteAccessToken() {
-        sharedPreferences.edit().remove(ACCESS_TOKEN).apply()
+    private fun deleteValue(key: String) {
+        editor.remove(key).apply()
     }
 
-    override fun getAccessTime(): String? {
-        val json = sharedPreferences.getString(ACCESS_TIME, null)
-        return tokenAdapter?.fromJson(json)
-    }
+    override fun getAccessToken(): String = getValue(ACCESS_TOKEN, tokenAdapter, defaultValue = "")
+    override fun setAccessToken(accessToken: String) = setValue(ACCESS_TOKEN, accessToken, tokenAdapter)
+    override fun deleteAccessToken() = deleteValue(ACCESS_TOKEN)
 
-    override fun setAccessTime(accessTime: String) {
-        val json = tokenAdapter.toJson(accessTime)
-        editor.putString(ACCESS_TIME, json).apply()
-    }
+    override fun getAccessTime(): String = getValue(ACCESS_TIME, tokenAdapter, defaultValue = "")
+    override fun setAccessTime(accessTime: String) = setValue(ACCESS_TIME, accessTime, tokenAdapter)
+    override fun deleteAccessTime() = deleteValue(ACCESS_TIME)
 
-    override fun deleteAccessTime() {
-        sharedPreferences.edit().remove(ACCESS_TIME).apply()
-    }
+    override fun getRefreshToken(): String = getValue(REFRESH_TOKEN, tokenAdapter, defaultValue = "")
+    override fun setRefreshToken(refreshToken: String) = setValue(REFRESH_TOKEN, refreshToken, tokenAdapter)
+    override fun deleteRefreshToken() = deleteValue(REFRESH_TOKEN)
 
-    override fun getRefreshToken(): String? {
-        val json = sharedPreferences.getString(REFRESH_TOKEN, null)
-        return tokenAdapter?.fromJson(json)
-    }
+    override fun getRefreshTime(): String = getValue(REFRESH_TIME, tokenAdapter, defaultValue = "")
+    override fun setRefreshTime(refreshTime: String) = setValue(REFRESH_TIME, refreshTime, tokenAdapter)
+    override fun deleteRefreshTime() = deleteValue(REFRESH_TIME)
 
-    override fun setRefreshToken(refreshToken: String) {
-        val json = tokenAdapter.toJson(refreshToken)
-        editor.putString(REFRESH_TOKEN, json).apply()
-    }
-
-    override fun deleteRefreshToken() {
-        sharedPreferences.edit().remove(REFRESH_TOKEN).apply()
-    }
-
-
-    override fun getRefreshTime(): String? {
-        val json = sharedPreferences.getString(REFRESH_TIME, null)
-        return tokenAdapter?.fromJson(json)
-    }
-
-    override fun setRefreshTime(refreshTime: String) {
-        val json = tokenAdapter.toJson(refreshTime)
-        editor.putString(REFRESH_TIME, json).apply()
-    }
-
-    override fun deleteRefreshTime() {
-        sharedPreferences.edit().remove(REFRESH_TIME).apply()
-    }
-
-    override fun getIsOnBoardingFinished(): Boolean {
-        val json = sharedPreferences.getString(ONBOARDING_FINISH, null)
-        return json?.let {
-            tokenAdapter.fromJson(it)?.toBoolean() ?: false
-        } ?: false
-    }
-
-
-    override fun setIsOnBoardingFinished() {
-        val json = tokenAdapter.toJson(false.toString())
-        editor.putString(ONBOARDING_FINISH, json).apply()
-    }
-
-    override fun deleteIsOnBoardingFinished() {
-        sharedPreferences.edit().remove(ONBOARDING_FINISH).apply()
-    }
+    override fun getIsOnBoardingFinished(): Boolean = sharedPreferences.getBoolean(ONBOARDING_FINISH, false)
+    override fun setIsOnBoardingFinished() = editor.putBoolean(ONBOARDING_FINISH, true).apply()
+    override fun deleteIsOnBoardingFinished() = deleteValue(ONBOARDING_FINISH)
 }
