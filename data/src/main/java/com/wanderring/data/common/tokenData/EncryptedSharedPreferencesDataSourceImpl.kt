@@ -12,7 +12,7 @@ class EncryptedSharedPreferencesDataSourceImpl @Inject constructor(
         private const val ACCESS_TOKEN = "access_token"
         private const val ACCESS_TIME = "access_time"
         private const val REFRESH_TOKEN = "refresh_token"
-        private const val REFRESH_TIME = "access_time"
+        private const val REFRESH_TIME = "refresh_time"
         private const val ONBOARDING_FINISH = "onboarding_finished"
     }
 
