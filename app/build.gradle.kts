@@ -1,3 +1,13 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+fun getApiKey(propertyKey: String): String {
+    val propFile = rootProject.file("./local.properties")
+    val properties = Properties()
+    properties.load(FileInputStream(propFile))
+    return properties.getProperty(propertyKey)
+}
+
 plugins {
     id(Dependency.Gradle.APPLICATION)
     id(Dependency.Gradle.KOTLIN)
@@ -20,7 +30,20 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField(
+            type = "String",
+            name = "ADDRESS_URL",
+            getApiKey("ADDRESS_URL")
+        )
+
+        buildConfigField(
+            type = "String",
+            name = "BASE_URL",
+            getApiKey("BASE_URL")
+        )
     }
+
 
     buildTypes {
         release {
