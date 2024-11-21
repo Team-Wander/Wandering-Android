@@ -6,13 +6,13 @@ import javax.inject.Inject
 class UserDataRepositoryImpl @Inject constructor(
     private val encryptedSharedPreferencesDataSource: EncryptedSharedPreferencesDataSource
 ) : UserDataRepository {
-    override fun getAccessToken(): String? = encryptedSharedPreferencesDataSource.getAccessToken()
+    override fun getAccessToken(): String = encryptedSharedPreferencesDataSource.getAccessToken()
 
-    override fun getAccessTime(): String? = encryptedSharedPreferencesDataSource.getAccessTime()
+    override fun getAccessTime(): String = encryptedSharedPreferencesDataSource.getAccessTime()
 
-    override fun getRefreshToken(): String? = encryptedSharedPreferencesDataSource.getRefreshToken()
+    override fun getRefreshToken(): String = encryptedSharedPreferencesDataSource.getRefreshToken()
 
-    override fun getRefreshTime(): String? = encryptedSharedPreferencesDataSource.getRefreshTime()
+    override fun getRefreshTime(): String = encryptedSharedPreferencesDataSource.getRefreshTime()
 
     override fun setAccess(accessToken: String, accessTime: String) {
         with(encryptedSharedPreferencesDataSource) {
