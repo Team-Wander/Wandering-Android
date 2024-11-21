@@ -4,7 +4,7 @@ import android.util.Log
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.wanderring.Do.BuildConfig
+import com.wanderring.data.common.address.AddressApi
 import com.wanderring.data.utill.TokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -69,4 +69,10 @@ object NetworkModule {
         .client(okHttpClient)
         .addConverterFactory(moshiConverterFactory)
         .build()
+
+    @Provides
+    @Singleton
+    fun provideRankAPI(retrofit: Retrofit): AddressApi {
+        return retrofit.create(AddressApi::class.java)
+    }
 }
