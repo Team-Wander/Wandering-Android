@@ -19,7 +19,7 @@ import com.wanderring.presentation.section.search.navigateToSearchRoute
 @Composable
 fun App(appState: AppState) {
     val navController = appState.navController
-    val currentDestination = appState.currentDestination!!.route!!
+    val currentDestination = appState.currentDestination?.route
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -41,7 +41,7 @@ fun App(appState: AppState) {
         bottomBar = {
             if (appState.isTopLevelDestination) {
                 DoNavBar(
-                    currentDestination = currentDestination,
+                    currentDestination = currentDestination.orEmpty(),
                     topLevelDestinations = appState.topLevelDestinations,
                     navigateToTopLevelDestination = appState::navigateToTopLevelDestination,
                 )
