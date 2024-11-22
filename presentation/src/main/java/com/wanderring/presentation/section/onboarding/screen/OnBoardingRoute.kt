@@ -324,8 +324,8 @@ fun EnterLocationPage(
 ) {
     LaunchedEffect(locationState) {
         snapshotFlow { locationState }
-            .filter { it.isNotEmpty() }
-            .debounce(300L) // 300ms 동안 입력 없으면 처리
+            .filter { it.isNotEmpty() && it.length >= 2 }
+            .debounce(500L)
             .collectLatest { debouncedText ->
                 searchLocation(debouncedText)
             }
