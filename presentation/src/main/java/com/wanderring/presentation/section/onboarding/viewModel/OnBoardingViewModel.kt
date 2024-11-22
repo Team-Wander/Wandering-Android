@@ -22,7 +22,7 @@ class OnBoardingViewModel @Inject constructor(
             is OnBoardingScreenIntent.UpdateGrade -> updateGrade(intent.grade)
             is OnBoardingScreenIntent.UpdateSpot -> updateSpot(intent.spot)
             is OnBoardingScreenIntent.UpdateSearchText -> updateSearchTextState(intent.searchText)
-            is OnBoardingScreenIntent.SearchLocation -> updateSpot(intent.searchText)
+            is OnBoardingScreenIntent.SearchLocation -> searchLocation(intent.searchText)
         }
     }
 

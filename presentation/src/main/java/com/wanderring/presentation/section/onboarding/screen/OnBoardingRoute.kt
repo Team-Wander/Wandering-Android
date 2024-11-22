@@ -1,5 +1,6 @@
 package com.wanderring.presentation.section.onboarding.screen
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -64,9 +65,9 @@ fun OnBoardingRoute(
         state = state,
         onSchoolChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSchool(it)) },
         onGradeChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateGrade(it)) },
-        onSpotChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSearchText(it)) },
+        onSpotChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSpot(it)) },
         onSearchTextChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSearchText(it)) },
-        searchLocation = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSearchText(it)) },
+        searchLocation = { viewModel.handleIntent(OnBoardingScreenIntent.SearchLocation(it)) },
         onSubmit = { viewModel.handleIntent(OnBoardingScreenIntent.PostInfo) },
         navigateToBack = navigateToBack,
     )
@@ -129,7 +130,7 @@ fun OnBoardingScreen(
             2 -> {
                 EnterLocationPage(
                     modifier = modifier,
-                    locationState = state.spot,
+                    locationState = state.searchTextState,
                     onSearchTextChange = onSearchTextChange,
                     searchLocation = searchLocation,
                     onSpotChange = onSpotChange,
