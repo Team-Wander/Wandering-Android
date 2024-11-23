@@ -57,17 +57,17 @@ fun DoTextField(
             .focusRequester(focusRequester)
             .then(
                 if (useOutLine)
-                    modifier.border(
+                    Modifier.border(
                         width = 1.dp,
                         color = outlineColor,
                         shape = RoundedCornerShape(size = 12.dp)
                     )
-                else modifier
+                else Modifier
             ),
         decorationBox = { innerTextField ->
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+                modifier = modifier.fillMaxWidth()
             ) {
                 Box(modifier = Modifier.fillMaxWidth()) {
                     innerTextField()
