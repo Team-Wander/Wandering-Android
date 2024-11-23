@@ -8,7 +8,7 @@ data class AddressResponse(
 
 data class Results(
     val common: Common,
-    val juso: List<Juso>
+    val juso: List<Juso>?
 )
 
 data class Common(
