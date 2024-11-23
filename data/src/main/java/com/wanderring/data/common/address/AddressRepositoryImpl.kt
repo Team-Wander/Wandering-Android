@@ -20,7 +20,7 @@ class AddressRepositoryImpl @Inject constructor(
             keyword = keyword
         ).map {
             AddressModel(
-                juso = it.results.juso.map { juso -> juso.toJuso() }
+                juso = it.results.juso?.map { juso -> juso.toJuso() } ?: emptyList()
             )
         }
 }
