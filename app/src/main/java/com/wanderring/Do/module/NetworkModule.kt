@@ -4,6 +4,8 @@ import android.util.Log
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.wanderring.Do.module.util.AddressRetrofit
+import com.wanderring.Do.module.util.DefaultRetrofit
 import com.wanderring.data.common.address.AddressApi
 import com.wanderring.data.utill.TokenInterceptor
 import dagger.Module
@@ -59,11 +61,23 @@ object NetworkModule {
     fun provideConverterFactory(moshi: Moshi): MoshiConverterFactory =
         MoshiConverterFactory.create(moshi)
 
+    @DefaultRetrofit
     @Provides
     @Singleton
-    fun provideRetrofitInstance(
+    fun provideDefaultRetrofit(
         okHttpClient: OkHttpClient,
-        moshiConverterFactory: MoshiConverterFactory,
+        moshiConverterFactory: MoshiConverterFactory
+    ): Retrofit = Retrofit.Builder()
+        .client(okHttpClient)
+        .addConverterFactory(moshiConverterFactory)
+        .build()
+
+    @AddressRetrofit
+    @Provides
+    @Singleton
+    fun provideAddressRetrofit(
+        okHttpClient: OkHttpClient,
+        moshiConverterFactory: MoshiConverterFactory
     ): Retrofit = Retrofit.Builder()
         .baseUrl("BuildConfig.BASE_URL")
         .client(okHttpClient)
@@ -72,7 +86,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRankAPI(retrofit: Retrofit): AddressApi {
+    fun provideRankAPI(
+        @AddressRetrofit retrofit: Retrofit
+    ): AddressApi {
         return retrofit.create(AddressApi::class.java)
     }
 }
