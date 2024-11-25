@@ -1,25 +1,39 @@
 package com.wanderring.Do.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import com.wanderring.presentation.component.HomeIcon
+import com.wanderring.presentation.component.MyIcon
+import com.wanderring.presentation.component.SearchIcon
+import com.wanderring.presentation.component.TimeScheduleIcon
+import com.wanderring.presentation.section.home.HomeRoute
+import com.wanderring.presentation.section.my.MyRoute
+import com.wanderring.presentation.section.schedule.ScheduleRoute
+import com.wanderring.presentation.section.search.SearchRoute
 
 enum class TopLevelDestination(
-    val icon: @Composable () -> Unit,
+    val icon: @Composable (Color) -> Unit,
     val destinationName: String,
+    val routeName: String,
 ) {
-    Home(
-        icon = { com.wanderring.presentation.component.HomeIcon() },
-        destinationName = "홈"
+    TopLevelHomeRoute(
+        icon = { tint -> HomeIcon(tint = tint) },
+        destinationName = "홈",
+        routeName = HomeRoute
     ),
-    Search(
-        icon = { com.wanderring.presentation.component.SearchIcon() },
-        destinationName = "검색"
+    TopLevelSearchRoute(
+        icon = { tint -> SearchIcon(tint = tint) },
+        destinationName = "검색",
+        routeName = SearchRoute
     ),
-    Schedule(
-        icon = { com.wanderring.presentation.component.TimeScheduleIcon() },
-        destinationName = "시간표"
+    TopLevelScheduleRoute(
+        icon = { tint -> TimeScheduleIcon(tint = tint) },
+        destinationName = "시간표",
+        routeName = ScheduleRoute
     ),
-    My(
-        icon = { com.wanderring.presentation.component.MyIcon() },
-        destinationName = "마이"
+    TopLevelMyRoute(
+        icon = { tint -> MyIcon(tint = tint) },
+        destinationName = "마이",
+        routeName = MyRoute
     ),
 }
