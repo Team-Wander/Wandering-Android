@@ -18,6 +18,7 @@ class OnBoardingViewModel @Inject constructor(
     override fun handleIntent(intent: OnBoardingScreenIntent) {
         when (intent) {
             OnBoardingScreenIntent.PostInfo -> postInfo()
+            OnBoardingScreenIntent.NavigateToBack -> postSideEffect(OnBoardingSideEffect.NavigateToBack)
             is OnBoardingScreenIntent.UpdateSchool -> updateSchool(intent.school)
             is OnBoardingScreenIntent.UpdateGrade -> updateGrade(intent.grade)
             is OnBoardingScreenIntent.UpdateSpot -> updateSpot(intent.spot)
@@ -60,6 +61,7 @@ sealed class OnBoardingScreenIntent {
     data class UpdateSearchText(val searchText: String) : OnBoardingScreenIntent()
     data class SearchLocation(val searchText: String) : OnBoardingScreenIntent()
     data object PostInfo : OnBoardingScreenIntent()
+    data object NavigateToBack : OnBoardingScreenIntent()
 }
 
 data class OnBoardingScreenState(
@@ -83,4 +85,5 @@ data class OnBoardingScreenState(
 
 sealed class OnBoardingSideEffect {
     data object NavigateToHome : OnBoardingSideEffect()
+    data object NavigateToBack : OnBoardingSideEffect()
 }

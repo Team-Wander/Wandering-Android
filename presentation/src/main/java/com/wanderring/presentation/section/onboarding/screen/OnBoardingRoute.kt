@@ -55,6 +55,7 @@ fun OnBoardingRoute(
         viewModel.sideEffect.collect {
             when (it) {
                 OnBoardingSideEffect.NavigateToHome -> navigateToHome()
+                OnBoardingSideEffect.NavigateToBack -> navigateToBack()
             }
         }
     }
