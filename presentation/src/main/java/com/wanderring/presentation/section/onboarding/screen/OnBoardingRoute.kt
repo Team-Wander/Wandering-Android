@@ -62,13 +62,7 @@ fun OnBoardingRoute(
     OnBoardingScreen(
         modifier = modifier,
         state = state,
-        onSchoolChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSchool(it)) },
-        onGradeChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateGrade(it)) },
-        onSpotChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSpot(it)) },
-        onSearchTextChange = { viewModel.handleIntent(OnBoardingScreenIntent.UpdateSearchText(it)) },
-        searchLocation = { viewModel.handleIntent(OnBoardingScreenIntent.SearchLocation(it)) },
-        onSubmit = { viewModel.handleIntent(OnBoardingScreenIntent.PostInfo) },
-        navigateToBack = navigateToBack,
+        handleIntent = viewModel::handleIntent,
     )
 }
 
@@ -78,13 +72,7 @@ fun OnBoardingScreen(
     // OnBoarding 화면들을 하나로 묶은 screen
     modifier: Modifier = Modifier,
     state: OnBoardingScreenState,
-    onSchoolChange: (String) -> Unit,
-    onGradeChange: (Grade) -> Unit,
-    onSpotChange: (String) -> Unit,
-    onSearchTextChange: (String) -> Unit,
-    searchLocation: (String) -> Unit,
-    onSubmit: () -> Unit,
-    navigateToBack: () -> Unit,
+    handleIntent: (OnBoardingScreenIntent) -> Unit,
 ) {
     val pagerState = rememberPagerState(pageCount = { 3 })
     val coroutineScope = rememberCoroutineScope()
@@ -98,8 +86,8 @@ fun OnBoardingScreen(
                 EnterSchoolPage(
                     modifier = modifier,
                     schoolState = state.school,
-                    onSchoolValueChange = onSchoolChange,
-                    navigateToBack = navigateToBack,
+                    onSchoolValueChange = { handleIntent(OnBoardingScreenIntent.UpdateSchool(it)) },
+                    navigateToBack = { handleIntent(OnBoardingScreenIntent.NavigateToBack) },
                     navigateToGradePage = {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(1)
@@ -112,7 +100,7 @@ fun OnBoardingScreen(
                 EnterGradePage(
                     modifier = modifier,
                     gradeState = state.grade,
-                    onGradeValueChange = onGradeChange,
+                    onGradeValueChange = { handleIntent(OnBoardingScreenIntent.UpdateGrade(it)) },
                     navigateToBack = {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(0)
@@ -130,15 +118,15 @@ fun OnBoardingScreen(
                 EnterLocationPage(
                     modifier = modifier,
                     locationState = state.searchTextState,
-                    onSearchTextChange = onSearchTextChange,
-                    searchLocation = searchLocation,
-                    onSpotChange = onSpotChange,
+                    onSearchTextChange = { handleIntent(OnBoardingScreenIntent.UpdateSearchText(it)) },
+                    searchLocation = { handleIntent(OnBoardingScreenIntent.SearchLocation(it)) },
+                    onSpotChange = { handleIntent(OnBoardingScreenIntent.UpdateSpot(it)) },
                     navigateToBack = {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(1)
                         }
                     },
-                    onSubmit = onSubmit,
+                    onSubmit = { handleIntent(OnBoardingScreenIntent.PostInfo) },
                 )
             }
         }
