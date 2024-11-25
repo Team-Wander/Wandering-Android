@@ -10,6 +10,7 @@ import com.wanderring.presentation.section.my.myRoute
 import com.wanderring.presentation.section.onboarding.onBoarding
 import com.wanderring.presentation.section.schedule.scheduleRoute
 import com.wanderring.presentation.section.search.searchRoute
+import com.wanderring.presentation.section.search.writeWatchRoute
 
 @Composable
 fun DoNavHost(
@@ -30,6 +31,7 @@ fun DoNavHost(
         homeRoute()
         writeRoute()
         searchRoute()
+        writeWatchRoute()
         myRoute()
         scheduleRoute()
     }
