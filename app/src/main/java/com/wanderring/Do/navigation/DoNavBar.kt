@@ -8,21 +8,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.component.modifier.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
-import com.wanderring.presentation.utill.DoPreview
 import com.wanderring.presentation.section.home.HomeRoute
+import com.wanderring.presentation.utill.DoPreview
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun DoNavBar(
     modifier: Modifier = Modifier,
     currentDestination: String,
-    topLevelDestinations: List<TopLevelDestination>,
+    topLevelDestinations: ImmutableList<TopLevelDestination>,
     navigateToTopLevelDestination: (TopLevelDestination) -> Unit
 ) {
     Row(
@@ -33,11 +35,14 @@ fun DoNavBar(
             .padding(horizontal = 32.dp, vertical = 7.dp)
     ) {
         topLevelDestinations.forEach { type ->
+            val isSelected = currentDestination == type.routeName
+            val color = if (isSelected) DoColor.MAIN else DoColor.GRAY400
             DoNavBarItem(
                 text = type.destinationName,
-                isSelected = currentDestination == type.name,
+                textColor = color,
+                isSelected = isSelected,
                 onClick = { navigateToTopLevelDestination(type) },
-                icon = { type.icon() }
+                icon = { type.icon(color) }
             )
         }
     }
@@ -48,7 +53,7 @@ fun DoNavBar(
 fun DoNavBarPreview() {
     DoNavBar(
         currentDestination = HomeRoute,
-        topLevelDestinations = TopLevelDestination.entries,
+        topLevelDestinations = TopLevelDestination.entries.toImmutableList(),
         navigateToTopLevelDestination = { _ -> }
     )
 }
