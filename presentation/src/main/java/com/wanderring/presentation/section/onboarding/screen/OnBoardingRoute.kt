@@ -1,6 +1,5 @@
 package com.wanderring.presentation.section.onboarding.screen
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -325,10 +324,8 @@ fun EnterLocationPage(
     LaunchedEffect(locationState) {
         snapshotFlow { locationState }
             .filter { it.isNotEmpty() && it.length >= 2 }
-            .debounce(500L)
-            .collectLatest { debouncedText ->
-                searchLocation(debouncedText)
-            }
+            .debounce(400L)
+            .collectLatest(searchLocation)
     }
 
     Column(
