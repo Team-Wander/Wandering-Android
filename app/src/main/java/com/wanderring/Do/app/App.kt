@@ -34,7 +34,11 @@ fun App(appState: AppState) {
                     logoOnClick = { /* todo */ },
                     searchOnClick = { navController.navigateToSearchRoute() },
                     bellOnClick = { /* todo navController.navigateToAlarm() */ },
-                    profileOnClick = { navController.navigateToMyRoute() },
+                    profileOnClick = {
+                        if (currentDestination != MyRoute)
+                            navController.navigateToMyRoute()
+                        else Unit
+                    },
                 )
             }
         },
