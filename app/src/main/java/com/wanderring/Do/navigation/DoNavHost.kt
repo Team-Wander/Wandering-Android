@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.wanderring.presentation.section.home.homeRoute
+import com.wanderring.presentation.section.home.writeRoute
 import com.wanderring.presentation.section.my.myRoute
 import com.wanderring.presentation.section.onboarding.onBoarding
 import com.wanderring.presentation.section.schedule.scheduleRoute
@@ -27,6 +28,7 @@ fun DoNavHost(
             navigateToHome = { navigateToTopLevelDestination(TopLevelDestination.Home) }
         )
         homeRoute()
+        writeRoute()
         searchRoute()
         myRoute()
         scheduleRoute()
