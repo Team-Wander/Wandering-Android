@@ -95,6 +95,7 @@ dependencies {
     implementation(Dependency.Compose.COMPOSE_NAVIGATION)
     androidTestImplementation(platform(Dependency.Compose.COMPOSE_BOM))
     debugImplementation(Dependency.Compose.COMPOSE_TOOLING)
+    implementation(Dependency.Compose.KOTLINX_COLLECTIONS_IMMUTABLE)
 
     implementation(Dependency.Hilt.HILT)
     ksp(Dependency.Hilt.HILT_COMPILER)
