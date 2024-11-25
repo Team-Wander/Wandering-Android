@@ -62,7 +62,7 @@ object NetworkModule {
     fun provideConverterFactory(moshi: Moshi): MoshiConverterFactory =
         MoshiConverterFactory.create(moshi)
 
-    @DefaultRetrofit
+    @DefaultRetrofit // 주소api baseUrl을 사용하는 retrofit과 기본 baseUrl을 사용하는 retrofit을 hilt가 구분할수있도록 qualifier 사용
     @Provides
     @Singleton
     fun provideDefaultRetrofit(
