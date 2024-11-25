@@ -57,11 +57,11 @@ fun DoNavBarPreview() {
 fun DoNavBarItem(
     modifier: Modifier = Modifier,
     text: String,
+    textColor: Color,
     isSelected: Boolean,
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
 ) {
-    val color = remember { if (isSelected) DoColor.MAIN else DoColor.GRAY400 }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -72,7 +72,7 @@ fun DoNavBarItem(
             modifier = Modifier.height(20.dp),
             text = text,
             style = DoTypography.lable,
-            color = color
+            color = textColor
         )
     }
 }
