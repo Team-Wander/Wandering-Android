@@ -1,44 +1,23 @@
 package com.wanderring.presentation.utill
 
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.wanderring.presentation.section.home.HomeRoute
+import com.wanderring.presentation.section.my.MyRoute
+import com.wanderring.presentation.section.schedule.ScheduleRoute
+import com.wanderring.presentation.section.search.SearchRoute
+import kotlinx.collections.immutable.immutableListOf
 
 fun NavGraphBuilder.topLevelComposable(
     route: String,
-    navController: NavHostController,
-    screenOrder: List<String>,
+    currentDestination: String,
     content: @Composable () -> Unit
 ) {
+    val screenOrder = immutableListOf(HomeRoute, SearchRoute, ScheduleRoute, MyRoute)
+
     composable(
-        route,
-        enterTransition = {
-            val previousRoute = navController.previousBackStackEntry?.destination?.route
-            val previousIndex = screenOrder.indexOf(previousRoute)
-            val currentIndex = screenOrder.indexOf(route)
-            if (currentIndex > previousIndex) {
-                // Moving forward (right)
-                slideInHorizontally(initialOffsetX = { fullWidth -> fullWidth })
-            } else {
-                // Moving backward (left)
-                slideInHorizontally(initialOffsetX = { fullWidth -> -fullWidth })
-            }
-        },
-        exitTransition = {
-            val previousRoute = navController.previousBackStackEntry?.destination?.route
-            val previousIndex = screenOrder.indexOf(previousRoute)
-            val currentIndex = screenOrder.indexOf(route)
-            if (currentIndex > previousIndex) {
-                // Moving Forward (right)
-                slideOutHorizontally(targetOffsetX = { fullWidth -> -fullWidth })
-            } else {
-                // Moving Backward (left)
-                slideOutHorizontally(targetOffsetX = { fullWidth -> fullWidth })
-            }
-        }
+        route = route,
     ) {
         content() // 해당 화면의 Composable을 호출
     }
