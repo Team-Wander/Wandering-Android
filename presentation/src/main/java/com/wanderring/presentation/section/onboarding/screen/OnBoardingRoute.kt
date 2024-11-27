@@ -12,8 +12,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.TabRowDefaults.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -25,12 +28,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wanderring.domain.model.enumType.Grade
+import com.wanderring.domain.model.model.address.AddressModel
 import com.wanderring.presentation.component.DoButton
 import com.wanderring.presentation.component.DoTextField
 import com.wanderring.presentation.component.GradeSelectionButton
 import com.wanderring.presentation.component.SearchIcon
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.section.onboarding.component.InfoBox
+import com.wanderring.presentation.section.onboarding.component.SearchResultItem
 import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingScreenIntent
 import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingScreenState
 import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingSideEffect
@@ -119,8 +124,11 @@ fun OnBoardingScreen(
                 EnterLocationPage(
                     modifier = modifier,
                     locationState = state.searchTextState,
+                    searchResult = state.searchResult,
                     onSearchTextChange = { handleIntent(OnBoardingScreenIntent.UpdateSearchText(it)) },
-                    searchLocation = { handleIntent(OnBoardingScreenIntent.SearchLocation(it)) },
+                    onSearchLocationChange = {
+                        handleIntent(OnBoardingScreenIntent.UpdateSearchLocation(it))
+                    },
                     onSpotChange = { handleIntent(OnBoardingScreenIntent.UpdateSpot(it)) },
                     navigateToBack = {
                         coroutineScope.launch {
@@ -291,21 +299,23 @@ fun EnterGradePage(
 @Composable
 private fun EnterLocationPagePreview() {
     EnterLocationPage(
+        searchResult = AddressModel(emptyList()),
         locationState = "",
         onSearchTextChange = { _ -> },
-        searchLocation = { _ -> },
+        onSearchLocationChange = { _ -> },
         onSubmit = {},
         navigateToBack = {},
-        onSpotChange = { }
+        onSpotChange = { },
     )
 }
 
 @Composable
 fun EnterLocationPage(
     modifier: Modifier = Modifier,
+    searchResult: AddressModel,
     locationState: String,
     onSearchTextChange: (String) -> Unit,
-    searchLocation: (String) -> Unit,
+    onSearchLocationChange: (String) -> Unit,
     onSubmit: () -> Unit,
     navigateToBack: () -> Unit,
     onSpotChange: (String) -> Unit,
@@ -314,7 +324,7 @@ fun EnterLocationPage(
         snapshotFlow { locationState }
             .filter { it.isNotEmpty() && it.length >= 2 }
             .debounce(400L)
-            .collectLatest(searchLocation)
+            .collectLatest(onSearchLocationChange)
     }
 
     Column(
@@ -339,6 +349,26 @@ fun EnterLocationPage(
                     onValueChange = onSearchTextChange,
                     trailingIcon = { SearchIcon() }
                 )
+                if (searchResult.juso.isNotEmpty()) {
+                    LazyColumn(
+                        modifier = Modifier.padding(horizontal = 10.dp)
+                    ) {
+                        itemsIndexed(searchResult.juso) { index, result ->
+                            SearchResultItem(
+                                result = result,
+                                onClick = { onSpotChange(result.jibunAddr) }
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            if (index < searchResult.juso.lastIndex) {
+                                Divider(
+                                    color = DoColor.GRAY100,
+                                    thickness = 1.dp,
+                                    modifier = Modifier.padding(horizontal = 16.dp)
+                                )
+                            }
+                        }
+                    }
+                }
             }
         )
         DoButton(

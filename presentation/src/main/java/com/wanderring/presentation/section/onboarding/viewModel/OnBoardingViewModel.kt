@@ -23,13 +23,22 @@ class OnBoardingViewModel @Inject constructor(
             is OnBoardingScreenIntent.UpdateGrade -> updateGrade(intent.grade)
             is OnBoardingScreenIntent.UpdateSpot -> updateSpot(intent.spot)
             is OnBoardingScreenIntent.UpdateSearchText -> updateSearchTextState(intent.searchText)
-            is OnBoardingScreenIntent.SearchLocation -> searchLocation(intent.searchText)
+            is OnBoardingScreenIntent.UpdateSearchLocation -> searchLocation(intent.searchText)
         }
     }
 
-    private fun updateSchool(school: String) = setState { copy(school = school) }
-    private fun updateGrade(grade: Grade) = setState { copy(grade = grade) }
-    private fun updateSpot(spot: String) = setState { copy(spot = spot) }
+    private fun updateSchool(inputSchool: String) = setState { copy(school = inputSchool) }
+    private fun updateGrade(inputGrade: Grade) = setState { copy(grade = inputGrade) }
+    private fun updateSpot(inputSpot: String) =
+        setState {
+            copy(
+                searchTextState = inputSpot,
+                spot = inputSpot,
+                searchResult = AddressModel(emptyList())
+            )
+        }
+
+
     private fun updateSearchTextState(searchTextState: String) =
         setState { copy(searchTextState = searchTextState) }
 
@@ -39,13 +48,8 @@ class OnBoardingViewModel @Inject constructor(
             countPerPage = 5,
             keyword = searchTextState
         ).collect {
-            setState {
-                copy(
-                    searchList = it
-                )
-            }
+            setState { copy(searchResult = it) }
         }
-
     }
 
     private fun postInfo() {
@@ -59,7 +63,7 @@ sealed class OnBoardingScreenIntent {
     data class UpdateGrade(val grade: Grade) : OnBoardingScreenIntent()
     data class UpdateSpot(val spot: String) : OnBoardingScreenIntent()
     data class UpdateSearchText(val searchText: String) : OnBoardingScreenIntent()
-    data class SearchLocation(val searchText: String) : OnBoardingScreenIntent()
+    data class UpdateSearchLocation(val searchText: String) : OnBoardingScreenIntent()
     data object PostInfo : OnBoardingScreenIntent()
     data object NavigateToBack : OnBoardingScreenIntent()
 }
@@ -69,7 +73,7 @@ data class OnBoardingScreenState(
     val grade: Grade,
     val spot: String,
     val searchTextState: String,
-    val searchList: AddressModel,
+    val searchResult: AddressModel,
 ) {
     companion object {
         // State의 초기값을 넣어주기위해 필수로 구현해야하는 함수
@@ -78,7 +82,7 @@ data class OnBoardingScreenState(
             grade = Grade.NONE,
             spot = "",
             searchTextState = "",
-            searchList = AddressModel(juso = emptyList()),
+            searchResult = AddressModel(juso = emptyList()),
         )
     }
 }
