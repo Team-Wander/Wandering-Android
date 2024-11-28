@@ -17,7 +17,7 @@ interface AuthApi {
     suspend fun tokenRefresh(): TokenResponse
 
     @POST("/auth/info")
-    suspend fun submitExtraData(@Body extraDataBody: ExtraDataBody): TokenResponse
+    suspend fun submitExtraData(@Body extraDataBody: ExtraDataBody)
 }
 
 data class LoginBody(
