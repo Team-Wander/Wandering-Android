@@ -1,6 +1,6 @@
 package com.wanderring.data.common.address
 
-import com.wanderring.domain.model.model.address.JusoModel
+import com.wanderring.domain.model.address.JusoModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

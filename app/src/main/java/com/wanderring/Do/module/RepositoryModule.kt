@@ -2,8 +2,8 @@ package com.wanderring.Do.module
 
 import com.wanderring.data.common.address.AddressRepositoryImpl
 import com.wanderring.data.common.tokenData.UserDataRepositoryImpl
-import com.wanderring.domain.model.repository.userData.UserDataRepository
-import com.wanderring.domain.model.repository.address.AddressRepository
+import com.wanderring.domain.repository.UserDataRepository
+import com.wanderring.domain.repository.AddressRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

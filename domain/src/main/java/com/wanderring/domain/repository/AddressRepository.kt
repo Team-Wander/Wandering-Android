@@ -1,6 +1,6 @@
-package com.wanderring.domain.model.repository.address
+package com.wanderring.domain.repository
 
-import com.wanderring.domain.model.model.address.AddressModel
+import com.wanderring.domain.model.address.AddressModel
 import kotlinx.coroutines.flow.Flow
 
 interface AddressRepository {

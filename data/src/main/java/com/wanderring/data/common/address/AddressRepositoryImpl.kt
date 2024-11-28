@@ -1,7 +1,7 @@
 package com.wanderring.data.common.address
 
-import com.wanderring.domain.model.model.address.AddressModel
-import com.wanderring.domain.model.repository.address.AddressRepository
+import com.wanderring.domain.model.address.AddressModel
+import com.wanderring.domain.repository.AddressRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

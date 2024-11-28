@@ -1,6 +1,6 @@
 package com.wanderring.data.utill
 
-import com.wanderring.domain.model.repository.userData.UserDataRepository
+import com.wanderring.domain.repository.UserDataRepository
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

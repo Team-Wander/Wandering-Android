@@ -1,4 +1,4 @@
-package com.wanderring.domain.model.repository.userData
+package com.wanderring.domain.repository
 
 interface UserDataRepository {
     fun getAccessToken(): String

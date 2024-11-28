@@ -16,7 +16,7 @@ import com.wanderring.Do.navigation.TopLevelDestination.TopLevelScheduleRoute
 import com.wanderring.Do.navigation.TopLevelDestination.TopLevelSearchRoute
 import com.wanderring.Do.navigation.TopLevelDestination.TopLevelHomeRoute
 import com.wanderring.data.utill.isExpire
-import com.wanderring.domain.model.repository.userData.UserDataRepository
+import com.wanderring.domain.repository.UserDataRepository
 import com.wanderring.presentation.section.home.HomeRoute
 import com.wanderring.presentation.section.home.navigateToHomeRoute
 import com.wanderring.presentation.section.my.navigateToMyRoute

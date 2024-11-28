@@ -2,8 +2,8 @@ package com.wanderring.presentation.section.onboarding.viewModel
 
 import androidx.lifecycle.viewModelScope
 import com.wanderring.domain.model.enumType.Grade
-import com.wanderring.domain.model.model.address.AddressModel
-import com.wanderring.domain.model.repository.address.AddressRepository
+import com.wanderring.domain.model.address.AddressModel
+import com.wanderring.domain.repository.AddressRepository
 import com.wanderring.presentation.utill.DoViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

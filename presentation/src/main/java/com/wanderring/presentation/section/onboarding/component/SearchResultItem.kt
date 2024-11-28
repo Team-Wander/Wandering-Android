@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.wanderring.domain.model.model.address.JusoModel
+import com.wanderring.domain.model.address.JusoModel
 import com.wanderring.presentation.R
 import com.wanderring.presentation.component.modifier.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
