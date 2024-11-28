@@ -26,15 +26,13 @@ class AddressDataSourceImpl @Inject constructor(
         keyword: String,
     ): Flow<AddressResponse> = flow {
         emit(
-            withContext(Dispatchers.IO) {
-                addressApi.getAddress(
-                    confmKey = BuildConfig.ADDRESS_API_KEY,
-                    currentPage = currentPage,
-                    countPerPage = countPerPage,
-                    keyword = keyword,
-                    resultType = "json"
-                )
-            }
+            addressApi.getAddress(
+                confmKey = BuildConfig.ADDRESS_API_KEY,
+                currentPage = currentPage,
+                countPerPage = countPerPage,
+                keyword = keyword,
+                resultType = "json"
+            )
         )
     }.flowOn(Dispatchers.IO)
 }
