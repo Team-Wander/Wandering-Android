@@ -16,4 +16,9 @@ abstract class RemoteDataSourceModule {
     abstract fun provideAddressDataSource(
         addressDataSourceImpl: AddressDataSourceImpl
     ): AddressDataSource
+
+    @Binds
+    abstract fun provideAuthDataSource(
+        authDataSourceImpl: AuthDataSourceImpl
+    ): AuthDataSource
 }
