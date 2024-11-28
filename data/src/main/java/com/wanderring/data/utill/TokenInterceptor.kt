@@ -10,33 +10,36 @@ class TokenInterceptor @Inject constructor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        var request = chain.request()
-        val builder = request.newBuilder()
-
         // 액세스 토큰을 헤더에 추가
         val accessToken = dataSource.getAccessToken()
-
-        if (!accessToken.isNullOrEmpty()) {
-            request = builder
-                .addHeader("Authorization", "Bearer $accessToken")
-                .build()
-        }
+        val request = chain.request().newBuilder()
+            .apply {
+                if (!accessToken.isNullOrEmpty()) {
+                    addHeader("Authorization", "Bearer $accessToken")
+                }
+            }
+            .build()
 
         // 요청을 실행
-        val response = chain.proceed(request)
+        var response: Response = chain.proceed(request)
 
         // 액세스 토큰 만료 시
         if (response.code == 401) {
             val refreshToken = dataSource.getRefreshToken()
             if (!refreshToken.isNullOrEmpty()) {
-                // TODO: 리프레시 토큰으로 새로운 액세스 토큰 요청
+                // 리프레시 토큰으로 새로운 액세스 토큰 요청 (TODO)
+                // 새로운 액세스 토큰 발급 후 리트라이
+                val newAccessToken = "NEW_ACCESS_TOKEN" // 새로운 토큰을 받았다고 가정
+                val newRequest = request.newBuilder()
+                    .addHeader("Authorization", "Bearer $newAccessToken")
+                    .build()
 
-                // TODO: 발급받은 토큰으로 리트라이
+                // 이전 응답을 닫고 새로운 요청을 보냄
+                response.close()  // 반드시 이전 응답을 닫고
+                response = chain.proceed(newRequest)  // 새로운 요청으로 응답 받기
             }
         }
 
-        // TODO: 리프레시 토큰도 만료되면 토큰 모두 삭제
-
-        return chain.proceed(builder.build())
+        return response
     }
 }
