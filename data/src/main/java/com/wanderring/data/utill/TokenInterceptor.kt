@@ -11,6 +11,7 @@ class TokenInterceptor @Inject constructor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
+        
         val builder = request.newBuilder()
 
         // 액세스 토큰을 헤더에 추가
