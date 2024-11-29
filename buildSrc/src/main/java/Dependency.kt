@@ -71,12 +71,11 @@ object Dependency {
         const val COMPOSE_MANIFEST = "androidx.compose.ui:ui-test-manifest:${Versions.COMPOSE}"
     }
 
-    object Gauth {
-        const val GAUTH = "com.github.GSM-MSG:GAuth-Signin-Android:${Versions.GAUTH}"
-    }
-
     object DataStore {
+        const val DATASTORE = "androidx.datastore:datastore:${Versions.DATASTORE}"
+        const val DATASTORE_CORE = "androidx.datastore:datastore-core:${Versions.DATASTORE}"
+        const val PROTOBUF_JAVA_LITE = "com.google.protobuf:protobuf-javalite:${Versions.PROTOBUF_JAVA_LITE}"
         const val SECURITY_CRYPTO = "androidx.security:security-crypto:${Versions.SECURITY_CRYPTO}"
-        const val PREFERENCES = "androidx.datastore:datastore-preferences:${Versions.PREFERENCES}"
+        const val PREFERENCES = "androidx.datastore:datastore-preferences:${Versions.DATASTORE}"
     }
 }
