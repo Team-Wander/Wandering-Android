@@ -33,6 +33,7 @@ import com.wanderring.presentation.component.DoButton
 import com.wanderring.presentation.component.DoTextField
 import com.wanderring.presentation.component.GradeSelectionButton
 import com.wanderring.presentation.component.SearchIcon
+import com.wanderring.presentation.component.modifier.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.section.onboarding.component.InfoBox
 import com.wanderring.presentation.section.onboarding.component.SearchResultItem
@@ -188,6 +189,7 @@ fun EnterSchoolPage(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 14.dp),
+            enabled = schoolState.isNotEmpty(),
             text = "완료",
             onClick = navigateToGradePage
         )
@@ -289,6 +291,7 @@ fun EnterGradePage(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 14.dp),
+            enabled = gradeState != Grade.NONE,
             text = "완료",
             onClick = navigateToLocationPage
         )
@@ -375,6 +378,7 @@ fun EnterLocationPage(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 14.dp),
+            enabled = locationState.isNotEmpty(),
             text = "완료",
             onClick = onSubmit
         )
