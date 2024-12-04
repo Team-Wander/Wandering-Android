@@ -350,7 +350,13 @@ fun EnterLocationPage(
                     value = locationState,
                     placeholder = "위치를 알려주세요",
                     onValueChange = onSearchTextChange,
-                    trailingIcon = { SearchIcon() }
+                    trailingIcon = {
+                        SearchIcon(
+                            modifier = Modifier.clickableSingle(onClick = {
+                                onSearchLocationChange(locationState)
+                            })
+                        )
+                    }
                 )
                 if (searchResult.juso.isNotEmpty()) {
                     LazyColumn(
