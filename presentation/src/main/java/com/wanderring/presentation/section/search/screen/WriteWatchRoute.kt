@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
 import androidx.compose.material.rememberModalBottomSheetState
@@ -64,15 +65,26 @@ import com.wanderring.presentation.utill.DoPreview
 import kotlinx.coroutines.launch
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WriteWatchRoute(
     modifier: Modifier = Modifier,
     viewModel: WriteWatchViewModel = hiltViewModel(),
 ) {
+    val coroutineScope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+
     LaunchedEffect(Unit) {
         viewModel.sideEffect.collect {
             when (it) {
                 WriteWatchSideEffect.NavigateToBackStack -> TODO()
+                WriteWatchSideEffect.CloseBottomSheet -> {
+                    coroutineScope.launch { sheetState.hide() }
+                }
+
+                WriteWatchSideEffect.OpenBottomSheet -> {
+                    coroutineScope.launch { sheetState.show() }
+                }
             }
         }
     }
@@ -82,6 +94,7 @@ fun WriteWatchRoute(
     WriteWatchScreen(
         modifier = modifier,
         state = state,
+        sheetState = sheetState,
         handleIntent = viewModel::handleIntent,
     )
 }
@@ -91,10 +104,9 @@ fun WriteWatchRoute(
 fun WriteWatchScreen(
     modifier: Modifier = Modifier,
     state: WriteWatchScreenState,
+    sheetState: ModalBottomSheetState,
     handleIntent: (WriteWatchIntent) -> Unit,
 ) {
-    val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val coroutineScope = rememberCoroutineScope()
     val reportReason = remember {
         mutableStateOf("")
     }
@@ -138,7 +150,7 @@ fun WriteWatchScreen(
                     )
                     XIcon(
                         modifier = Modifier.clickableSingle {
-                            coroutineScope.launch { sheetState.hide() }
+                            handleIntent(WriteWatchIntent.CloseBottomSheet)
                         }
                     )
                 }
@@ -365,7 +377,7 @@ fun WriteWatchScreen(
                             }
                             ReportIcon(
                                 modifier = Modifier.clickableSingle {
-                                    coroutineScope.launch { sheetState.show() }
+                                    handleIntent(WriteWatchIntent.OpenBottomSheet)
                                 }
                             )
                         }
@@ -385,6 +397,7 @@ fun WriteWatchScreen(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @DoPreview
 @Composable
 fun WriteWatchScreenPreview() {
@@ -412,7 +425,8 @@ fun WriteWatchScreenPreview() {
             spot = "",
             tag = listOf(Tag.GO_OUT, Tag.WALK)
         ),
-        handleIntent = {}
+        handleIntent = {},
+        sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Expanded)
     )
 }
 
