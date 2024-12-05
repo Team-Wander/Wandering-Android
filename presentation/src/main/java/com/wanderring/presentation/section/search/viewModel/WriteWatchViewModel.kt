@@ -25,6 +25,8 @@ sealed class WriteWatchIntent {
     data object LoadAllData : WriteWatchIntent()
     data class SendReport(val body: ReportBody) : WriteWatchIntent()
     data object NavigateToBackStack : WriteWatchIntent()
+    data object OpenBottomSheet : WriteWatchIntent()
+    data object CloseBottomSheet : WriteWatchIntent()
 }
 
 data class WriteWatchScreenState(
@@ -104,4 +106,6 @@ enum class Reason(
 
 sealed class WriteWatchSideEffect {
     data object NavigateToBackStack : WriteWatchSideEffect()
+    data object OpenBottomSheet : WriteWatchSideEffect()
+    data object CloseBottomSheet : WriteWatchSideEffect()
 }
