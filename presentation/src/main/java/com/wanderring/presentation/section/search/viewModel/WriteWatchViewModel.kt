@@ -15,8 +15,10 @@ class WriteWatchViewModel @Inject constructor(
     override fun handleIntent(intent: WriteWatchIntent) {
         when (intent) {
             WriteWatchIntent.LoadAllData -> TODO()
-            WriteWatchIntent.NavigateToBackStack -> TODO()
+            WriteWatchIntent.NavigateToBackStack -> postSideEffect(WriteWatchSideEffect.NavigateToBackStack)
             is WriteWatchIntent.SendReport -> TODO()
+            WriteWatchIntent.CloseBottomSheet -> postSideEffect(WriteWatchSideEffect.CloseBottomSheet)
+            WriteWatchIntent.OpenBottomSheet -> postSideEffect(WriteWatchSideEffect.OpenBottomSheet)
         }
     }
 }
