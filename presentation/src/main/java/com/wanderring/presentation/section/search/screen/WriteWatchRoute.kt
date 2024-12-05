@@ -154,34 +154,34 @@ fun WriteWatchScreen(
                         ) {
                             CheckBoxComponent(
                                 text = Reason.entries[1].description,
-                                isSelected = checkBoxStateList.value == 1,
+                                isSelected = checkBoxStateList.intValue == 1,
                                 onClick = {
-                                    checkBoxStateList.value =
-                                        if (checkBoxStateList.value == 1) 0 else 1
+                                    checkBoxStateList.intValue =
+                                        if (checkBoxStateList.intValue == 1) 0 else 1
                                 },
                             )
                             CheckBoxComponent(
                                 text = Reason.entries[3].description,
-                                isSelected = checkBoxStateList.value == 3,
+                                isSelected = checkBoxStateList.intValue == 3,
                                 onClick = {
-                                    checkBoxStateList.value =
-                                        if (checkBoxStateList.value == 3) 0 else 3
+                                    checkBoxStateList.intValue =
+                                        if (checkBoxStateList.intValue == 3) 0 else 3
                                 },
                             )
                             CheckBoxComponent(
                                 text = Reason.entries[5].description,
-                                isSelected = checkBoxStateList.value == 5,
+                                isSelected = checkBoxStateList.intValue == 5,
                                 onClick = {
-                                    checkBoxStateList.value =
-                                        if (checkBoxStateList.value == 5) 0 else 5
+                                    checkBoxStateList.intValue =
+                                        if (checkBoxStateList.intValue == 5) 0 else 5
                                 },
                             )
                             CheckBoxComponent(
                                 text = Reason.entries[6].description,
-                                isSelected = checkBoxStateList.value == 6,
+                                isSelected = checkBoxStateList.intValue == 6,
                                 onClick = {
-                                    checkBoxStateList.value =
-                                        if (checkBoxStateList.value == 6) 0 else 6
+                                    checkBoxStateList.intValue =
+                                        if (checkBoxStateList.intValue == 6) 0 else 6
                                 },
                             )
                         }
@@ -191,23 +191,23 @@ fun WriteWatchScreen(
                         ) {
                             CheckBoxComponent(
                                 text = Reason.entries[2].description,
-                                isSelected = checkBoxStateList.value == 2,
+                                isSelected = checkBoxStateList.intValue == 2,
                                 onClick = {
-                                    checkBoxStateList.value =
-                                        if (checkBoxStateList.value == 2) 0 else 2
+                                    checkBoxStateList.intValue =
+                                        if (checkBoxStateList.intValue == 2) 0 else 2
                                 },
                             )
                             CheckBoxComponent(
                                 text = Reason.entries[4].description,
-                                isSelected = checkBoxStateList.value == 4,
+                                isSelected = checkBoxStateList.intValue == 4,
                                 onClick = {
-                                    checkBoxStateList.value =
-                                        if (checkBoxStateList.value == 4) 0 else 4
+                                    checkBoxStateList.intValue =
+                                        if (checkBoxStateList.intValue == 4) 0 else 4
                                 },
                             )
                         }
                     }
-                    if (checkBoxStateList.value == 6) {
+                    if (checkBoxStateList.intValue == 6) {
                         Spacer(modifier = Modifier.height(24.dp))
                         DoTextField(
                             value = reportReason.value,
