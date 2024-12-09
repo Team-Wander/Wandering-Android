@@ -1,5 +1,7 @@
 package com.wanderring.Do.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -15,15 +17,19 @@ import com.wanderring.presentation.section.schedule.scheduleRoute
 import com.wanderring.presentation.section.search.SearchRoute
 import com.wanderring.presentation.section.search.screen.SearchRoute
 import com.wanderring.presentation.section.search.writeWatchRoute
+import com.wanderring.presentation.utill.BottomSheetType
 import com.wanderring.presentation.utill.topLevelComposable
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DoNavHost(
     modifier: Modifier = Modifier,
     startDestination: String,
     currentDestination: String,
     navController: NavHostController,
+    bottomSheetState: ModalBottomSheetState,
     navigateToTopLevelDestination: (TopLevelDestination) -> Unit,
+    updateBottomSheetType: (BottomSheetType) -> Unit,
 ) {
     NavHost(
         modifier = modifier,
@@ -60,7 +66,9 @@ fun DoNavHost(
             currentDestination = currentDestination,
             content = {
                 MyRoute(
-                    navigateProfile = { TODO() }
+                    navigateProfile = { TODO() },
+                    bottomSheetState = bottomSheetState,
+                    updateBottomSheetType = updateBottomSheetType,
                 )
             },
         )
