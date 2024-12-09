@@ -22,16 +22,12 @@ fun App(appState: AppState) {
     val navController = appState.navController
     val currentDestination = appState.currentDestination?.route ?: HomeRoute
     val isTopLevelDestination = appState.isTopLevelDestination
+    val showTopBar = currentDestination in setOf(MyRoute, HomeRoute /*, AlarmRoute */)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
-            if (
-                currentDestination == MyRoute
-                || currentDestination == HomeRoute
-            /* || currentDestination == AlarmRoute */
-            ) {
                 DoMainTopBar(
                     logoOnClick = { /* todo */ },
                     searchOnClick = { navController.navigateToSearchRoute() },
@@ -70,5 +66,6 @@ fun App(appState: AppState) {
             navigateToTopLevelDestination = appState::navigateToTopLevelDestination,
             currentDestination = currentDestination
         )
+                if (showTopBar) {
     }
 }
