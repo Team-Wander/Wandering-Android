@@ -59,50 +59,39 @@ fun MyRoute(
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MyScreen(
     modifier: Modifier = Modifier,
     myState: MyState,
     handleIntent: (MyIntent) -> Unit,
 ) {
-    val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val coroutineScope = rememberCoroutineScope()
-
-    ModalBottomSheetLayout(
-        sheetState = sheetState,
-        sheetShape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp),
-        sheetContent = {
-            AlamBottomSheetContent(modifier.fillMaxWidth())
-        }
+    Column(
+        verticalArrangement = Arrangement.spacedBy(30.dp, Alignment.Top),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp)
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(30.dp, Alignment.Top),
-            modifier = modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
+        ProfileCard(
+            modifier = Modifier.fillMaxWidth(),
+            name = myState.name,
+            schoolGrade = myState.schoolGrade,
+            optionOnClick = { handleIntent(MyIntent.ShowBottomSheet) },
+        )
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(18.dp, Alignment.Top),
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier.fillMaxWidth(),
         ) {
-            ProfileCard(
-                modifier = Modifier.fillMaxWidth(),
-                name = myState.name,
-                schoolGrade = myState.schoolGrade,
-                optionOnClick = { coroutineScope.launch { sheetState.show() } },
-            )
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(18.dp, Alignment.Top),
-                horizontalAlignment = Alignment.Start,
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                items(myState.reservation) {
-                    DoWalkListItem(state = it)
-                }
-                items(myState.write) {
-                    DoWalkListItem(state = it)
-                }
+            items(myState.reservation) {
+                DoWalkListItem(state = it)
+            }
+            items(myState.write) {
+                DoWalkListItem(state = it)
             }
         }
     }
 }
+
 
 @DoPreview
 @Composable
