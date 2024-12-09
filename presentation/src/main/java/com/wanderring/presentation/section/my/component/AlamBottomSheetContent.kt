@@ -26,6 +26,7 @@ fun AlamBottomSheetContent(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(36.dp, Alignment.Top),
         horizontalAlignment = Alignment.Start,
         modifier = modifier
+            .fillMaxWidth()
             .padding(horizontal = 44.dp, vertical = 20.dp)
             .background(
                 color = DoColor.WHITE,
