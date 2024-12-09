@@ -16,6 +16,8 @@ class MyViewModel @Inject constructor(
             MyIntent.NavigateToProfile -> postSideEffect(MySideEffect.NavigateProfile)
             MyIntent.LoadWriteList -> loadWriteList()
             MyIntent.LoadReservationList -> loadReservationList()
+            MyIntent.HideBottomSheet -> postSideEffect(MySideEffect.HideBottomSheet)
+            MyIntent.ShowBottomSheet -> postSideEffect(MySideEffect.ShowBottomSheet)
         }
     }
 
@@ -38,6 +40,8 @@ sealed class MyIntent {
     data object LoadWriteList : MyIntent()
     data object LoadReservationList : MyIntent()
     data object NavigateToProfile : MyIntent()
+    data object ShowBottomSheet : MyIntent()
+    data object HideBottomSheet : MyIntent()
 }
 
 data class MyState(
@@ -59,4 +63,6 @@ data class MyState(
 
 sealed class MySideEffect {
     data object NavigateProfile : MySideEffect()
+    data object ShowBottomSheet : MySideEffect()
+    data object HideBottomSheet : MySideEffect()
 }
