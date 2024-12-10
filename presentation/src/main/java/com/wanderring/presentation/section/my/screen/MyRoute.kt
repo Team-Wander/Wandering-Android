@@ -1,6 +1,5 @@
 package com.wanderring.presentation.section.my.screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -48,20 +47,26 @@ fun MyRoute(
 ) {
     val myState by myViewModel.state.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
-
     val lifecycle = LocalLifecycleOwner.current.lifecycle
+
     LaunchedEffect(lifecycle) {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
             myViewModel.sideEffect.collect { effect ->
                 when (effect) {
                     is MySideEffect.NavigateProfile -> navigateProfile()
                     is MySideEffect.HideBottomSheet -> {
-                         }
+                        coroutineScope.launch { bottomSheetState.hide() }
+                    }
+
                     is MySideEffect.ShowBottomSheet -> {
-                        Log.d("sideEffect", "collat $effect")
-                        updateBottomSheetType(BottomSheetType.MyPageOption)
+                        updateBottomSheetType(
+                            BottomSheetType.MyPageOption(
+                                cancelOnClick = { myViewModel.handleIntent(MyIntent.HideBottomSheet) },
+                                profileChangeOnClick = { /* TODO: 프로필 변경 */ },
+                                logoutOnClick = { /* TODO: 로그아웃 로직 연결 */ },
+                            )
+                        )
                         coroutineScope.launch {
-                            Log.d("coroutineScope sideEffect", "collat $effect")
                             bottomSheetState.show()
                         }
                     }
