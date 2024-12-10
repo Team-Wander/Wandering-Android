@@ -34,13 +34,13 @@ fun App(appState: AppState) {
     val isTopLevelDestination = appState.isTopLevelDestination
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val showTopBar = currentDestination in setOf(MyRoute, HomeRoute /*, AlarmRoute */)
-    val appBottomSheetType = remember { mutableStateOf(BottomSheetType.None) }
-
+    val appBottomSheetType = remember { mutableStateOf<BottomSheetType>(BottomSheetType.None) }
+ 
     ModalBottomSheetLayout(
         modifier = Modifier.fillMaxSize(),
         sheetState = bottomSheetState,
         sheetShape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp),
-        sheetContent = { appBottomSheetType.value.bottomSheet() }
+        sheetContent = { appBottomSheetType.value.content() }
     ) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
