@@ -16,12 +16,18 @@ import androidx.compose.ui.unit.dp
 import com.wanderring.presentation.component.LogoutIcon
 import com.wanderring.presentation.component.PhotoIcon
 import com.wanderring.presentation.component.XIcon
+import com.wanderring.presentation.component.modifier.clickableSingle.clickableSingle
 import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 import com.wanderring.presentation.utill.DoPreview
 
 @Composable
-fun AlamBottomSheetContent(modifier: Modifier = Modifier) {
+fun AlamBottomSheetContent(
+    modifier: Modifier = Modifier,
+    profileChangeOnClick: () -> Unit,
+    logoutOnClick: () -> Unit,
+    cancelOnClick: () -> Unit,
+) {
     Column(
         verticalArrangement = Arrangement.spacedBy(36.dp, Alignment.Top),
         horizontalAlignment = Alignment.Start,
@@ -40,6 +46,7 @@ fun AlamBottomSheetContent(modifier: Modifier = Modifier) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.Start),
             verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickableSingle(onClick = profileChangeOnClick)
         ) {
             PhotoIcon()
             Text(
@@ -52,6 +59,7 @@ fun AlamBottomSheetContent(modifier: Modifier = Modifier) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.Start),
             verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickableSingle(onClick = logoutOnClick)
         ) {
             LogoutIcon()
             Text(
@@ -64,6 +72,7 @@ fun AlamBottomSheetContent(modifier: Modifier = Modifier) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.Start),
             verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickableSingle(onClick = cancelOnClick)
         ) {
             XIcon()
             Text(
@@ -79,5 +88,10 @@ fun AlamBottomSheetContent(modifier: Modifier = Modifier) {
 @DoPreview
 @Composable
 fun AlamBottomSheetContentPreview() {
-    AlamBottomSheetContent(modifier = Modifier.fillMaxWidth())
+    AlamBottomSheetContent(
+        modifier = Modifier.fillMaxWidth(),
+        profileChangeOnClick = {},
+        logoutOnClick = {},
+        cancelOnClick = {},
+    )
 }
