@@ -42,11 +42,11 @@ data class WriteWatchScreenState(
     val content: String,
     val date: String,
     val maximum: Int,
-    val contact: List<String>,
     val spot: String,
-    val gender: List<Gender>,
-    val tag: List<Tag>,
-    val grade: List<Grade>
+    val contact: ImmutableList<String>,
+    val gender: ImmutableList<Gender>,
+    val tag: ImmutableList<Tag>,
+    val grade: ImmutableList<Grade>,
 ) {
     companion object {
         // State의 초기값을 넣어주기위해 필수로 구현해야하는 함수
@@ -61,11 +61,12 @@ data class WriteWatchScreenState(
             content = "",
             date = "",
             maximum = 1,
-            contact = listOf("", "", "", ""),
             spot = "",
-            gender = listOf(Gender.NONE),
-            tag = listOf(),
-            grade = listOf(Grade.NONE)
+            checkBoxState = 0,
+            contact = persistentListOf(),
+            gender = persistentListOf(),
+            tag = persistentListOf(),
+            grade = persistentListOf(),
         )
     }
 }
