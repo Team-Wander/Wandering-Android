@@ -5,6 +5,8 @@ import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.domain.model.enumType.Tag
 import com.wanderring.presentation.utill.DoViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,19 +18,33 @@ class WriteWatchViewModel @Inject constructor(
         when (intent) {
             WriteWatchIntent.LoadAllData -> TODO()
             WriteWatchIntent.NavigateToBackStack -> postSideEffect(WriteWatchSideEffect.NavigateToBackStack)
-            is WriteWatchIntent.SendReport -> TODO()
             WriteWatchIntent.HideBottomSheet -> postSideEffect(WriteWatchSideEffect.ShowBottomSheet)
             WriteWatchIntent.ShowBottomSheet -> postSideEffect(WriteWatchSideEffect.HideBottomSheet)
+            is WriteWatchIntent.UpdateCheckBoxState -> setState { copy(checkBoxState = intent.index) }
+            is WriteWatchIntent.UpdateReportReasonState -> setState { copy(reportReason = intent.state) }
+            is WriteWatchIntent.SendReport -> sendReport()
+        }
+    }
+
+    private fun sendReport() {
+        // TODO: 통신로직 추가
+        setState {
+            copy(
+                reportReason = "",
+                checkBoxState = 0,
+            )
         }
     }
 }
 
 sealed class WriteWatchIntent {
     data object LoadAllData : WriteWatchIntent()
-    data class SendReport(val body: ReportBody) : WriteWatchIntent()
+    data object SendReport : WriteWatchIntent()
     data object NavigateToBackStack : WriteWatchIntent()
     data object ShowBottomSheet : WriteWatchIntent()
     data object HideBottomSheet : WriteWatchIntent()
+    data class UpdateCheckBoxState(val index: Int) : WriteWatchIntent()
+    data class UpdateReportReasonState(val state: String) : WriteWatchIntent()
 }
 
 data class WriteWatchScreenState(
@@ -41,8 +57,10 @@ data class WriteWatchScreenState(
     val title: String,
     val content: String,
     val date: String,
-    val maximum: Int,
     val spot: String,
+    val reportReason: String,
+    val maximum: Int,
+    val checkBoxState: Int,
     val contact: ImmutableList<String>,
     val gender: ImmutableList<Gender>,
     val tag: ImmutableList<Tag>,
@@ -60,8 +78,9 @@ data class WriteWatchScreenState(
             title = "",
             content = "",
             date = "",
-            maximum = 1,
             spot = "",
+            reportReason = "",
+            maximum = 1,
             checkBoxState = 0,
             contact = persistentListOf(),
             gender = persistentListOf(),
