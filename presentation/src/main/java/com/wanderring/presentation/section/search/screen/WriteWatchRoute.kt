@@ -14,17 +14,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
-import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -113,7 +107,7 @@ fun WriteWatchRoute(
                     }
 
                     WriteWatchSideEffect.HideBottomSheet -> {
-                        coroutineScope.launch { sheetState.show() }
+                        coroutineScope.launch { bottomSheetState.hide() }
                     }
                 }
             }
@@ -134,289 +128,137 @@ fun WriteWatchScreen(
     state: WriteWatchScreenState,
     handleIntent: (WriteWatchIntent) -> Unit,
 ) {
-    ModalBottomSheetLayout(
-        modifier = Modifier.fillMaxSize(),
-        sheetState = sheetState,
-        sheetShape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp),
-        sheetContent = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.Bottom),
-                horizontalAlignment = Alignment.End,
-                modifier = Modifier
-                    .background(
-                        color = DoColor.WHITE,
-                        shape = RoundedCornerShape(
-                            topStart = 12.dp,
-                            topEnd = 12.dp,
-                            bottomStart = 0.dp,
-                            bottomEnd = 0.dp
-                        )
-                    )
-                    .padding(horizontal = 30.dp, vertical = 20.dp),
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "신고사유",
-                        style = TextStyle(
-                            fontSize = 20.sp,
-                            lineHeight = 30.sp,
-                            fontFamily = FontFamily(Font(R.font.pretendard)),
-                            fontWeight = FontWeight(700),
-                            color = DoColor.Black,
-                        )
-                    )
-                    XIcon(
-                        modifier = Modifier.clickableSingle {
-                            handleIntent(WriteWatchIntent.HideBottomSheet)
-                        }
-                    )
-                }
-                Column {
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.Top,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.Top),
-                            horizontalAlignment = Alignment.Start,
-                        ) {
-                            CheckBoxComponent(
-                                text = Reason.entries[1].description,
-                                isSelected = checkBoxStateList.intValue == 1,
-                                onClick = {
-                                    checkBoxStateList.intValue =
-                                        if (checkBoxStateList.intValue == 1) 0 else 1
-                                },
-                            )
-                            CheckBoxComponent(
-                                text = Reason.entries[3].description,
-                                isSelected = checkBoxStateList.intValue == 3,
-                                onClick = {
-                                    checkBoxStateList.intValue =
-                                        if (checkBoxStateList.intValue == 3) 0 else 3
-                                },
-                            )
-                            CheckBoxComponent(
-                                text = Reason.entries[5].description,
-                                isSelected = checkBoxStateList.intValue == 5,
-                                onClick = {
-                                    checkBoxStateList.intValue =
-                                        if (checkBoxStateList.intValue == 5) 0 else 5
-                                },
-                            )
-                            CheckBoxComponent(
-                                text = Reason.entries[6].description,
-                                isSelected = checkBoxStateList.intValue == 6,
-                                onClick = {
-                                    checkBoxStateList.intValue =
-                                        if (checkBoxStateList.intValue == 6) 0 else 6
-                                },
-                            )
-                        }
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.Top),
-                            horizontalAlignment = Alignment.Start,
-                        ) {
-                            CheckBoxComponent(
-                                text = Reason.entries[2].description,
-                                isSelected = checkBoxStateList.intValue == 2,
-                                onClick = {
-                                    checkBoxStateList.intValue =
-                                        if (checkBoxStateList.intValue == 2) 0 else 2
-                                },
-                            )
-                            CheckBoxComponent(
-                                text = Reason.entries[4].description,
-                                isSelected = checkBoxStateList.intValue == 4,
-                                onClick = {
-                                    checkBoxStateList.intValue =
-                                        if (checkBoxStateList.intValue == 4) 0 else 4
-                                },
-                            )
-                        }
-                    }
-                    if (checkBoxStateList.intValue == 6) {
-                        Spacer(modifier = Modifier.height(24.dp))
-                        DoTextField(
-                            value = reportReason.value,
-                            onValueChange = { reportReason.value = it },
-                            modifier = Modifier
-                                .background(
-                                    color = DoColor.GRAY200,
-                                    shape = RoundedCornerShape(size = 8.dp),
-                                )
-                                .padding(
-                                    vertical = 12.dp,
-                                    horizontal = 16.dp,
-                                ),
-                            useOutLine = false,
-                            placeholder = "신고 사유를 적어주세요",
-                        )
-                    }
-                }
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.End),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    DoButton(
-                        modifier = Modifier.padding(
-                            horizontal = 20.dp,
-                            vertical = 10.dp,
-                        ),
-                        text = "취소",
-                        color = DoColor.RED,
-                        onClick = {},
-                    )
-                    DoButton(
-                        modifier = Modifier.padding(
-                            horizontal = 20.dp,
-                            vertical = 10.dp,
-                        ),
-                        text = "확인",
-                        color = DoColor.MAIN,
-                        onClick = {},
-
-                        )
-                }
-            }
-        }
+    Column(
+        verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.padding(vertical = 22.dp, horizontal = 16.dp),
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier.padding(vertical = 22.dp, horizontal = 16.dp),
-        ) {
-            DoBasicTopAppBar(
-                middleText = "글 보기",
-                startIcon = {
-                    ChevronRightIcon(modifier = Modifier.clickable {
-                        handleIntent(WriteWatchIntent.NavigateToBackStack)
-                    })
+        DoBasicTopAppBar(
+            middleText = "글 보기",
+            startIcon = {
+                ChevronRightIcon(modifier = Modifier.clickable {
+                    handleIntent(WriteWatchIntent.NavigateToBackStack)
                 })
+            })
+        Column(
+            verticalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxSize(),
+        ) {
             Column(
-                verticalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(22.dp, Alignment.Top),
+                horizontalAlignment = Alignment.Start,
             ) {
+                with(state) {
+                    ProfileCard(
+                        author = author,
+                        authorSchool = authorSchool,
+                        authorGrade = authorGrade,
+                        authorGender = authorGender,
+                        authorProfile = authorProfile,
+                    )
+                }
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(22.dp, Alignment.Top),
+                    verticalArrangement = Arrangement.spacedBy(14.dp, Alignment.Top),
                     horizontalAlignment = Alignment.Start,
                 ) {
-                    with(state) {
-                        ProfileCard(
-                            author = author,
-                            authorSchool = authorSchool,
-                            authorGrade = authorGrade,
-                            authorGender = authorGender,
-                            authorProfile = authorProfile,
+                    Text(
+                        text = state.title,
+                        style = DoTypography.m2,
+                        fontWeight = FontWeight(600),
+                        color = DoColor.Black,
+                    )
+                    Text(
+                        text = state.content,
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            lineHeight = 25.2.sp,
+                            fontFamily = FontFamily(Font(R.font.pretendard)),
+                            fontWeight = FontWeight(400),
+                            color = DoColor.GRAY900,
                         )
-                    }
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(14.dp, Alignment.Top),
-                        horizontalAlignment = Alignment.Start,
-                    ) {
+                    )
+                }
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
+                    horizontalAlignment = Alignment.Start,
+                ) {
+                    state.contact.forEach {
                         Text(
-                            text = state.title,
-                            style = DoTypography.m2,
-                            fontWeight = FontWeight(600),
+                            text = it,
+                            style = DoTypography.m3,
+                            fontWeight = FontWeight(400),
                             color = DoColor.Black,
                         )
-                        Text(
-                            text = state.content,
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                lineHeight = 25.2.sp,
-                                fontFamily = FontFamily(Font(R.font.pretendard)),
-                                fontWeight = FontWeight(400),
-                                color = DoColor.GRAY900,
-                            )
-                        )
                     }
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
-                        horizontalAlignment = Alignment.Start,
+                }
+                if (state.gender.isNotEmpty()) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.Start),
+                        verticalAlignment = Alignment.Top,
                     ) {
-                        state.contact.forEach {
-                            Text(
-                                text = it,
-                                style = DoTypography.m3,
-                                fontWeight = FontWeight(400),
-                                color = DoColor.Black,
-                            )
+                        state.gender.forEach {
+                            SeekGreenTag(text = it.description)
                         }
                     }
-                    if (state.gender.isNotEmpty()) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.Start),
-                            verticalAlignment = Alignment.Top,
-                        ) {
-                            state.gender.forEach {
-                                SeekGreenTag(text = it.description)
-                            }
+                }
+                if (state.grade.isNotEmpty()) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.Start),
+                        verticalAlignment = Alignment.Top,
+                    ) {
+                        state.grade.forEach {
+                            SeekGrayTag(text = it.descriptionWithHash)
                         }
                     }
-                    if (state.grade.isNotEmpty()) {
+                }
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.Top),
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(
+                        text = state.date,
+                        style = DoTypography.lable,
+                        fontWeight = FontWeight(400),
+                        color = DoColor.GRAY400,
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.Start),
+                            horizontalArrangement = Arrangement.spacedBy(
+                                12.dp,
+                                Alignment.Start
+                            ),
                             verticalAlignment = Alignment.Top,
                         ) {
-                            state.grade.forEach {
+                            state.tag.forEach {
                                 SeekGrayTag(text = it.descriptionWithHash)
                             }
                         }
-                    }
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.Top),
-                        horizontalAlignment = Alignment.Start,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Text(
-                            text = state.date,
-                            style = DoTypography.lable,
-                            fontWeight = FontWeight(400),
-                            color = DoColor.GRAY400,
-                        )
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(
-                                    12.dp,
-                                    Alignment.Start
-                                ),
-                                verticalAlignment = Alignment.Top,
-                            ) {
-                                state.tag.forEach {
-                                    SeekGrayTag(text = it.descriptionWithHash)
-                                }
+                        ReportIcon(
+                            modifier = Modifier.clickableSingle {
+                                handleIntent(WriteWatchIntent.ShowBottomSheet)
                             }
-                            ReportIcon(
-                                modifier = Modifier.clickableSingle {
-                                    handleIntent(WriteWatchIntent.ShowBottomSheet)
-                                }
-                            )
-                        }
+                        )
                     }
                 }
-                DoButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 14.dp),
-                    text = "완료",
-                    onClick = {
-                        handleIntent(WriteWatchIntent.NavigateToBackStack)
-                    },
-                )
             }
+            DoButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 14.dp),
+                text = "완료",
+                onClick = {
+                    handleIntent(WriteWatchIntent.NavigateToBackStack)
+                },
+            )
         }
     }
 }
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @DoPreview
@@ -431,23 +273,25 @@ fun WriteWatchScreenPreview() {
             authorProfile = "",
             content = "토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람토요일에 호수공원 산책할 사람",
             title = "같이 산책 하실 분 구해요",
-            contact = listOf(
+            contact = persistentListOf(
                 "카톡 : wjdtjffl55",
                 "디스코드 : hye_2417",
                 "인스타그램 : hye_2417",
             ),
             date = "2023년 5월 1일",
-            gender = listOf(
+            gender = persistentListOf(
                 Gender.WOMEN,
                 Gender.MAN
             ),
-            grade = listOf(),
+            grade = persistentListOf(),
             maximum = 12,
             spot = "",
-            tag = listOf(Tag.GO_OUT, Tag.WALK)
-        ),
+            tag = persistentListOf(Tag.GO_OUT, Tag.WALK),
+            checkBoxState = 0,
+            reportReason = "",
+
+            ),
         handleIntent = {},
-        sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Expanded)
     )
 }
 
