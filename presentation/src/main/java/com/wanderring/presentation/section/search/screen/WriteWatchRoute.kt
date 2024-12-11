@@ -29,6 +29,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -38,7 +39,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import com.wanderring.domain.model.enumType.Gender
 import com.wanderring.domain.model.enumType.Grade
 import com.wanderring.domain.model.enumType.Tag
@@ -64,7 +67,6 @@ import com.wanderring.presentation.section.search.viewModel.WriteWatchViewModel
 import com.wanderring.presentation.utill.DoPreview
 import kotlinx.coroutines.launch
 
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WriteWatchRoute(
@@ -74,16 +76,20 @@ fun WriteWatchRoute(
     val coroutineScope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
-    LaunchedEffect(Unit) {
-        viewModel.sideEffect.collect {
-            when (it) {
-                WriteWatchSideEffect.NavigateToBackStack -> TODO()
-                WriteWatchSideEffect.CloseBottomSheet -> {
-                    coroutineScope.launch { sheetState.hide() }
-                }
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
 
-                WriteWatchSideEffect.OpenBottomSheet -> {
-                    coroutineScope.launch { sheetState.show() }
+    LaunchedEffect(lifecycle) {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewModel.sideEffect.collect {
+                when (it) {
+                    WriteWatchSideEffect.NavigateToBackStack -> TODO()
+                    WriteWatchSideEffect.ShowBottomSheet -> {
+                        coroutineScope.launch { sheetState.hide() }
+                    }
+
+                    WriteWatchSideEffect.HideBottomSheet -> {
+                        coroutineScope.launch { sheetState.show() }
+                    }
                 }
             }
         }
@@ -150,7 +156,7 @@ fun WriteWatchScreen(
                     )
                     XIcon(
                         modifier = Modifier.clickableSingle {
-                            handleIntent(WriteWatchIntent.CloseBottomSheet)
+                            handleIntent(WriteWatchIntent.HideBottomSheet)
                         }
                     )
                 }
@@ -377,7 +383,7 @@ fun WriteWatchScreen(
                             }
                             ReportIcon(
                                 modifier = Modifier.clickableSingle {
-                                    handleIntent(WriteWatchIntent.OpenBottomSheet)
+                                    handleIntent(WriteWatchIntent.ShowBottomSheet)
                                 }
                             )
                         }
