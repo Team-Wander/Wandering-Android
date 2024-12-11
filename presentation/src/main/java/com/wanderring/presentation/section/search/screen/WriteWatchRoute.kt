@@ -64,7 +64,9 @@ import com.wanderring.presentation.section.search.viewModel.WriteWatchIntent
 import com.wanderring.presentation.section.search.viewModel.WriteWatchScreenState
 import com.wanderring.presentation.section.search.viewModel.WriteWatchSideEffect
 import com.wanderring.presentation.section.search.viewModel.WriteWatchViewModel
+import com.wanderring.presentation.utill.BottomSheetType
 import com.wanderring.presentation.utill.DoPreview
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -76,18 +78,38 @@ fun WriteWatchRoute(
     updateBottomSheetType: (BottomSheetType) -> Unit,
     navigateToBackStack: () -> Unit,
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
-    val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-
     val lifecycle = LocalLifecycleOwner.current.lifecycle
 
     LaunchedEffect(lifecycle) {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
             viewModel.sideEffect.collect {
                 when (it) {
-                    WriteWatchSideEffect.NavigateToBackStack -> TODO()
+                    WriteWatchSideEffect.NavigateToBackStack -> {
+                        navigateToBackStack()
+                    }
+
                     WriteWatchSideEffect.ShowBottomSheet -> {
-                        coroutineScope.launch { sheetState.hide() }
+                        updateBottomSheetType(
+                            BottomSheetType.WriteWatchReport(
+                                checkBoxState = state.checkBoxState,
+                                reportReason = state.reportReason,
+                                onCancelClick = { viewModel.handleIntent(WriteWatchIntent.HideBottomSheet) },
+                                onConfirmClick = { viewModel.handleIntent(WriteWatchIntent.SendReport) },
+                                updateReportReason = { state ->
+                                    viewModel.handleIntent(
+                                        WriteWatchIntent.UpdateReportReasonState(state)
+                                    )
+                                },
+                                updateCheckBoxState = { state ->
+                                    viewModel.handleIntent(
+                                        WriteWatchIntent.UpdateCheckBoxState(state)
+                                    )
+                                },
+                            )
+                        )
+                        coroutineScope.launch { bottomSheetState.show() }
                     }
 
                     WriteWatchSideEffect.HideBottomSheet -> {
@@ -98,30 +120,20 @@ fun WriteWatchRoute(
         }
     }
 
-    val state by viewModel.state.collectAsStateWithLifecycle()
 
     WriteWatchScreen(
         modifier = modifier,
         state = state,
-        sheetState = sheetState,
         handleIntent = viewModel::handleIntent,
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WriteWatchScreen(
     modifier: Modifier = Modifier,
     state: WriteWatchScreenState,
-    sheetState: ModalBottomSheetState,
     handleIntent: (WriteWatchIntent) -> Unit,
 ) {
-    val reportReason = remember {
-        mutableStateOf("")
-    }
-    val checkBoxStateList = remember {
-        mutableIntStateOf(0)
-    }
     ModalBottomSheetLayout(
         modifier = Modifier.fillMaxSize(),
         sheetState = sheetState,
