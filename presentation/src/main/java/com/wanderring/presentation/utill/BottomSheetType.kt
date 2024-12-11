@@ -3,6 +3,7 @@ package com.wanderring.presentation.utill
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.wanderring.presentation.section.my.component.AlamBottomSheetContent
+import com.wanderring.presentation.section.search.screen.ReportBottomSheet
 
 sealed class BottomSheetType {
     @Composable
@@ -26,9 +27,25 @@ sealed class BottomSheetType {
         }
     }
 
-    data class WriteWatchReport(val modifier: Modifier = Modifier) : BottomSheetType() {
+    data class WriteWatchReport(
+        val modifier: Modifier = Modifier,
+        val checkBoxState: Int,
+        val reportReason: String,
+        val updateCheckBoxState: (Int) -> Unit,
+        val updateReportReason: (String) -> Unit,
+        val onConfirmClick: () -> Unit,
+        val onCancelClick: () -> Unit,
+    ) : BottomSheetType() {
         @Composable
         override fun content() {
+            ReportBottomSheet(
+                checkBoxState = checkBoxState,
+                reportReason = reportReason,
+                updateCheckBoxState = updateCheckBoxState,
+                updateReportReason = updateReportReason,
+                onConfirmClick = onConfirmClick,
+                onCancelClick = onCancelClick
+            )
         }
     }
 
