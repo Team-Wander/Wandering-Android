@@ -544,3 +544,151 @@ fun CheckBoxComponentPreveiw() {
         onClick = {},
     )
 }
+
+@Composable
+fun ReportBottomSheet(
+    modifier: Modifier = Modifier,
+    checkBoxState: Int,
+    reportReason: String,
+    updateCheckBoxState: (Int) -> Unit,
+    updateReportReason: (String) -> Unit,
+    onConfirmClick: () -> Unit,
+    onCancelClick: () -> Unit,
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.Bottom),
+        horizontalAlignment = Alignment.End,
+        modifier = modifier
+            .background(
+                color = DoColor.WHITE,
+                shape = RoundedCornerShape(
+                    topStart = 12.dp,
+                    topEnd = 12.dp,
+                    bottomStart = 0.dp,
+                    bottomEnd = 0.dp
+                )
+            )
+            .padding(horizontal = 30.dp, vertical = 20.dp),
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "신고사유",
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    lineHeight = 30.sp,
+                    fontFamily = FontFamily(Font(R.font.pretendard)),
+                    fontWeight = FontWeight(700),
+                    color = DoColor.Black,
+                )
+            )
+            XIcon(
+                modifier = Modifier.clickableSingle(onClick = onCancelClick)
+            )
+        }
+        Column {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.Top),
+                    horizontalAlignment = Alignment.Start,
+                ) {
+                    CheckBoxComponent(
+                        text = Reason.entries[1].description,
+                        isSelected = checkBoxState == 1,
+                        onClick = {
+                            updateCheckBoxState(if (checkBoxState == 1) 0 else 1)
+                        },
+                    )
+                    CheckBoxComponent(
+                        text = Reason.entries[3].description,
+                        isSelected = checkBoxState == 3,
+                        onClick = {
+                            updateCheckBoxState(if (checkBoxState == 3) 0 else 3)
+                        },
+                    )
+                    CheckBoxComponent(
+                        text = Reason.entries[5].description,
+                        isSelected = checkBoxState == 5,
+                        onClick = {
+                            updateCheckBoxState(if (checkBoxState == 5) 0 else 5)
+                        },
+                    )
+                    CheckBoxComponent(
+                        text = Reason.entries[6].description,
+                        isSelected = checkBoxState == 6,
+                        onClick = {
+                            updateCheckBoxState(if (checkBoxState == 6) 0 else 6)
+                        },
+                    )
+                }
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.Top),
+                    horizontalAlignment = Alignment.Start,
+                ) {
+                    CheckBoxComponent(
+                        text = Reason.entries[2].description,
+                        isSelected = checkBoxState == 2,
+                        onClick = {
+                            updateCheckBoxState(if (checkBoxState == 2) 0 else 2)
+                        },
+                    )
+                    CheckBoxComponent(
+                        text = Reason.entries[4].description,
+                        isSelected = checkBoxState == 4,
+                        onClick = {
+                            updateCheckBoxState(if (checkBoxState == 4) 0 else 4)
+                        },
+                    )
+                }
+            }
+            if (checkBoxState == 6) {
+                Spacer(modifier = Modifier.height(24.dp))
+                DoTextField(
+                    value = reportReason,
+                    onValueChange = updateReportReason,
+                    modifier = Modifier
+                        .background(
+                            color = DoColor.GRAY200,
+                            shape = RoundedCornerShape(size = 8.dp),
+                        )
+                        .padding(
+                            vertical = 12.dp,
+                            horizontal = 16.dp,
+                        ),
+                    useOutLine = false,
+                    placeholder = "신고 사유를 적어주세요",
+                )
+            }
+        }
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.End),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            DoButton(
+                modifier = Modifier.padding(
+                    horizontal = 20.dp,
+                    vertical = 10.dp,
+                ),
+                text = "취소",
+                color = DoColor.RED,
+                onClick = onCancelClick,
+            )
+            DoButton(
+                modifier = Modifier.padding(
+                    horizontal = 20.dp,
+                    vertical = 10.dp,
+                ),
+                text = "확인",
+                color = DoColor.MAIN,
+                onClick = onConfirmClick,
+            )
+        }
+    }
+}
