@@ -73,7 +73,11 @@ fun DoNavHost(
             },
         )
         writeRoute()
-        writeWatchRoute()
+        writeWatchRoute(
+            navigateToBackStack = navController::popBackStack,
+            bottomSheetState = bottomSheetState,
+            updateBottomSheetType = updateBottomSheetType,
+        )
         scheduleRoute()
     }
 }

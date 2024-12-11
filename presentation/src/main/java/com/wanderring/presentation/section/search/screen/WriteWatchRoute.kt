@@ -72,6 +72,9 @@ import kotlinx.coroutines.launch
 fun WriteWatchRoute(
     modifier: Modifier = Modifier,
     viewModel: WriteWatchViewModel = hiltViewModel(),
+    bottomSheetState: ModalBottomSheetState,
+    updateBottomSheetType: (BottomSheetType) -> Unit,
+    navigateToBackStack: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
