@@ -17,8 +17,8 @@ class WriteWatchViewModel @Inject constructor(
             WriteWatchIntent.LoadAllData -> TODO()
             WriteWatchIntent.NavigateToBackStack -> postSideEffect(WriteWatchSideEffect.NavigateToBackStack)
             is WriteWatchIntent.SendReport -> TODO()
-            WriteWatchIntent.CloseBottomSheet -> postSideEffect(WriteWatchSideEffect.CloseBottomSheet)
-            WriteWatchIntent.OpenBottomSheet -> postSideEffect(WriteWatchSideEffect.OpenBottomSheet)
+            WriteWatchIntent.HideBottomSheet -> postSideEffect(WriteWatchSideEffect.ShowBottomSheet)
+            WriteWatchIntent.ShowBottomSheet -> postSideEffect(WriteWatchSideEffect.HideBottomSheet)
         }
     }
 }
@@ -27,8 +27,8 @@ sealed class WriteWatchIntent {
     data object LoadAllData : WriteWatchIntent()
     data class SendReport(val body: ReportBody) : WriteWatchIntent()
     data object NavigateToBackStack : WriteWatchIntent()
-    data object OpenBottomSheet : WriteWatchIntent()
-    data object CloseBottomSheet : WriteWatchIntent()
+    data object ShowBottomSheet : WriteWatchIntent()
+    data object HideBottomSheet : WriteWatchIntent()
 }
 
 data class WriteWatchScreenState(
@@ -108,6 +108,6 @@ enum class Reason(
 
 sealed class WriteWatchSideEffect {
     data object NavigateToBackStack : WriteWatchSideEffect()
-    data object OpenBottomSheet : WriteWatchSideEffect()
-    data object CloseBottomSheet : WriteWatchSideEffect()
+    data object HideBottomSheet : WriteWatchSideEffect()
+    data object ShowBottomSheet : WriteWatchSideEffect()
 }
