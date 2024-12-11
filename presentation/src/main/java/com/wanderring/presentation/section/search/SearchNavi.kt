@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.wanderring.presentation.section.home.screen.WriteRoute
+import com.wanderring.presentation.section.search.screen.WriteWatchRoute
 
 const val SearchRoute = "SearchRoute"
 const val WriteWatchRoute = "WriteWatchRoute"
@@ -19,6 +19,6 @@ fun NavController.navigateToWriteRoute(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.writeWatchRoute() {
     composable(WriteWatchRoute) {
-        WriteRoute()
+        WriteWatchRoute()
     }
 }
