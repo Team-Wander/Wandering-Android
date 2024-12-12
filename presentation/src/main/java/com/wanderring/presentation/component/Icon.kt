@@ -67,7 +67,7 @@ fun LogoImage(
     Icon(
         painter = painterResource(id = R.drawable.logo),
         contentDescription = null,
-        modifier = modifier,
+        modifier = modifier.size(24.dp),
         tint = tint
     )
 }
