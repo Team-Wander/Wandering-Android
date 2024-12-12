@@ -55,10 +55,8 @@ class AppState(
 
     val startDestination = if (userDataRepository.getRefreshTime().isExpire()) {
         LoginRoute
-    } else if (isOnBoardingFinished) {
-        HomeRoute
     } else {
-        OnBoardingRoute
+        HomeRoute
     }
 
     // 현재 네비게이션 백스택의 최상위 항목의 목적지
