@@ -11,7 +11,8 @@ import com.wanderring.presentation.section.home.screen.HomeRoute
 import com.wanderring.presentation.section.home.writeRoute
 import com.wanderring.presentation.section.my.MyRoute
 import com.wanderring.presentation.section.my.screen.MyRoute
-import com.wanderring.presentation.section.onboarding.onBoarding
+import com.wanderring.presentation.section.onboarding.loginRoute
+import com.wanderring.presentation.section.onboarding.onBoardingRoute
 import com.wanderring.presentation.section.schedule.ScheduleRoute
 import com.wanderring.presentation.section.schedule.scheduleRoute
 import com.wanderring.presentation.section.search.SearchRoute
@@ -36,6 +37,7 @@ fun DoNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
+        loginRoute()
         onBoardingRoute(
             navigateToBack = navController::popBackStack,
             navigateToHome = { navigateToTopLevelDestination(TopLevelDestination.TopLevelHomeRoute) }
