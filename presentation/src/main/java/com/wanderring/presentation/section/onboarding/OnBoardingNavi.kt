@@ -13,7 +13,7 @@ fun NavController.navigateToOnBoardingRoute(navOptions: NavOptions? = null) {
     this.navigate(OnBoardingRoute, navOptions)
 }
 
-fun NavGraphBuilder.onBoarding(
+fun NavGraphBuilder.onBoardingRoute(
     navigateToHome: () -> Unit,
     navigateToBack: () -> Unit,
 ) {

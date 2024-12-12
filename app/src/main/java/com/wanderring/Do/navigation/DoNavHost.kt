@@ -36,7 +36,7 @@ fun DoNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        onBoarding(
+        onBoardingRoute(
             navigateToBack = navController::popBackStack,
             navigateToHome = { navigateToTopLevelDestination(TopLevelDestination.TopLevelHomeRoute) }
         )
