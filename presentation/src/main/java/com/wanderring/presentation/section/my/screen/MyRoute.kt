@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
@@ -42,7 +43,6 @@ fun MyRoute(
     modifier: Modifier = Modifier,
     myViewModel: MyViewModel = hiltViewModel(),
     bottomSheetState: ModalBottomSheetState,
-    navigateProfile: () -> Unit,
     updateBottomSheetType: (BottomSheetType) -> Unit,
 ) {
     val myState by myViewModel.state.collectAsStateWithLifecycle()
@@ -53,7 +53,6 @@ fun MyRoute(
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
             myViewModel.sideEffect.collect { effect ->
                 when (effect) {
-                    is MySideEffect.NavigateProfile -> navigateProfile()
                     is MySideEffect.HideBottomSheet -> {
                         coroutineScope.launch { bottomSheetState.hide() }
                     }
@@ -107,10 +106,16 @@ fun MyScreen(
             modifier = Modifier.fillMaxWidth(),
         ) {
             items(myState.reservation) {
-                DoWalkListItem(state = it)
+                DoWalkListItem(
+                    modifier = Modifier.fillMaxWidth(),
+                    state = it,
+                )
             }
             items(myState.write) {
-                DoWalkListItem(state = it)
+                DoWalkListItem(
+                    modifier = Modifier.fillMaxWidth(),
+                    state = it,
+                )
             }
         }
     }

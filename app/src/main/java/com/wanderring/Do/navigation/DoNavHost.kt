@@ -68,7 +68,6 @@ fun DoNavHost(
             currentDestination = currentDestination,
             content = {
                 MyRoute(
-                    navigateProfile = { TODO() },
                     bottomSheetState = bottomSheetState,
                     updateBottomSheetType = updateBottomSheetType,
                 )
