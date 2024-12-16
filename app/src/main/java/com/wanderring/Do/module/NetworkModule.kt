@@ -106,4 +106,12 @@ object NetworkModule {
     ): AddressApi {
         return retrofit.create(AddressApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideSchoolAPI(
+        @SchoolRetrofit retrofit: Retrofit
+    ): SchoolApi {
+        return retrofit.create(SchoolApi::class.java)
+    }
 }
