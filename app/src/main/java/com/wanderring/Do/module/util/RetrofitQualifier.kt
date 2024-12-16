@@ -9,3 +9,7 @@ annotation class DefaultRetrofit
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class AddressRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class SchoolRetrofit
