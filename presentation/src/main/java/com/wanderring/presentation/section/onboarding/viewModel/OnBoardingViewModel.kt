@@ -1,11 +1,14 @@
 package com.wanderring.presentation.section.onboarding.viewModel
 
 import androidx.lifecycle.viewModelScope
+import com.wanderring.domain.model.address.JusoModel
 import com.wanderring.domain.model.enumType.Grade
-import com.wanderring.domain.model.address.AddressModel
 import com.wanderring.domain.repository.AddressRepository
 import com.wanderring.presentation.utill.DoViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,7 +37,7 @@ class OnBoardingViewModel @Inject constructor(
             copy(
                 searchTextState = inputSpot,
                 spot = inputSpot,
-                searchResult = AddressModel(emptyList())
+                searchResult = persistentListOf()
             )
         }
 
@@ -48,7 +51,7 @@ class OnBoardingViewModel @Inject constructor(
             countPerPage = 5,
             keyword = searchTextState
         ).collect {
-            setState { copy(searchResult = it) }
+            setState { copy(searchResult = it.toImmutableList()) }
         }
     }
 
@@ -73,7 +76,7 @@ data class OnBoardingScreenState(
     val grade: Grade,
     val spot: String,
     val searchTextState: String,
-    val searchResult: AddressModel,
+    val searchResult: ImmutableList<JusoModel>,
 ) {
     companion object {
         // State의 초기값을 넣어주기위해 필수로 구현해야하는 함수
@@ -82,7 +85,7 @@ data class OnBoardingScreenState(
             grade = Grade.NONE,
             spot = "",
             searchTextState = "",
-            searchResult = AddressModel(juso = emptyList()),
+            searchResult = persistentListOf(),
         )
     }
 }

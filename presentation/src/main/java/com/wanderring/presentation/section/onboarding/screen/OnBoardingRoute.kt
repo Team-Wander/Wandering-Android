@@ -27,8 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.wanderring.domain.model.address.JusoModel
 import com.wanderring.domain.model.enumType.Grade
-import com.wanderring.domain.model.address.AddressModel
 import com.wanderring.presentation.component.DoButton
 import com.wanderring.presentation.component.DoTextField
 import com.wanderring.presentation.component.GradeSelectionButton
@@ -42,6 +42,8 @@ import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingScreen
 import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingSideEffect
 import com.wanderring.presentation.section.onboarding.viewModel.OnBoardingViewModel
 import com.wanderring.presentation.utill.DoPreview
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
@@ -302,7 +304,7 @@ fun EnterGradePage(
 @Composable
 private fun EnterLocationPagePreview() {
     EnterLocationPage(
-        searchResult = AddressModel(emptyList()),
+        searchResult = persistentListOf<JusoModel>(),
         locationState = "",
         onSearchTextChange = { _ -> },
         onSearchLocationChange = { _ -> },
@@ -315,7 +317,7 @@ private fun EnterLocationPagePreview() {
 @Composable
 fun EnterLocationPage(
     modifier: Modifier = Modifier,
-    searchResult: AddressModel,
+    searchResult: ImmutableList<JusoModel>,
     locationState: String,
     onSearchTextChange: (String) -> Unit,
     onSearchLocationChange: (String) -> Unit,
@@ -358,17 +360,17 @@ fun EnterLocationPage(
                         )
                     }
                 )
-                if (searchResult.juso.isNotEmpty()) {
+                if (searchResult.isNotEmpty()) {
                     LazyColumn(
                         modifier = Modifier.padding(horizontal = 10.dp)
                     ) {
-                        itemsIndexed(searchResult.juso) { index, result ->
+                        itemsIndexed(searchResult) { index, result ->
                             SearchResultItem(
                                 result = result,
                                 onClick = { onSpotChange(result.jibunAddr) }
                             )
                             Spacer(modifier = Modifier.height(16.dp))
-                            if (index < searchResult.juso.lastIndex) {
+                            if (index < searchResult.lastIndex) {
                                 Divider(
                                     color = DoColor.GRAY100,
                                     thickness = 1.dp,
