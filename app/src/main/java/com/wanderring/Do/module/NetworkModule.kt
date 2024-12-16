@@ -88,7 +88,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRankAPI(
+    fun provideAddressAPI(
         @AddressRetrofit retrofit: Retrofit
     ): AddressApi {
         return retrofit.create(AddressApi::class.java)
