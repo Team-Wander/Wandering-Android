@@ -2,6 +2,7 @@ package com.wanderring.Do.module
 
 import com.wanderring.data.common.address.AddressRepositoryImpl
 import com.wanderring.data.common.school.SchoolDataSourceImpl
+import com.wanderring.data.common.school.SchoolRepositoryImpl
 import com.wanderring.data.common.tokenData.UserDataRepositoryImpl
 import com.wanderring.domain.repository.UserDataRepository
 import com.wanderring.domain.repository.AddressRepository
@@ -17,16 +18,16 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideUserDataRepository(
-        userDataRepositoryImpl: UserDataRepositoryImpl
+        userDataRepositoryImpl: UserDataRepositoryImpl,
     ): UserDataRepository
 
     @Binds
     abstract fun provideAddressRepository(
-        addressRepositoryImpl: AddressRepositoryImpl
+        addressRepositoryImpl: AddressRepositoryImpl,
     ): AddressRepository
 
     @Binds
     abstract fun provideSchoolRepository(
-        schoolDataSourceImpl: SchoolDataSourceImpl
+        schoolRepositoryImpl: SchoolRepositoryImpl,
     ): SchoolRepository
 }
