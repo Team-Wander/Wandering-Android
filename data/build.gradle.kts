@@ -23,10 +23,17 @@ android {
 
         testInstrumentationRunner = ProjectProperties.Test.TEST_RUNNER
         consumerProguardFiles(ProjectProperties.Files.CONSUMER_PROGUARD_FILES)
+
         buildConfigField(
             type = "String",
             name = "ADDRESS_API_KEY",
             getApiKey("ADDRESS_API_KEY")
+        )
+
+        buildConfigField(
+            type = "String",
+            name = "SCHOOL_API_KEY",
+            getApiKey("SCHOOL_API_KEY")
         )
     }
 
