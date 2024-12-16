@@ -1,9 +1,11 @@
 package com.wanderring.Do.module
 
 import com.wanderring.data.common.address.AddressRepositoryImpl
+import com.wanderring.data.common.school.SchoolDataSourceImpl
 import com.wanderring.data.common.tokenData.UserDataRepositoryImpl
 import com.wanderring.domain.repository.UserDataRepository
 import com.wanderring.domain.repository.AddressRepository
+import com.wanderring.domain.repository.SchoolRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,4 +24,9 @@ abstract class RepositoryModule {
     abstract fun provideAddressRepository(
         addressRepositoryImpl: AddressRepositoryImpl
     ): AddressRepository
+
+    @Binds
+    abstract fun provideSchoolRepository(
+        schoolDataSourceImpl: SchoolDataSourceImpl
+    ): SchoolRepository
 }
