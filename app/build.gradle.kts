@@ -33,14 +33,20 @@ android {
 
         buildConfigField(
             type = "String",
-            name = "ADDRESS_URL",
-            getApiKey("ADDRESS_URL")
+            name = "BASE_URL",
+            getApiKey("BASE_URL")
         )
 
         buildConfigField(
             type = "String",
-            name = "BASE_URL",
-            getApiKey("BASE_URL")
+            name = "SCHOOL_URL",
+            getApiKey("SCHOOL_URL")
+        )
+
+        buildConfigField(
+            type = "String",
+            name = "ADDRESS_URL",
+            getApiKey("ADDRESS_URL")
         )
     }
 
