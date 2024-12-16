@@ -1,5 +1,6 @@
 package com.wanderring.Do.app
 
+import android.util.Log
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -35,7 +36,7 @@ fun App(appState: AppState) {
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val showTopBar = currentDestination in setOf(MyRoute, HomeRoute /*, AlarmRoute */)
     val appBottomSheetType = remember { mutableStateOf<BottomSheetType>(BottomSheetType.None) }
- 
+    Log.d("appState",appState.toString())
     ModalBottomSheetLayout(
         modifier = Modifier.fillMaxSize(),
         sheetState = bottomSheetState,
