@@ -21,7 +21,7 @@ import com.wanderring.presentation.component.theme.DoColor
 import com.wanderring.presentation.component.theme.DoTypography
 
 @Composable
-fun SearchResultItem(result: JusoModel, onClick: () -> Unit) {
+fun AddressSearchResultItem(result: JusoModel, onClick: () -> Unit) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
@@ -48,6 +48,26 @@ fun SearchResultItem(result: JusoModel, onClick: () -> Unit) {
                 textAlign = TextAlign.End,
             ),
             modifier = Modifier.weight(1f), // 남은 공간을 균등 분배
+        )
+    }
+}
+
+@Composable
+fun SchoolSearchResultItem(result: String, onClick: () -> Unit) {
+    Row(
+        horizontalArrangement = Arrangement.Start,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickableSingle(onClick = onClick)
+            .padding(vertical = 16.dp)
+    ) {
+        Text(
+            text = result,
+            style = DoTypography.lable,
+            fontWeight = FontWeight(400),
+            color = DoColor.Black,
+            textAlign = TextAlign.Start,
+            modifier = Modifier.weight(1f),
         )
     }
 }
