@@ -8,7 +8,10 @@ import javax.inject.Inject
 class SchoolRepositoryImpl @Inject constructor(
     private val schoolDataSource: SchoolDataSource,
 ) : SchoolRepository {
-    override suspend fun getSchoolList(searchSchulNm: String, gubun: String): Flow<List<String>> =
+    override suspend fun getSchool(
+        searchSchulNm: String,
+        gubun: String,
+    ): Flow<List<String>> =
         schoolDataSource.getSchoolList(
             searchSchulNm = searchSchulNm,
             gubun = gubun,
