@@ -11,17 +11,16 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.wanderring.Do.navigation.TopLevelDestination
+import com.wanderring.Do.navigation.TopLevelDestination.TopLevelHomeRoute
 import com.wanderring.Do.navigation.TopLevelDestination.TopLevelMyRoute
 import com.wanderring.Do.navigation.TopLevelDestination.TopLevelScheduleRoute
 import com.wanderring.Do.navigation.TopLevelDestination.TopLevelSearchRoute
-import com.wanderring.Do.navigation.TopLevelDestination.TopLevelHomeRoute
 import com.wanderring.data.utill.isExpire
 import com.wanderring.domain.repository.UserDataRepository
 import com.wanderring.presentation.section.home.HomeRoute
 import com.wanderring.presentation.section.home.navigateToHomeRoute
 import com.wanderring.presentation.section.my.navigateToMyRoute
 import com.wanderring.presentation.section.onboarding.LoginRoute
-import com.wanderring.presentation.section.onboarding.OnBoardingRoute
 import com.wanderring.presentation.section.schedule.navigateToScheduleRoute
 import com.wanderring.presentation.section.search.navigateToSearchRoute
 import kotlinx.collections.immutable.ImmutableList
@@ -50,9 +49,6 @@ class AppState(
     val navController: NavHostController,
     val userDataRepository: UserDataRepository,
 ) {
-    // 앱의 온보딩 과정이 끝났는지 여부
-    private val isOnBoardingFinished = userDataRepository.getIsOnBoardingFinished()
-
     val startDestination = if (!userDataRepository.getRefreshTime().isExpire()) {
         LoginRoute
     } else {
